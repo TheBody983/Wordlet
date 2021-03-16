@@ -9,8 +9,7 @@ Cloner le repo dans un dossier
 `* Démarrer : `flow project ``
 
 ## Cheatsheet powershell
-Se déplacer dans les dossiers
-`cd [cheminDuDossier]` 
+`cd [cheminDuDossier]` se déplacer dans les dossiers
 `cd ..` remonte au dossier parent
 `cd ./Dossier2/` à partir du dossier actuel, aller dans Dossier2
 
