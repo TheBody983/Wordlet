@@ -6,8 +6,7 @@ Cloner le repo dans un dossier
 
 [Installer le Flow CLI](https://docs.onflow.org/flow-cli/install)
 * Emulateur de la blockchain Flow  
-`* Démarrer :`
-`flow project start-emulator`
+  * Démarrer : `flow project start-emulator`
 
 ## Cheatsheet powershell
 `cd [cheminDuDossier]` se déplacer dans les dossiers  
