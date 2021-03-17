@@ -15,11 +15,11 @@ transaction {
 
   execute {
       let metadata : {String : String} = {
-          "name": "The Big Swing",
+          "name": "White People at the Gym",
           "swing_velocity": "29", 
           "swing_angle": "45", 
-          "rating": "5",
-          "uri": "ipfs://QmRZdc3mAMXpv6Akz9Ekp1y4vDSjazTx2dCQRkxVy1yUj6"
+          "rating": "10",
+          "uri": "ipfs://QmUp7jLZ5bMCmdxL2UcMvUpEyzuhyK4fW5LNsNr4FtkuWh"
       }
       let newNFT <- self.minterRef.mintNFT()
   
@@ -28,3 +28,4 @@ transaction {
       log("NFT Minted and deposited to Account 2's Collection")
   }
 }
+ 
