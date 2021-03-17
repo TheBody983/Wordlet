@@ -10,11 +10,15 @@
 
 3. [Installer NodeJS](https://nodejs.org/en/download/)
 
+4. Dans le Powershell, faire un `npm install`
+
 ## Lancement
-* Emulateur de la blockchain Flow  
-  * Démarrer : `flow project start-emulator`
-  * Arrêter : Ctrl+C
-* Dans le dossier wordlet-frontend faire un npm start
+* Démarrer l'émulateur avec `./!startemulator.ps1`  
+  * Arrêter : Ctrl+C  
+
+Dans un nouveau  terminal :  
+* Initialiser l'émulateur avec `./!initemulator.ps1`  
+* Démarrer l'app web avec `./!startapp.ps1`  
 
 ## Cheatsheet powershell
 `cd [cheminDuDossier]` se déplacer dans les dossiers  

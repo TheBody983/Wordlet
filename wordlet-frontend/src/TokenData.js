@@ -38,7 +38,15 @@ const TokenData = () => {
               )
             })
           }
-          <button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
+          <div className="center video">
+            <video id="nft-video" canplaythrough controls width="85%">
+              <source src={`https://ipfs.io/ipfs/${nftInfo["uri"].split("://")[1]}`}
+                    type="video/mp4" />
+            </video>
+            <div>
+              <button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
+            </div>
+          </div>          
         </div>
       }
     </div>

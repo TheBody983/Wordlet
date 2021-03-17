@@ -18,6 +18,14 @@
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
 			"keys": "f8955acd89cf25b8a21641fbb34cd1030fa094aa62c29142d69b0efb40cf3620"
+		},
+		"damien": {
+			"address": "179b6b1cb6755e31",
+			"keys": "b408f0955ae55116ef4a59342cbdee29ec4c36bf516243d36a3214f635bf88e9",
+			"privateKey": "b408f0955ae55116ef4a59342cbdee29ec4c36bf516243d36a3214f635bf88e9",
+			"chain": "Damien",
+			"sigAlgorithm": "ECDSA_P256",
+			"hashAlgorithm": "SHA3_256"
 		}
 	},
 	"deployments": {

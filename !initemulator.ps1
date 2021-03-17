@@ -1,0 +1,2 @@
+﻿flow accounts create --key=”2070dcdfd5660eb031a9c887547df5abe606c3e6d4550a1d2bdd5235372cde829b3acd2809044819c6f16bfbfafbe941f2fa3b26f1dab848df954957cc976521” --results
+flow project deploy
