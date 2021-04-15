@@ -1,5 +1,5 @@
 import {config} from "@onflow/fcl"
 config()
-.put("accessNode.api", process.env.REACT_APP_ACCESS_NODE) 
+.put("accessNode.api", "http://localhost:8080") 
 .put("challenge.handshake", process.env.REACT_APP_WALLET_DISCOVERY) 
 .put("0xProfile", process.env.REACT_APP_CONTRACT_PROFILE)
