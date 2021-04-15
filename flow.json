@@ -6,31 +6,35 @@
 		}
 	},
 	"contracts": {
-     "PinataPartyContract": "./cadence/contracts/PinataPartyContract.cdc"
-	},
+		"PinataPartyContract": "./cadence/contracts/PinataPartyContract.cdc"
+	   },
 	"networks": {
 		"emulator": {
 			"host": "127.0.0.1:3569",
 			"chain": "flow-emulator"
+		},
+		"mainnet": {
+			"host": "access.mainnet.nodes.onflow.org:9000",
+			"chain": "flow-mainnet"
+		},
+		"testnet": {
+			"host": "access.devnet.nodes.onflow.org:9000",
+			"chain": "flow-testnet"
 		}
 	},
 	"accounts": {
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
-			"keys": "f8955acd89cf25b8a21641fbb34cd1030fa094aa62c29142d69b0efb40cf3620"
-		},
-		"damien": {
-			"address": "179b6b1cb6755e31",
-			"keys": "b408f0955ae55116ef4a59342cbdee29ec4c36bf516243d36a3214f635bf88e9",
-			"privateKey": "b408f0955ae55116ef4a59342cbdee29ec4c36bf516243d36a3214f635bf88e9",
-			"chain": "Damien",
+			"keys": "ea9a08630bb657e93a3b2206163247cd3c5f18d0c26fe252bae42fc1f8c661e4",
+			"chain": "flow-emulator",
+			"privateKey": "ea9a08630bb657e93a3b2206163247cd3c5f18d0c26fe252bae42fc1f8c661e4",
 			"sigAlgorithm": "ECDSA_P256",
 			"hashAlgorithm": "SHA3_256"
 		}
 	},
 	"deployments": {
-     "emulator": {
-          "emulator-account": ["PinataPartyContract"]
-     }
+		"emulator": {
+			"emulator-account": ["PinataPartyContract"]
+		}
 	}
 }
