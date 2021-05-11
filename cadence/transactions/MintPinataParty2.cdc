@@ -15,9 +15,11 @@ transaction {
 
   execute {
       let metadata : {String : String} = {
-          "name": "White People at the Gym",
+          "name": "Brrrrr",
           "swing_velocity": "29", 
-          "swing_angle": "45"
+          "swing_angle": "45", 
+          "rating": "10",
+          "uri": "ipfs://QmUp7jLZ5bMCmdxL2UcMvUpEyzuhyK4fW5LNsNr4FtkuWh"
       }
       let newNFT <- self.minterRef.mintNFT()
   

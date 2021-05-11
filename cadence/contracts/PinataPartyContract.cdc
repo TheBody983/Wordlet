@@ -46,6 +46,7 @@ pub contract PinataPartyContract {
     }
 
     pub fun getMetadata(id: UInt64): {String : String} {
+        // return self.metadataObjs[id]!
         return self.metadataObjs[id]!
     }
 
@@ -54,7 +55,7 @@ pub contract PinataPartyContract {
     }
   }
 
-  pub fun createEmptyCollection(): @Collection {
+    pub fun createEmptyCollection(): @Collection {
         return <- create Collection()
     }
 

@@ -1,0 +1,51 @@
+{
+	"emulators": {
+		"default": {
+			"port": 3569,
+			"serviceAccount": "emulator-account"
+		}
+	},
+	"contracts": {
+		"PinataPartyContract": "./cadence/contracts/PinataPartyContract.cdc",
+		"PinnieToken": "./cadence/contracts/PinnieToken.cdc",
+		"MarketplaceContract": "./cadence/contracts/MarketplaceContract.cdc"
+	   },
+	"networks": {
+		"emulator": {
+			"host": "127.0.0.1:3569",
+			"chain": "flow-emulator"
+		},
+		"mainnet": {
+			"host": "access.mainnet.nodes.onflow.org:9000",
+			"chain": "flow-mainnet"
+		},
+		"testnet": {
+			"host": "access.devnet.nodes.onflow.org:9000",
+			"chain": "flow-testnet"
+		}
+	},
+	"accounts": {
+		"emulator-account": {
+			"address": "f8d6e0586b0a20c7",
+			"keys": "ea9a08630bb657e93a3b2206163247cd3c5f18d0c26fe252bae42fc1f8c661e4",
+			"chain": "flow-emulator",
+			"privateKey": "ea9a08630bb657e93a3b2206163247cd3c5f18d0c26fe252bae42fc1f8c661e4",
+			"sigAlgorithm": "ECDSA_P256",
+			"hashAlgorithm": "SHA3_256"
+		},
+		"second-account": {
+			"address": "0x01cf0e2f2f715450",
+			"pub": "785c0642ac85d293d6aba5e8ddd124c8e4a8be055e9d9c6d17810669cd1af50021b6c95ea4344fe3ea5e00355ce3adaf36d8493ec0ac556978f6d8a58318c",
+			"keys": "23a0d1178aec16499a7a5fa8ca349a68f31dd28a2f23faccf4437b9450312e95",
+			"chain": "second-account",
+			"privateKey": "23a0d1178aec16499a7a5fa8ca349a68f31dd28a2f23faccf4437b9450312e95",
+			"sigAlgorithm": "ECDSA_P256",
+			"hashAlgorithm": "SHA3_256"
+		}
+	},
+	"deployments": {
+		"emulator": {
+			"emulator-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
+		}
+	}
+}

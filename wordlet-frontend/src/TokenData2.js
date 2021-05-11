@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import * as fcl from "@onflow/fcl";
-// import * as t from "@onflow/types";
+import * as t from "@onflow/types";
 
-const TokenData = () => {
+const TokenData2 = () => {
   const [nftInfo, setNftInfo] = useState(null)
-  const fetchTokenData = async () => {
+  const fetchTokenData = async (tokenId) => {
     const encoded = await fcl
       .send([
         fcl.script`
         import PinataPartyContract from 0xf8d6e0586b0a20c7
-        pub fun main() : {String : String} {
+        pub fun main(tokenId: UInt64) : {String : String} {
           // Voir les NFT de 0xf8d6e0586b0a20c7
           let nftOwner = getAccount(0xf8d6e0586b0a20c7)  
           let capability = nftOwner.getCapability<&{PinataPartyContract.NFTReceiver}>(/public/NFTReceiver)
@@ -17,18 +17,21 @@ const TokenData = () => {
           let receiverRef = capability.borrow()
               ?? panic("Could not borrow the receiver reference")
       
-          return receiverRef.getMetadata(id: 1)
+          return receiverRef.getMetadata(id: tokenId)
         }
-      `
+        `,
+        fcl.args([
+          fcl.arg(tokenId, t.UInt64)
+        ])
       ])
     
     const decoded = await fcl.decode(encoded)
     setNftInfo(decoded)
   };
   return (
-    <div className="token-data">
+    <div className="token-data2">
       <div className="center">
-        <button className="btn-primary" onClick={() => fetchTokenData()}>Raw TokenID</button>        
+        <button className="btn-primary" onClick={() =>fetchTokenData(2)}>Token en param</button>        
       </div>
       {
         nftInfo &&
@@ -40,13 +43,15 @@ const TokenData = () => {
               )
             })
           }
+          <div className="center video">
             <div>
               <button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
-            </div>       
+            </div>
+          </div>          
         </div>
       }
     </div>
   );
 };
 
-export default TokenData;
+export default TokenData2;
