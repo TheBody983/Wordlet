@@ -121,10 +121,9 @@ const MarketData = () => {
               <div>
                 <h3>{token.name}</h3>
                 <h4>Stats</h4>
-                <p>ID : {token.id}</p>
-                <p>Overall Rating: {token.rating}</p>
-                <p>Swing Angle: {token.swing_angle}</p>
-                <p>Swing Velocity: {token.swing_velocity}</p>
+                <p>Mot : {token.mot}</p>
+                <p>Source : {token.source}</p>
+                <p>Type : {token.type}</p>
                 
                 <h4>Price</h4>
                 <p>{parseInt(token.price, 10).toFixed(2)} Pinnies</p>

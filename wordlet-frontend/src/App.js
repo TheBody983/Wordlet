@@ -15,9 +15,9 @@ function App() {
       <Balance />
       <MintPinnie />
       <h2> Mes Tokens </h2>
-      <TokenData />
-      <TokenData2 />
       <UserData />
+      <TokenData />
+      <TokenData2 tokenId={1}/>
       <h2> Marché </h2>
       <MarketData />
     </div>

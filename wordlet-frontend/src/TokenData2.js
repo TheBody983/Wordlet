@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
 
-const TokenData2 = () => {
+const TokenData2 = (props) => {
+  let tokenId = parseInt(props.tokenId)
+  console.log("id : " + tokenId)
+  console.log("type : " + typeof(tokenId))
+
   const [nftInfo, setNftInfo] = useState(null)
   const fetchTokenData = async (tokenId) => {
     const encoded = await fcl
@@ -21,7 +25,7 @@ const TokenData2 = () => {
         }
         `,
         fcl.args([
-          fcl.arg(tokenId, t.UInt64)
+          fcl.arg(parseInt(tokenId), t.UInt64)
         ])
       ])
     
@@ -29,9 +33,9 @@ const TokenData2 = () => {
     setNftInfo(decoded)
   };
   return (
-    <div className="token-data2">
+    <div className="token-data">
       <div className="center">
-        <button className="btn-primary" onClick={() =>fetchTokenData(2)}>Token en param</button>        
+        <button className="btn-primary" onClick={() =>fetchTokenData(props.tokenId)}>Token {props.tokenId}</button>        
       </div>
       {
         nftInfo &&

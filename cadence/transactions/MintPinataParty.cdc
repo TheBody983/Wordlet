@@ -15,9 +15,9 @@ transaction {
 
   execute {
       let metadata : {String : String} = {
-          "name": "White People at the Gym",
-          "swing_velocity": "29", 
-          "swing_angle": "45"
+          "mot": "Wordlet",
+          "source": "Original", 
+          "type": "Nom Propre"
       }
       let newNFT <- self.minterRef.mintNFT()
   
