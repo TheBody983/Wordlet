@@ -15,6 +15,14 @@
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
 			"keys": "456d136f4fb0d7b9363373bd49ed47213cd27dad9d219c6ad737a6fb167211e8"
+		},	
+		"ledger-account": {
+			"address": "af57ff0c67d120f4",
+			"keys": "a0269bf7fdcf0e2de789835b56e83fa27d3b9a10d88c61a68925ae1bbdc13ebd"
+		},
+		"testnet-account": {
+			"address": "401a7448baae5e02",
+			"keys": "6b392f1e3047e38533233b2711c4fd2308a8337ccac93e25a15ce88ad18b54fa"
 		}
 	},
 	"deployments": {}

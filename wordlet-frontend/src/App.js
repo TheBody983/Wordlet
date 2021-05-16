@@ -3,7 +3,7 @@ import TokenData from './TokenData';
 import TokenData2 from './TokenData2';
 import UserData from './UserData';
 import MarketData from './MarketData';
-import { AuthCluster } from './AuthCluster';
+import AuthCluster from './AuthCluster';
 import Balance from './MyBalance';
 import MintPinnie from './MintPinnie';
 
