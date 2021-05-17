@@ -5,6 +5,9 @@ flow accounts create --key=bbb3f57cf5e7a56a84cdd5895126cef873d36fbc6c5e959a9c3c0
 
 # Deploie les contrats selon le flow.json
 flow project deploy
+flow accounts add-contract PinataPartyContract ./cadence/contracts/PinataPartyContract.cdc
+flow accounts add-contract PinnieToken ./cadence/contracts/PinnieToken.cdc
+flow accounts add-contract MarketplaceContract ./cadence/contracts/MarketPlaceContract.cdc
 
 # Cree la NFT defaut "Wordlet"
 flow transactions send .\cadence\transactions\MintPinataParty.cdc

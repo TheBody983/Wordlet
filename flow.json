@@ -35,9 +35,5 @@
 		"emulator": {
 			"emulator-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
 		}
-	},
-	"testnet": {
-		"testnet-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
 	}
-
 }
