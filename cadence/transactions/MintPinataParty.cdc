@@ -1,6 +1,6 @@
 import PinataPartyContract from 0xf8d6e0586b0a20c7
 
-transaction {
+transaction{
   let receiverRef: &{PinataPartyContract.NFTReceiver}
   let minterRef: &PinataPartyContract.NFTMinter
 
@@ -13,7 +13,7 @@ transaction {
           ?? panic("could not borrow minter reference")
   }
 
-  execute {
+  execute{
       let metadata : {String : String} = {
           "mot": "Wordlet",
           "source": "Original", 

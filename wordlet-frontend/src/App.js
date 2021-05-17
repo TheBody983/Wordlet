@@ -6,12 +6,14 @@ import MarketData from './MarketData';
 import AuthCluster from './AuthCluster';
 import Balance from './MyBalance';
 import MintPinnie from './MintPinnie';
+import Root from './root.js';
 
 function App() {
   return (
     <div className="App">
       <h1> Wordlet </h1>
       <AuthCluster/>
+      <Root />
       <Balance />
       <MintPinnie />
       <h2> Mes Tokens </h2>

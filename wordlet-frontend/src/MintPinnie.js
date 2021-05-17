@@ -12,12 +12,12 @@ const MintPinnie = () => {
       fcl.limit(50),
       fcl.args([
         fcl.arg(address, t.Address),
-        fcl.arg(qty, t.UFix64)
+        fcl.arg("10.0", t.UFix64)
       ]),
       fcl.transaction`
       import PinnieToken from 0xf8d6e0586b0a20c7
 
-      transaction {
+      transaction (address: Address, qty: UFix64){
           let mintingRef: &PinnieToken.VaultMinter
       
           var receiver: Capability<&PinnieToken.Vault{PinnieToken.Receiver}>
@@ -48,8 +48,8 @@ const MintPinnie = () => {
   return (
     <div className="Minter">
       <div className="center">
-        <button className="btn-primary" onClick={() => mintPinnies("0xf8d6e0586b0a20c7", 10)}>Mint for Emulator</button>        
-        <button className="btn-primary" onClick={() => mintPinnies("0x01cf0e2f2f715450", 10)}>Mint for Second-Account</button>        
+        <button className="btn-primary" onClick={() => mintPinnies("0xf8d6e0586b0a20c7", 10.0)}>Mint for Emulator</button>        
+        <button className="btn-primary" onClick={() => mintPinnies("0x01cf0e2f2f715450", 10.0)}>Mint for Second-Account</button>        
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import PinataPartyContract from 0xf8d6e0586b0a20c7
 
-transaction {
+transaction (mot: String, source: String, type: String){
   let receiverRef: &{PinataPartyContract.NFTReceiver}
   let minterRef: &PinataPartyContract.NFTMinter
 
@@ -15,9 +15,9 @@ transaction {
 
   execute {
       let metadata : {String : String} = {
-          "mot": "Investir",
-          "source": "Pere Riche, Pere Pauvre", 
-          "type": "Verbe"
+          "mot": mot,
+          "source": source, 
+          "type": type
       }
       let newNFT <- self.minterRef.mintNFT()
   

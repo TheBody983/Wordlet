@@ -6,8 +6,11 @@ flow accounts create --key=bbb3f57cf5e7a56a84cdd5895126cef873d36fbc6c5e959a9c3c0
 # Deploie les contrats selon le flow.json
 flow project deploy
 
-# Cree la NFC defaut "white people at the gym"
+# Cree la NFT defaut "Wordlet"
 flow transactions send .\cadence\transactions\MintPinataParty.cdc
+flow transactions send .\cadence\transactions\MintPinataParty2.cdc --arg String:"Bonjour" --arg String:"Original" --arg String:"Nom Commun"
+flow transactions send .\cadence\transactions\MintPinataParty2.cdc --arg String:"Investir" --arg String:"Pere Riche Pere Pauvre" --arg String:"Verbe"
+flow transactions send .\cadence\transactions\MintPinataParty2.cdc --arg String:"Abri" --arg String:"Ma Mamie" --arg String:"Nom Commun"
 
 # Cree la reference pour les pinnies sur le emulator account
 flow transactions send .\cadence\transactions\LinkPinnie.cdc
