@@ -5,7 +5,11 @@
 			"serviceAccount": "emulator-account"
 		}
 	},
-	"contracts": {},
+	"contracts": {
+		"PinataPartyContract": "./cadence/contracts/PinataPartyContract.cdc",
+		"PinnieToken": "./cadence/contracts/PinnieToken.cdc",
+		"MarketplaceContract": "./cadence/contracts/MarketplaceContract.cdc"
+	   },
 	"networks": {
 		"emulator": "127.0.0.1:3569",
 		"mainnet": "access.mainnet.nodes.onflow.org:9000",
@@ -14,16 +18,26 @@
 	"accounts": {
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
-			"keys": "456d136f4fb0d7b9363373bd49ed47213cd27dad9d219c6ad737a6fb167211e8"
-		},	
-		"ledger-account": {
-			"address": "af57ff0c67d120f4",
-			"keys": "a0269bf7fdcf0e2de789835b56e83fa27d3b9a10d88c61a68925ae1bbdc13ebd"
+			"keys": "2e9211c43e4bec5be064686f1becf2d47f894e921c1d79bb4e31c15a50e06585"
+		},
+		"second-account": {
+			"address": "0x01cf0e2f2f715450",
+			"pub": "bbb3f57cf5e7a56a84cdd5895126cef873d36fbc6c5e959a9c3c0f8f9dec8becf0c2d4afdc37a087a885f83deeb19ccf128968e57a357c481e1c213a3e0d00cd",
+			"keys": "238717b0d4411a386515de1f0480c5e1c31a885d409476503eb220fc96b458bd"
+
 		},
 		"testnet-account": {
 			"address": "401a7448baae5e02",
 			"keys": "6b392f1e3047e38533233b2711c4fd2308a8337ccac93e25a15ce88ad18b54fa"
 		}
 	},
-	"deployments": {}
+	"deployments": {
+		"emulator": {
+			"emulator-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
+		}
+	},
+	"testnet": {
+		"testnet-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
+	}
+
 }
