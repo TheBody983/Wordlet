@@ -18,7 +18,8 @@
 	"accounts": {
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
-			"keys": "2e9211c43e4bec5be064686f1becf2d47f894e921c1d79bb4e31c15a50e06585"
+			"keys": "2e9211c43e4bec5be064686f1becf2d47f894e921c1d79bb4e31c15a50e06585",
+			"pub":"dfc5e4da98e1ace53b3fc39abce804f25b282d7d15d6d3f2e85b6dfcadd7aed7d7e8b13495d96fd8f32c1e87f48e164a8ed04681e1c778dc167a68cebf2aef41"
 		},
 		"second-account": {
 			"address": "0x01cf0e2f2f715450",
@@ -35,5 +36,9 @@
 		"emulator": {
 			"emulator-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
 		}
+	},
+	"testnet": {
+		"testnet-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
 	}
+
 }
