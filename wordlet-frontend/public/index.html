@@ -1,43 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+  <meta charset="UTF-8">
+  <title>Wordlet</title>
+  <link rel="icon" href="Worlet 2.0/WordletIcon.ico" />
+  <link rel="stylesheet" type="text/css" href="Wordlet.css">
+</head>
+<body>
+<header>
+  <ul>
+    <li><a href="#accueil" id="btnaccueil" class="active">Accueil</a></li>
+    <li><a href="#marche" id="btnmarche">Marché</a></li>
+    <li><a href="#jeux" id="btnjeux">Jeux</a></li>
+    <li><a href="#apropos" id="btnpropos">À propos</a></li>
+  </ul>
+</header>
+<section id="accueil">
+  <img src="etoiles.png" id="stars">
+  <img src="lune.png" id="moon">
+  <img src="montagne_derriere.png" id="mountains_behind">
+  <h2 id="text">Wordlet</h2>
+  <a href="#" id="btn">Se connecter/S'inscrire</a>
+</section>
+<section id="marche">
+  <div id="root"></div>
+  <img src="marche.png" id="marche">
+</section>
+<section id="jeux">
+  <img src="cave.png" id="mountains_front">
+</section>
+<div class="sec" id="apropos">
+  <h2>Wordlet</h2>
+  <p><br>Projet de BIHANNIC Lucas, RICHARD Damien et TRONEL Ludovic.
+    <br><br> Tous 3 étudiants en licence Informatique à l'Université de la Nouvelle-Calédonie.
+    <br></br>Wordlet, de la compression de Word Wallet, littéralement traduit par "le portefeuille de mots", est une application permettant l'introduction au monde des blockchain par le biais de NFT (Token Non Fongible) sous forme de mots, qui peuvent être achetés, vendus, échangés où joués et gagnés par le biais de différents jeux. Ces derniers peuvent être codés par les utilisateurs à partir de code open source, les meilleurs d'entre eux sont votés par les joueurs et les plus populaires seront implémentés par les créateurs de l'application. </p>
+</div>
+<script>
+  let stars = document.getElementById('stars');
+  let moon = document.getElementById('moon');
+  let mountains_behind = document.getElementById('mountains_behind');
+  let text = document.getElementById('text');
+  let btn = document.getElementById('btn');
+  let mountains_front = document.getElementById('mountains_front');
+  let header = document.querySelector('header');
+  let btnaccueil = document.getElementById('btnaccueil');
+  let btnmarche = document.getElementById('btnmarche');
+  let btnjeux = document.getElementById('btnjeux');
+  let btnpropos = document.getElementById('btnpropos');
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  window.addEventListener('scroll', function (){
+    let value = window.scrollY;
+    stars.style.left = value + 'px';
+    moon.style.top = value +'px';
+    if ( value <= 1000) {
+      mountains_behind.style.top = value * 0.5 + 'px';
+    }
+    if ( value <= 425) {
+      text.style.marginLeft = value * 3.1 + 'px';
+      text.style.fontSize = 145 - (0.20 * value) + 'px';
+    }
+    if ( value >= 425 ) {
+      text.style.top = value +'px';
+    }
+    btn.style.marginRight = value * 3.5 +'px';
+    header.style.top = value * 1 +'px';
+  })
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  btnaccueil.onclick = function() { btnaccueil.setAttribute('class', 'active');
+    btnmarche.setAttribute('class', ' ');
+    btnjeux.setAttribute('class', ' ');
+    btnpropos.setAttribute('class', ' ');};
+  btnmarche.onclick = function() { btnaccueil.setAttribute('class', ' ');
+    btnmarche.setAttribute('class', 'active');
+    btnjeux.setAttribute('class', ' ');
+    btnpropos.setAttribute('class', ' '); };
+  btnjeux.onclick = function() { btnaccueil.setAttribute('class', ' ');
+    btnmarche.setAttribute('class', ' ');
+    btnjeux.setAttribute('class', 'active');
+    btnpropos.setAttribute('class', ' '); };
+  btnpropos.onclick = function() { btnaccueil.setAttribute('class', ' ');
+    btnmarche.setAttribute('class', ' ');
+    btnjeux.setAttribute('class', ' ');
+    btnpropos.setAttribute('class', 'active'); };
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+</script>
+</body>
 </html>
