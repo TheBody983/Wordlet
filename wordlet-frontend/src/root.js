@@ -85,7 +85,7 @@ export default function Root() {
   const [config, setConfig] = useState(null)
   useEffect(() => fcl.config().subscribe(setConfig), [])
   return(<div>bite</div>)
-  /*
+  
   return (
     <div>
       <ul>
@@ -97,5 +97,5 @@ export default function Root() {
       </ul>
       <pre>{JSON.stringify({currentUser, config}, null, 2)}</pre>
     </div>
-  )*/
+  )
 }

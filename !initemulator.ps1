@@ -4,7 +4,6 @@ $host.UI.RawUI.WindowTitle = "Flow CLI"
 flow accounts create --key=bbb3f57cf5e7a56a84cdd5895126cef873d36fbc6c5e959a9c3c0f8f9dec8becf0c2d4afdc37a087a885f83deeb19ccf128968e57a357c481e1c213a3e0d00cd
 
 # Deploie les contrats selon le flow.json
-flow project deploy
 flow accounts add-contract PinataPartyContract ./cadence/contracts/PinataPartyContract.cdc
 flow accounts add-contract PinnieToken ./cadence/contracts/PinnieToken.cdc
 flow accounts add-contract MarketplaceContract ./cadence/contracts/MarketPlaceContract.cdc

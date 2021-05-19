@@ -26,10 +26,6 @@
 			"pub": "bbb3f57cf5e7a56a84cdd5895126cef873d36fbc6c5e959a9c3c0f8f9dec8becf0c2d4afdc37a087a885f83deeb19ccf128968e57a357c481e1c213a3e0d00cd",
 			"keys": "238717b0d4411a386515de1f0480c5e1c31a885d409476503eb220fc96b458bd"
 
-		},
-		"testnet-account": {
-			"address": "401a7448baae5e02",
-			"keys": "6b392f1e3047e38533233b2711c4fd2308a8337ccac93e25a15ce88ad18b54fa"
 		}
 	},
 	"deployments": {

@@ -2,4 +2,4 @@
 $host.UI.RawUI.WindowTitle = "Flow Emulator"
 
 # Demarre l'emulateur Flow
-flow emulator -v
+flow emulator
