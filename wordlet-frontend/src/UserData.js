@@ -34,7 +34,7 @@ const UserData = () => {
   return (
     <div className="token-data">
       <div className="center">
-        <button className="btn-primary" onClick={() =>fetchUserTokens("0xf8d6e0586b0a20c7")}>User en param</button>        
+        <button className="btn-primary" onClick={() =>fetchUserTokens("0xf8d6e0586b0a20c7")}>User en param</button>
       </div>
       {
         userTokens &&
@@ -48,9 +48,6 @@ const UserData = () => {
               )
             })
           }
-            <div>
-              <button onClick={() => setUserTokens(null)} className="btn-secondary">Clear User Tokens</button>
-            </div>
         </div>   
       }
     </div>
