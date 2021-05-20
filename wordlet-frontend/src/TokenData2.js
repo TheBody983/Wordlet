@@ -32,6 +32,8 @@ const TokenData2 = (props) => {
     const decoded = await fcl.decode(encoded)
     setNftInfo(decoded)
   };
+
+
   return (
     <div className="token-data">
       <div className="center">

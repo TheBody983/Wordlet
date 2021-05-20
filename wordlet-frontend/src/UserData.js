@@ -6,6 +6,8 @@ import * as t from "@onflow/types";
 const UserData = () => {
   const [userTokens, setUserTokens] = useState(null)
 
+
+
   const fetchUserTokens = async (address) => {
     const encoded = await fcl
       .send([
@@ -31,10 +33,16 @@ const UserData = () => {
     console.log(decoded)
     setUserTokens(decoded)
   };
+  var verr = 0;
+  if(!userTokens){
+    fetchUserTokens("0xf8d6e0586b0a20c7");
+    verr ++;
+  }
+
   return (
     <div className="token-data">
       <div className="center">
-        <button className="btn-primary" onClick={() =>fetchUserTokens("0xf8d6e0586b0a20c7")}>User en param</button>
+        <button className="btn-primary" onClick={() =>fetchUserTokens("0xf8d6e0586b0a20c7")}>Actualiser</button>
       </div>
       {
         userTokens &&
@@ -42,9 +50,7 @@ const UserData = () => {
           {
             Object.keys(userTokens).map(k => {
               return (
-                // <button className="btn-primary" onClick={() =>fetchTokenData({k})}> Token {k} </button>
                 <TokenData2 tokenId={userTokens[k]}/>       
-
               )
             })
           }
