@@ -114,3 +114,7 @@ section img#mountains_behind{
 .sec p{
     font-size: 1.2em;
 }
+
+.Root {
+    z-index: 0;
+  }

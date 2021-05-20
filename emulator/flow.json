@@ -6,9 +6,9 @@
 		}
 	},
 	"contracts": {
-		"PinataPartyContract": "./cadence/contracts/PinataPartyContract.cdc",
-		"PinnieToken": "./cadence/contracts/PinnieToken.cdc",
-		"MarketplaceContract": "./cadence/contracts/MarketplaceContract.cdc"
+		"PinataPartyContract": "./contracts/PinataPartyContract.cdc",
+		"PinnieToken": "./contracts/PinnieToken.cdc",
+		"MarketplaceContract": "./contracts/MarketplaceContract.cdc"
 	   },
 	"networks": {
 		"emulator": "127.0.0.1:3569",
@@ -32,9 +32,6 @@
 		"emulator": {
 			"emulator-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
 		}
-	},
-	"testnet": {
-		"testnet-account": ["PinataPartyContract", "PinnieToken", "MarketplaceContract"]
 	}
 
 }
