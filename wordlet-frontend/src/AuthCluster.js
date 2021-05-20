@@ -18,7 +18,7 @@ export function AuthCluster() {
   } else {
     return (
       <div>
-        <button onClick={fcl.logIn}>Se connecter/S'inscrire</button>
+        <button onClick={fcl.reauthenticate}>Se connecter/S'inscrire</button>
       </div>
     )
   }

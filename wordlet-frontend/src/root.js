@@ -84,7 +84,7 @@ export default function Root() {
   useEffect(() => fcl.currentUser().subscribe(setCurrentUser), [])
   const [config, setConfig] = useState(null)
   useEffect(() => fcl.config().subscribe(setConfig), [])
-  return(<div>bonjour</div>)
+  return(<div> </div>)
   
   return (
     <div>
