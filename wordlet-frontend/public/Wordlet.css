@@ -90,7 +90,6 @@ section img#mountains_behind{
     border-radius: 40px;
     background: #ffff;
     color: #2b1055;
-    font-size: 1.5em;
     z-index: 9;
     transform: translateY(100px);
 }
@@ -113,4 +112,7 @@ section img#mountains_behind{
 }
 .sec p{
     font-size: 1.2em;
+}
+#accountData, #marketData{
+    z-index: 1;
 }

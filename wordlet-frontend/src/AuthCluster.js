@@ -2,6 +2,7 @@
 
 import React, {useState, useEffect} from "react"
 import * as fcl from "@onflow/fcl"
+import './AuthCluster.css';
 
 export function AuthCluster() {
   const [user, setUser] = useState({loggedIn: null})
@@ -11,14 +12,13 @@ export function AuthCluster() {
     return (
       <div>
         <span>{user?.addr ?? "No Address"}</span>
-        <button onClick={fcl.unauthenticate}>Log Out</button>
+        <button onClick={fcl.unauthenticate}>Se déconnecter</button>
       </div>
     )
   } else {
     return (
       <div>
-        <button onClick={fcl.logIn}>Log In</button>
-        <button onClick={fcl.signUp}>Sign Up</button>
+        <button onClick={fcl.logIn}>Se connecter/S'inscrire</button>
       </div>
     )
   }

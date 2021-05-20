@@ -44,8 +44,7 @@ const MyBalance = () => {
         {balance}
         
         <div>
-            <button onClick={() => fetchBalance("0xf8d6e0586b0a20c7")} className="btn-secondary">Emulator</button>
-            <button onClick={() => fetchBalance("0x01cf0e2f2f715450")} className="btn-secondary">Second</button>
+            <button onClick={() => fetchBalance("0xf8d6e0586b0a20c7")} className="btn-secondary">Afficher</button>
         </div>
 
     </div>

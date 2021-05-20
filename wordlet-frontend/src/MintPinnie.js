@@ -48,8 +48,7 @@ const MintPinnie = () => {
   return (
     <div className="Minter">
       <div className="center">
-        <button className="btn-primary" onClick={() => mintPinnies("0xf8d6e0586b0a20c7", "10.0")}>Mint for Emulator</button>        
-        <button className="btn-primary" onClick={() => mintPinnies("0x01cf0e2f2f715450", "10.0")}>Mint for Second-Account</button>        
+        <button className="btn-primary" onClick={() => mintPinnies("0xf8d6e0586b0a20c7", "10.0")}>Mint for Emulator</button>
       </div>
     </div>
   );
