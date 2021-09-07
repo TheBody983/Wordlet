@@ -1,3 +1,5 @@
+# Dockerfile du frontend
+
 FROM node:13.12.0-alpine
 
 WORKDIR /app
@@ -11,6 +13,8 @@ RUN npm install react-scripts@3.4.1 -g --silent
 
 COPY . ./
 
+EXPOSE 8080
 EXPOSE 3000
+EXPOSE 2000
 
 CMD ["npm", "start"]
