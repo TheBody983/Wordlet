@@ -32,7 +32,45 @@ const TokenData2 = (props) => {
     const decoded = await fcl.decode(encoded)
     setNftInfo(decoded)
   };
+  const listTokenForSale = async (tokenId, value) => {
+    const txId = await fcl
+    .send([
+      fcl.proposer(fcl.authz),
+      fcl.payer(fcl.authz),
+      fcl.authorizations([fcl.authz]),
+      fcl.limit(50),
+      fcl.args([
+        fcl.arg(tokenId, t.UInt64),
+        fcl.arg(value, t.UFix64)
+      ]),
+      fcl.transaction`
+          import PinataPartyContract from 0xf8d6e0586b0a20c7
+          import PinnieToken from 0xf8d6e0586b0a20c7
+          import MarketplaceContract from 0xf8d6e0586b0a20c7
 
+          transaction (tokenId: UInt64, value: UFix64){
+
+              prepare(acct: AuthAccount) {
+                  let receiver = acct.getCapability<&{PinnieToken.Receiver}>(/public/MainReceiver)
+                  let sale <- MarketplaceContract.createSaleCollection(ownerVault: receiver)
+
+                  let collectionRef = acct.borrow<&PinataPartyContract.Collection>(from: /storage/NFTCollection)
+                      ?? panic("Could not borrow owner's nft collection reference")
+
+                  let token <- collectionRef.withdraw(withdrawID: tokenId)
+
+                  sale.listForSale(token: <-token, price: value)
+
+                  acct.save(<-sale, to: /storage/NFTSale)
+
+                  acct.link<&MarketplaceContract.SaleCollection{MarketplaceContract.SalePublic}>(/public/NFTSale, target: /storage/NFTSale)
+
+                  //log("Vente du NFT ".concat(tokenId).concat(" pour ").concat(value).concat("jetons"))
+              }
+          }
+          `,      
+      ])
+      }
 
   return (
     <div className="token-data">
@@ -43,11 +81,16 @@ const TokenData2 = (props) => {
         nftInfo &&
         <div>
           {
+            <div>{
             Object.keys(nftInfo).map(k => {
               return (
-                <p>{k}: {nftInfo[k]}</p>
+                
+                  <p>{k}: {nftInfo[k]}</p>
+                
               )
-            })
+            })}
+            <button className="btn-primary" onClick={() =>listTokenForSale(props.tokenId, "10.0")}>Mettre en vente</button>        
+          </div>
           }
           <div className="center video">
             <div>
