@@ -89,7 +89,7 @@ const MarketData = () => {
         import PinataPartyContract from 0xf8d6e0586b0a20c7
         import PinnieToken from 0xf8d6e0586b0a20c7
         import MarketplaceContract from 0xf8d6e0586b0a20c7
-        transaction {
+        transaction (tokenId: UInt64){
             let collectionRef: &AnyResource{PinataPartyContract.NFTReceiver}
             let temporaryVault: @PinnieToken.Vault
             prepare(acct: AuthAccount) {

@@ -1,0 +1,10 @@
+services:
+  wordlet:
+    build: ./wordlet-frontend # Dossier du build dans le quel on a le dockerfile
+    ports:
+      - "2000:3000"
+  emulator:
+    build: ./emulator
+    ports:
+      - "8080:8080"
+      

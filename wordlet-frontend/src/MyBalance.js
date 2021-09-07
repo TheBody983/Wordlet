@@ -11,14 +11,14 @@ const MyBalance = () => {
         try {
             const encoded = await fcl.send([
                 fcl.script`
-                import PinnieToken from 0xf8d6e0586b0a20c7
+                import PinnieToken from 0xEmulator
 
                 pub fun main(address: Address): UFix64 {
                     let acct1 = getAccount(address)
 
                     let acct1ReceiverRef = acct1.getCapability<&PinnieToken.Vault{PinnieToken.Balance}>(/public/MainReceiver)
                         .borrow()
-                        ?? panic("Could not borrow a reference to the acct1 receiver")
+                        ?? panic("Could not borrow a reference to the account receiver")
 
                     log("Balance de ")
                     log(address)
@@ -32,11 +32,23 @@ const MyBalance = () => {
             ])
             const decoded = await fcl.decode(encoded)
             setBalance(decoded)
-            console.log("balance : " + decoded)
+            console.log("Balance : " + decoded)
         } catch (error) {
+            setBalance(0)
+
             console.log("No balance")
         }
     };
+
+    const [user, setUser] = useState({loggedIn: null})
+    useEffect(() => fcl.currentUser().subscribe(setUser), [])
+  
+    var verr = 0;
+    if(!balance && user.addr){
+      fetchBalance(user.addr);
+      verr ++;
+    }
+
     return (
     <div>
 
@@ -44,7 +56,7 @@ const MyBalance = () => {
         {balance}
         
         <div>
-            <button onClick={() => fetchBalance("0xf8d6e0586b0a20c7")} className="btn-secondary">Afficher</button>
+            <button onClick={() => fetchBalance(user.addr)} className="btn-secondary">Afficher</button>
         </div>
 
     </div>
