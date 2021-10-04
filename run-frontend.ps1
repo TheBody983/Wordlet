@@ -1,1 +1,0 @@
-docker run --rm -p 2000:2000 thebody983/frontend

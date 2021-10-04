@@ -1,5 +1,3 @@
-// File: ./src/auth-cluster.js
-
 import React, {useState, useEffect} from "react"
 import * as fcl from "@onflow/fcl"
 import './AuthCluster.css';
@@ -11,14 +9,14 @@ export function AuthCluster() {
   if (user.loggedIn) {
     return (
       <div>
-        <span>{user?.addr ?? "No Address"}</span>
+        <span>{user?.addr ?? "Pas d'Addresse"}</span>
         <button onClick={fcl.unauthenticate}>Se déconnecter</button>
       </div>
     )
   } else {
     return (
       <div>
-        <button onClick={fcl.reauthenticate}>Se connecter/S'inscrire</button>
+        <button onClick={fcl.logIn}>Connexion</button>
       </div>
     )
   }
