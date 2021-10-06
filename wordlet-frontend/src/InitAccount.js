@@ -1,5 +1,0 @@
-INITWORDLET = '
-'
-
-INITSHARDS = '
-'

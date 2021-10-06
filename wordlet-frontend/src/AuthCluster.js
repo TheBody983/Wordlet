@@ -1,25 +1,23 @@
-import React, {useState, useEffect} from "react"
+import React, {useState, useEffect} from 'react'
 import * as fcl from "@onflow/fcl"
-import './AuthCluster.css';
 
-export function AuthCluster() {
+const AuthCluster = () => {
   const [user, setUser] = useState({loggedIn: null})
   useEffect(() => fcl.currentUser().subscribe(setUser), [])
-
   if (user.loggedIn) {
     return (
       <div>
-        <span>{user?.addr ?? "Pas d'Addresse"}</span>
-        <button onClick={fcl.unauthenticate}>Se déconnecter</button>
+        <span>{user?.addr ?? "Pas d'Adresse"}</span>
+        <button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
       </div>
     )
   } else {
     return (
       <div>
-        <button onClick={fcl.logIn}>Connexion</button>
+        <button className="btn-primary" onClick={fcl.authenticate}>Connexion</button>
       </div>
     )
   }
 }
 
-export default AuthCluster;
+export default AuthCluster
