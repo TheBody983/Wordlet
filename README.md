@@ -10,19 +10,11 @@
 
 3. [Installer NodeJS](https://nodejs.org/en/download/)
 
-4. Dans le Powershell, faire un `npm install`
+4. Dans wordlet-frontend, faire un `npm install` (Powershell)
 
 ## Lancement
-* Démarrer l'émulateur avec `./!startemulator.ps1`  
+* Dans emulator, démarrer l'émulateur avec `emulator start`  
+  * Initialiser les contrats : `./init.ps1`
   * Arrêter : Ctrl+C  
 
-Dans un nouveau  terminal :  
-* Initialiser l'émulateur avec `./!initemulator.ps1`  
-* Démarrer l'app web avec `./!startapp.ps1`  
-
-## Cheatsheet powershell
-`cd [cheminDuDossier]` se déplacer dans les dossiers  
-`cd ..` remonte au dossier parent  
-`cd ./Dossier2/` à partir du dossier actuel, aller dans Dossier2  
-
-`ls` liste des dossiers et fichiers  
+* Dans wordlet-frontend, démarrer l'application avec `npm start`
