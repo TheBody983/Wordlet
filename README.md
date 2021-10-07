@@ -13,7 +13,8 @@
 4. Dans wordlet-frontend, faire un `npm install` (Powershell)
 
 ## Lancement
-* Dans emulator, démarrer l'émulateur avec `emulator start`  
+* Dans emulator, démarrer l'émulateur avec `flow emulator`  
+  * Initialiser les contrats : `flow project deploy`
   * Initialiser les contrats : `./init.ps1`
   * Arrêter : Ctrl+C  
 
