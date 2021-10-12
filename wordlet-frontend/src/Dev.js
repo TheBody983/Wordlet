@@ -1,0 +1,27 @@
+/* Wordlet
+
+Cet élément sert à tester rapidement des scripts et 
+*/
+
+import React from "react";
+import * as fcl from "@onflow/fcl";
+
+import executeScript from "./dev.executeScript" ;
+import sendTransaction from "./dev.sendTransaction";
+
+const afficherConfig = async () => {
+    console.log(await fcl.config().all())
+}
+
+
+const Dev = () => {
+    return (
+        <div className="dev-div">
+            <button onClick={() => afficherConfig()} className="btn-primary">Config</button>
+            <button onClick={() => executeScript()} className="btn-primary">Script</button>
+            <button onClick={() => sendTransaction()} className="btn-primary">Transaction</button>
+        </div>
+    );
+}
+
+export default Dev;

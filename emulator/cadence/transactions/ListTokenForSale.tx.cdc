@@ -1,15 +1,15 @@
 
-import PinataPartyContract from 0xf8d6e0586b0a20c7
-import PinnieToken from 0xf8d6e0586b0a20c7
-import MarketplaceContract from 0xf8d6e0586b0a20c7
+import WordletContract from 0x1f7da62a915f01c7
+import WOToken from 0x1f7da62a915f01c7
+import MarketplaceContract from 0x1f7da62a915f01c7
 
 transaction (tokenId: UInt64, value: UFix64){
 
     prepare(acct: AuthAccount) {
-        let receiver = acct.getCapability<&{PinnieToken.Receiver}>(/public/MainReceiver)
+        let receiver = acct.getCapability<&{WOToken.Receiver}>(/public/MainReceiver)
         let sale <- MarketplaceContract.createSaleCollection(ownerVault: receiver)
 
-        let collectionRef = acct.borrow<&PinataPartyContract.Collection>(from: /storage/NFTCollection)
+        let collectionRef = acct.borrow<&WordletContract.Collection>(from: /storage/NFTCollection)
             ?? panic("Could not borrow owner's nft collection reference")
 
         let token <- collectionRef.withdraw(withdrawID: tokenId)

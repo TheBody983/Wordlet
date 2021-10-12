@@ -7,9 +7,8 @@
 	},
 	"contracts": {
 		"MarketplaceContract": "./contracts/MarketplaceContract.cdc",
-		"PinataPartyContract": "./contracts/PinataPartyContract.cdc",
-		"PinnieToken": "./contracts/PinnieToken.cdc"
-		
+		"WordletContract": "./contracts/WordletContract.cdc",
+		"WOToken": "./contracts/WOToken.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",
@@ -19,17 +18,26 @@
 	"accounts": {
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
-			"key": "e350ccf4a28c7cfb5fc0106b79851b775dc9fc417cfecd91188e1568fef5b4af"
+			"key": "e350ccf4a28c7cfb5fc0106b79851b775dc9fc417cfecd91188e1568fef5b4af",
+			"pub": "1399da96a7f25823a21b5244869851e5b04c4035b99f0e6246284fff6b720380aa886603712b451834318ec42ee5de873644477ccff0d1b5830e30c11a222557"
 		},
 		"emulator-account2": {
 			"address": "01cf0e2f2f715450",
-			"key": "92942a781d6c7269bf7d8ffe27e41185856130939dba007e27ff42b72cd3bff6",
-			"pub": "1d8aaa06628ef0281aa96d8a7eeb98bc801a7f7ad2f542b54fb597629f36379ebacef2514351675d5794e9ac9639695e87754937ae68053607183e0d10c674be"
+			"key": "86585470482acda40a7bf5970fbf06cd69a252bad2b7e5a099ea1f990eebb942",
+			"pub": "e9e6ff35f25b9d667310b8c7403330eb9875120c0363c72456e75121cd9378f712d3ea0d11c3fcc018cf99dac49abb74503007a5a5e8a6b069bb66da0249a793"
+		},
+		"testnet-account": {
+			"address": "0x1f7da62a915f01c7",
+			"key": "b4df8c588981b214119d23c572bc2f0ae6955a151d4beaa95f841b1cfc808318",
+			"pub": "95b9793a37adb923dde0857393b78f8988d5ff2646ed4d808fae5bfbb77812b763dbbd9bb1932a48eaf04cd18b283f12197ff6e3cbd3e3a85ff35322c04dd010"
 		}
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-account": ["MarketplaceContract", "PinataPartyContract", "PinnieToken"]
+			"emulator-account": ["WOToken", "WordletContract", "MarketplaceContract"]
+		},
+		"testnet": {
+			"testnet-account": ["WOToken", "WordletContract", "MarketplaceContract"]
 		}
 	}
 }

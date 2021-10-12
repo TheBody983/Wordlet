@@ -1,4 +1,4 @@
-pub contract PinnieToken {
+pub contract WOToken {
     pub var totalSupply: UFix64
     pub var tokenName: String
 
@@ -6,12 +6,12 @@ pub contract PinnieToken {
         pub fun withdraw(amount: UFix64): @Vault {
             post {
                 result.balance == UFix64(amount):
-                    "Withdrawal amount must be the same as the balance of the withdrawn Vault"
+                    "La valeur de retrait doit être la même que celle contenue dans le Vault"
             }
         }
     }
 
-	  pub resource interface Receiver {
+	pub resource interface Receiver {
         pub fun deposit(from: @Vault)
     }
 
@@ -44,16 +44,16 @@ pub contract PinnieToken {
     pub resource VaultMinter {
         pub fun mintTokens(amount: UFix64, recipient: Capability<&AnyResource{Receiver}>) {
             let recipientRef = recipient.borrow()
-                ?? panic("Could not borrow a receiver reference to the vault")
+                ?? panic("Impossible d'emprunter la référence Reciever du Vault")
 
-            PinnieToken.totalSupply = PinnieToken.totalSupply + UFix64(amount)
+            WOToken.totalSupply = WOToken.totalSupply + UFix64(amount)
             recipientRef.deposit(from: <-create Vault(balance: amount))
         }
     }
 
     init() {
         self.totalSupply = 30.0
-        self.tokenName = "Pinnie"
+        self.tokenName = "WOT"
 
         let vault <- create Vault(balance: self.totalSupply)
         self.account.save(<-vault, to: /storage/MainVault)

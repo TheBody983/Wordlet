@@ -20,7 +20,7 @@ pub contract WordletContract {
 
     // Interface Publique : Les fonctions auxquelles tout le monde à accès 
     pub resource interface NFTReceiver {
-        pub fun deposit(token: @NFT)
+        pub fun deposit(token: @NFT, metadata: {String : String})
         pub fun getIDs(): [UInt64]
         pub fun idExists(id: UInt64): Bool
         pub fun getMetadata(id: UInt64) : {String : String}

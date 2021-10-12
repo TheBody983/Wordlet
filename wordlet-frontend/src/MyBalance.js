@@ -11,14 +11,14 @@ const MyBalance = () => {
         try {
             const encoded = await fcl.send([
                 fcl.script`
-                import PinnieToken from 0xEmulator
+                import WOToken from 0x1f7da62a915f01c7
 
                 pub fun main(address: Address): UFix64 {
                     let acct1 = getAccount(address)
 
-                    let acct1ReceiverRef = acct1.getCapability<&PinnieToken.Vault{PinnieToken.Balance}>(/public/MainReceiver)
+                    let acct1ReceiverRef = acct1.getCapability<&WOToken.Vault{WOToken.Balance}>(/public/MainReceiver)
                         .borrow()
-                        ?? panic("Could not borrow a reference to the account receiver")
+                        ?? panic("Impossible d'emprunter la Référence Reciever")
 
                     log("Balance de ")
                     log(address)
@@ -35,18 +35,17 @@ const MyBalance = () => {
             console.log("Balance : " + decoded)
         } catch (error) {
             setBalance(0)
+            console.error(error)
 
-            console.log("No balance")
+            console.log("MyBalance : No balance")
         }
     };
 
     const [user, setUser] = useState({loggedIn: null})
     useEffect(() => fcl.currentUser().subscribe(setUser), [])
   
-    var verr = 0;
     if(!balance && user.addr){
       fetchBalance(user.addr);
-      verr ++;
     }
 
     return (

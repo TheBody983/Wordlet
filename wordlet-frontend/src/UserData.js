@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import TokenData2 from './TokenData2';
+import TokenData from './TokenData';
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
 
@@ -11,15 +11,15 @@ const UserData = () => {
     const encoded = await fcl
       .send([
         fcl.script`
-        import PinataPartyContract from 0xf8d6e0586b0a20c7
+        import WordletContract from 0xf8d6e0586b0a20c7
         pub fun main(address: Address) : [UInt64] {
 
           // Voir les NFT de address
           let nftOwner = getAccount(address)  
-          let capability = nftOwner.getCapability<&{PinataPartyContract.NFTReceiver}>(/public/NFTReceiver)
+          let capability = nftOwner.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)
       
           let receiverRef = capability.borrow()
-              ?? panic("Could not borrow the receiver reference")
+              ?? panic("Impossible d'emprunter la Référence Reciever")
       
           return receiverRef.getIDs()
         }
@@ -35,17 +35,15 @@ const UserData = () => {
     catch (error) {
       setUserTokens(null);
 
-      console.log("No Tokens")
+      console.log("UserData : Pas de NFT trouvés")
     }
   };
 
   const [user, setUser] = useState({loggedIn: null})
   useEffect(() => fcl.currentUser().subscribe(setUser), [])
 
-  var verr = 0;
   if(!userTokens && user.addr){
     fetchUserTokens(user.addr);
-    verr ++;
   }
 
   return (
@@ -59,7 +57,7 @@ const UserData = () => {
           {
             Object.keys(userTokens).map(k => {
               return (
-                <TokenData2 tokenId={userTokens[k]}/>       
+                <TokenData tokenId={userTokens[k]}/>       
               )
             })
           }

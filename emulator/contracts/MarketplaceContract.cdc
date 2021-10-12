@@ -1,5 +1,5 @@
-import PinataPartyContract from 0xf8d6e0586b0a20c7
-import PinnieToken from 0xf8d6e0586b0a20c7
+import WordletContract from 0x1f7da62a915f01c7
+import WOToken from 0x1f7da62a915f01c7
 
 pub contract MarketplaceContract {
     pub event ForSale(id: UInt64, price: UFix64)
@@ -8,31 +8,31 @@ pub contract MarketplaceContract {
     pub event SaleWithdrawn(id: UInt64)
 
     pub resource interface SalePublic {
-        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{PinataPartyContract.NFTReceiver}, buyTokens: @PinnieToken.Vault)
+        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordletContract.NFTReceiver}, buyTokens: @WOToken.Vault)
         pub fun idPrice(tokenID: UInt64): UFix64?
         pub fun getIDs(): [UInt64]
     }
 
     pub resource SaleCollection: SalePublic {
-        pub var forSale: @{UInt64: PinataPartyContract.NFT}
+        pub var forSale: @{UInt64: WordletContract.NFT}
 
         pub var prices: {UInt64: UFix64}
 
-        access(account) let ownerVault: Capability<&AnyResource{PinnieToken.Receiver}>
+        access(account) let ownerVault: Capability<&AnyResource{WOToken.Receiver}>
 
-        init (vault: Capability<&AnyResource{PinnieToken.Receiver}>) {
+        init (vault: Capability<&AnyResource{WOToken.Receiver}>) {
             self.forSale <- {}
             self.ownerVault = vault
             self.prices = {}
         }
 
-        pub fun withdraw(tokenID: UInt64): @PinataPartyContract.NFT {
+        pub fun withdraw(tokenID: UInt64): @WordletContract.NFT {
             self.prices.remove(key: tokenID)
             let token <- self.forSale.remove(key: tokenID) ?? panic("missing NFT")
             return <-token
         }
 
-        pub fun listForSale(token: @PinataPartyContract.NFT, price: UFix64) {
+        pub fun listForSale(token: @WordletContract.NFT, price: UFix64) {
             let id = token.id
 
             self.prices[id] = price
@@ -49,7 +49,7 @@ pub contract MarketplaceContract {
             emit PriceChanged(id: tokenID, newPrice: newPrice)
         }
 
-        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{PinataPartyContract.NFTReceiver}, buyTokens: @PinnieToken.Vault) {
+        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordletContract.NFTReceiver}, buyTokens: @WOToken.Vault) {
             pre {
                 self.forSale[tokenID] != nil && self.prices[tokenID] != nil:
                     "No token matching this ID for sale!"
@@ -85,7 +85,7 @@ pub contract MarketplaceContract {
         }
     }
 
-    pub fun createSaleCollection(ownerVault: Capability<&AnyResource{PinnieToken.Receiver}>): @SaleCollection {
+    pub fun createSaleCollection(ownerVault: Capability<&AnyResource{WOToken.Receiver}>): @SaleCollection {
         return <- create SaleCollection(vault: ownerVault)
     }
 }

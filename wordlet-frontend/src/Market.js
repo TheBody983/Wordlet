@@ -1,7 +1,6 @@
 import './Market.css';
 import MarketData from './MarketData';
 import Balance from './MyBalance';
-import MintPinnie from './MintPinnie';
 
 function Market() {
     return(
@@ -10,7 +9,6 @@ function Market() {
             <h1>En cours de construction...</h1>
             <MarketData />
             <Balance />
-            <MintPinnie />
         </div>
     );
 }
