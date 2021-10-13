@@ -13,8 +13,6 @@ import SetupAccount from "./SetupAccount"
 ReactDOM.render(
 <React.StrictMode>
 	<Log />
-	<Dev />
-	<SetupAccount />
 </React.StrictMode>,
 document.getElementById('btn')
 );
@@ -22,8 +20,10 @@ document.getElementById('btn')
 ReactDOM.render(
 	<React.StrictMode>
 		<App />
+		<Dev />
+		<SetupAccount />
 	</React.StrictMode>,
-	document.getElementById('accountData')
+document.getElementById('accountData')
 );
 
 ReactDOM.render(

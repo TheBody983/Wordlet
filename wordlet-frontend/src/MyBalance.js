@@ -14,16 +14,13 @@ const MyBalance = () => {
                 import WOToken from 0x1f7da62a915f01c7
 
                 pub fun main(address: Address): UFix64 {
-                    let acct1 = getAccount(address)
+                    let account = getAccount(address)
 
-                    let acct1ReceiverRef = acct1.getCapability<&WOToken.Vault{WOToken.Balance}>(/public/MainReceiver)
+                    let accountReceiverRef = account.getCapability<&WOToken.Vault{WOToken.Balance}>(/public/MainReceiver)
                         .borrow()
                         ?? panic("Impossible d'emprunter la Référence Reciever")
 
-                    log("Balance de ")
-                    log(address)
-                    log(acct1ReceiverRef.balance)
-                    return acct1ReceiverRef.balance
+                    return accountReceiverRef.balance
                 }
                 `,
                 fcl.args([
@@ -32,7 +29,7 @@ const MyBalance = () => {
             ])
             const decoded = await fcl.decode(encoded)
             setBalance(decoded)
-            console.log("Balance : " + decoded)
+            console.log("MyBalance : " + decoded)
         } catch (error) {
             setBalance(0)
             console.error(error)
@@ -50,12 +47,13 @@ const MyBalance = () => {
 
     return (
     <div>
-
-        balance :
-        {balance}
+        <div>
+            <div>Mon Compte : </div>
+            {balance} WOT
+        </div>
         
         <div>
-            <button onClick={() => fetchBalance(user.addr)} className="btn-secondary">Afficher</button>
+            <button onClick={() => fetchBalance(user.addr)}>Actualiser</button>
         </div>
 
     </div>

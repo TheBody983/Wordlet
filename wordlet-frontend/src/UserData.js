@@ -11,7 +11,7 @@ const UserData = () => {
     const encoded = await fcl
       .send([
         fcl.script`
-        import WordletContract from 0xf8d6e0586b0a20c7
+        import WordletContract from 0x1f7da62a915f01c7
         pub fun main(address: Address) : [UInt64] {
 
           // Voir les NFT de address

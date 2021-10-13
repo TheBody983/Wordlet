@@ -9,7 +9,6 @@ return (
 	<h2> Mes Tokens </h2>
 	<UserData />
 	<Balance />
-	<SetupAccount />
 	
 	</div>
 );

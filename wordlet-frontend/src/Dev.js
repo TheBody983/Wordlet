@@ -1,6 +1,6 @@
 /* Wordlet
 
-Cet élément sert à tester rapidement des scripts et 
+Cet élément sert à tester rapidement des scripts et transactions
 */
 
 import React from "react";
@@ -16,10 +16,10 @@ const afficherConfig = async () => {
 
 const Dev = () => {
     return (
-        <div className="dev-div">
-            <button onClick={() => afficherConfig()} className="btn-primary">Config</button>
-            <button onClick={() => executeScript()} className="btn-primary">Script</button>
-            <button onClick={() => sendTransaction()} className="btn-primary">Transaction</button>
+        <div id="dev-div">
+            <button onClick={() => afficherConfig()}>Config</button>
+            <button onClick={() => executeScript()}>Script</button>
+            <button onClick={() => sendTransaction()}>Transaction</button>
         </div>
     );
 }
