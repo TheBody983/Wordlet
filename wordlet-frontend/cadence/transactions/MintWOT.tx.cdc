@@ -1,6 +1,8 @@
 import WOToken from 0x1f7da62a915f01c7
 /*
 v1
+
+Créé 100 WOT pour le compte Wordlet
 */
 
 
@@ -15,13 +17,12 @@ transaction {
         
         let recipient = getAccount(0x1f7da62a915f01c7)
       
-        self.receiver = recipient.getCapability<&WOToken.Vault{WOToken.Receiver}>
-(/public/MainReceiver)
+        self.receiver = recipient.getCapability<&WOToken.Vault{WOToken.Receiver}>(/public/MainReceiver)
 
 	}
 
     execute {
-        self.mintingRef.mintTokens(amount: 30.0, recipient: self.receiver)
+        self.mintingRef.mintTokens(amount: 100.0, recipient: self.receiver)
 
         log("30 tokens minted and deposited to account 0x1f7da62a915f01c7")
     }

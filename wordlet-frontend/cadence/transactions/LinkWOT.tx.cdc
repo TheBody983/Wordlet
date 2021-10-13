@@ -1,5 +1,9 @@
 import WOToken from 0x1f7da62a915f01c7
 
+/*
+v1
+ */
+
 transaction {
   prepare(acct: AuthAccount) {
     acct.link<&WOToken.Vault{WOToken.Receiver, WOToken.Balance}>(/public/MainReceiver, target: /storage/MainVault)

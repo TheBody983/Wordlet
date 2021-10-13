@@ -1,5 +1,8 @@
 import WOToken from 0x1f7da62a915f01c7
 
+/*
+v1
+ */
 transaction (addr: Address){
     prepare(acct: AuthAccount) {
         let vaultA <- WOToken.createEmptyVault()
