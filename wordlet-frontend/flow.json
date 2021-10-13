@@ -26,7 +26,7 @@
 			"key": "86585470482acda40a7bf5970fbf06cd69a252bad2b7e5a099ea1f990eebb942",
 			"pub": "e9e6ff35f25b9d667310b8c7403330eb9875120c0363c72456e75121cd9378f712d3ea0d11c3fcc018cf99dac49abb74503007a5a5e8a6b069bb66da0249a793"
 		},
-		"testnet-account": {
+		"wordlet": {
 			"address": "0x1f7da62a915f01c7",
 			"key": "b4df8c588981b214119d23c572bc2f0ae6955a151d4beaa95f841b1cfc808318",
 			"pub": "95b9793a37adb923dde0857393b78f8988d5ff2646ed4d808fae5bfbb77812b763dbbd9bb1932a48eaf04cd18b283f12197ff6e3cbd3e3a85ff35322c04dd010"
@@ -37,7 +37,7 @@
 			"emulator-account": ["WOToken", "WordletContract", "MarketplaceContract"]
 		},
 		"testnet": {
-			"testnet-account": ["WOToken", "WordletContract", "MarketplaceContract"]
+			"wordlet": ["WOToken", "WordletContract", "MarketplaceContract"]
 		}
 	}
 }
