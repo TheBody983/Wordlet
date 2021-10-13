@@ -10,16 +10,14 @@ pub fun main(): String {
  * Execute un script et renvoie la valeur de retour dans la console
  */
 const executeScript = async () => {
-
     try {
         // Execute un script placé en paramètre 
-        var result = await fcl
-        .send([fcl.script(script)])
-        result = fcl.decode(result)
-        console.log(result)
+        const encoded = await fcl
+            .send([fcl.script(script)])
+        const decoded = fcl.decode(encoded)
+        console.log(decoded)
     }
     catch(error){
-        console.log("Erreur lors de l'execution du script")
         console.error(error)
     }
 }

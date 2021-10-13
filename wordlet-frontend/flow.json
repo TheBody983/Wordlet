@@ -6,9 +6,9 @@
 		}
 	},
 	"contracts": {
-		"MarketplaceContract": "./contracts/MarketplaceContract.cdc",
-		"WordletContract": "./contracts/WordletContract.cdc",
-		"WOToken": "./contracts/WOToken.cdc"
+		"MarketplaceContract": "./cadence/contracts/MarketplaceContract.cdc",
+		"WordletContract": "./cadence/contracts/WordletContract.cdc",
+		"WOToken": "./cadence/contracts/WOToken.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",

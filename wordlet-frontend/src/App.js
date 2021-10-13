@@ -1,7 +1,6 @@
 import './App.css';
 import UserData from './UserData';
 import Balance from './MyBalance';
-import SetupAccount from './SetupAccount';
 
 function App() {
 return (

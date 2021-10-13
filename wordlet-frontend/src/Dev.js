@@ -1,13 +1,14 @@
 /* Wordlet
 
 Cet élément sert à tester rapidement des scripts et transactions
+
 */
 
 import React from "react";
 import * as fcl from "@onflow/fcl";
 
-import executeScript from "./dev.executeScript" ;
-import sendTransaction from "./dev.sendTransaction";
+import executeScript from "./cadence/template.script" ;
+import sendTransaction from "./cadence/template.tx";
 
 const afficherConfig = async () => {
     console.log(await fcl.config().all())
