@@ -10,12 +10,10 @@
 
 3. [Installer NodeJS](https://nodejs.org/en/download/)
 
-4. Installer les dépendances avec `npm install` (Powershell)
+4. Dans wordlet-frontend, faire un `npm install` (Powershell)
 
-5. Installer les dépendances propres à flow avec `npm install @onflow/fcl @onflow/types` (Powershell)
-
-6. Corriger les vulnérabilités avec `npm audit fix --force`
+5. Dans wordlet-frontend, faire un `npm i @onflow/fcl @onflow/types` (Powershell)
 
 ## Lancement
 
-* Démarrer l'application avec `npm start`
+* Dans wordlet-frontend, démarrer l'application avec `npm start`

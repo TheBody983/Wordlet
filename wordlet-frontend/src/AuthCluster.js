@@ -7,15 +7,10 @@ const AuthCluster = () => {
 	if (user.loggedIn) {
 		return (
 			<div>
+				<span>{user?.addr ?? "Pas d'Adresse"}</span>
 				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
 			</div>
 			)
-			/*return (
-				<div>
-					<span>{user?.addr ?? "Pas d'Adresse"}</span>
-					<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
-				</div>
-				)*/
 	} else {
 		return (
 		<div>
