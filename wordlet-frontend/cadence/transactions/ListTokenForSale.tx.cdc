@@ -1,7 +1,10 @@
-
 import WordletContract from 0x1f7da62a915f01c7
 import WOToken from 0x1f7da62a915f01c7
 import MarketplaceContract from 0x1f7da62a915f01c7
+
+/*
+v1
+ */
 
 transaction (tokenId: UInt64, value: UFix64){
 
