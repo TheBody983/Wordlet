@@ -14,7 +14,6 @@ ReactDOM.render(
 <React.StrictMode>
 	<Log />
 	<Dev />
-	<Discord />
 	<SetupAccount />
 </React.StrictMode>,
 document.getElementById('btn')
