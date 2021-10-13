@@ -13,7 +13,7 @@ transaction (address: Address){
     let vaultRef = acct.borrow<&WOToken.Vault>(from: /storage/MainVault)
         ?? panic("Could not borrow a reference to the owner's vault")
       
-    self.temporaryVault <- vaultRef.withdraw(amount: 10.0)
+    self.temporaryVault <- vaultRef.withdraw(amount: 500.0)
   }
 
   execute {

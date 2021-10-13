@@ -22,7 +22,7 @@ transaction {
 	}
 
     execute {
-        self.mintingRef.mintTokens(amount: 100.0, recipient: self.receiver)
+        self.mintingRef.mintTokens(amount: 1000.0, recipient: self.receiver)
 
         log("30 tokens minted and deposited to account 0x1f7da62a915f01c7")
     }
