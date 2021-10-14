@@ -37,7 +37,6 @@ const checkTokensForSale = async (adresse) => {
                     fcl.arg(adresse, t.Address)
                 ])
             ])
-            console.log(encoded)
         return await fcl.decode(encoded)
     } 
     catch (error) {

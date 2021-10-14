@@ -41,7 +41,7 @@ const getUserBalance = async (address) => {
         
     }
     catch(error){
-        console.error(error)
+        if(!error instanceof TypeError) console.error(error)
         return 0
     }
 }

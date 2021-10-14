@@ -6,18 +6,20 @@ import getUserBalance from "./cadence/getUserBalance.script";
 const MyBalance = () => {
     const [balance, setBalance] = useState(null);
     useEffect(() => {
-        getBalance();
+        try{ getBalance();}
+        catch(e){}
     }, []);
     
-    const getBalance = async (address) => {
+    const getBalance = async () => {
         try {
-            const bal = await getUserBalance(address)
+            const bal = await getUserBalance(user.addr)
             setBalance(bal)
         }
         catch (error) {
             console.error(error)
         }
     }
+    
 
     const [user, setUser] = useState({loggedIn: null})
     useEffect(() => fcl.currentUser().subscribe(setUser), [])
@@ -34,7 +36,7 @@ const MyBalance = () => {
         </div>
         
         <div>
-            <button onClick={() => getBalance(user.addr)}>Actualiser</button>
+            <button onClick={() => getBalance()}>Actualiser</button>
         </div>
 
     </div>

@@ -33,7 +33,7 @@ const UserData = () => {
 		</div>
 		{
 			userTokens &&
-			<div class="horizontal-scroll-wrapper squares">
+			<div className="horizontal-scroll-wrapper squares">
 			{
 				Object.keys(userTokens).map(k => {
 				return (
