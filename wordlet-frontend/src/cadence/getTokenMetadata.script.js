@@ -1,11 +1,15 @@
+//  getTokenMetadata.script.js  
+//
+//  v1
+//  Récupère les métadonnées d'un token
+
+
+
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types"
 
-// Récupère les métadonnées d'un token
-// v1
-
 const getTokenMetadataScript=`
-import WordletContract from 0x1f7da62a915f01c7
+import WordletContract from 0xWordlet
 
 pub fun main(id: UInt64) : {String : String} {
     let nftOwner = getAccount(0x1f7da62a915f01c7)  

@@ -1,8 +1,17 @@
+//  getUserBalance.script.js
+//
+//  v1
+//  Récupère le nombre de WOT d'un compte
+
+
+
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
 
+
+
 const getUserBalanceScript = `
-import WOToken from 0x1f7da62a915f01c7
+import WOToken from 0xWordlet
 
 pub fun main(address: Address): UFix64 {
     let account = getAccount(address)
@@ -15,9 +24,8 @@ pub fun main(address: Address): UFix64 {
 }
 `
 
-/**
- * Execute un script et renvoie la valeur de retour dans la console
- */
+
+
 const getUserBalance = async (address) => {
     try {
         // Execute un script placé en paramètre 
@@ -37,5 +45,7 @@ const getUserBalance = async (address) => {
         return 0
     }
 }
+
+
 
 export default getUserBalance;

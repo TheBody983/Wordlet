@@ -1,21 +1,16 @@
-import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types"
+//  createWOTokenVault.tx.js
+//  
+//  v1 
+//  Créé un Vault de WOT sur le compte courant ainsi qu'une référence à lui
 
-const createWOTVault = async () => {
-    const txId = await fcl
-    .send([
-    fcl.proposer(fcl.authz),
-    fcl.payer(fcl.authz),
-    fcl.authorizations([fcl.authz]),
-    fcl.limit(50),
-    fcl.transaction(createWOTVaultTx),      
-    ])
-    await fcl.decode(txId);
-    console.log(txId)
-}
+
+
+import * as fcl from "@onflow/fcl";
+
+
 
 const createWOTVaultTx = `
-import WOToken from 0x1f7da62a915f01c7
+import WOToken from 0xWordlet
 
 /*
 v1
@@ -44,5 +39,22 @@ transaction{
     }
 }
 `
+
+
+
+const createWOTVault = async () => {
+    const txId = await fcl
+    .send([
+    fcl.proposer(fcl.authz),
+    fcl.payer(fcl.authz),
+    fcl.authorizations([fcl.authz]),
+    fcl.limit(50),
+    fcl.transaction(createWOTVaultTx),      
+    ])
+    await fcl.decode(txId);
+    console.log(txId)
+}
+
+
 
 export default createWOTVault

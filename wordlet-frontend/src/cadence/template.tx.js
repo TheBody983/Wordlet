@@ -1,15 +1,22 @@
+//  template.tx.js
+//
+//  v1
+//  Envoie une transation signée de l'utilisateur courant
+
+
 import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types";
+
+
 
 const transaction = `
-import WOToken from 0x1f7da62a915f01c7
-
 transaction {
     prepare(acct: AuthAccount) {
         log("Bonjour")
     }
 }
 `
+
+
 
 const sendTransaction = async () => {
     var decoded
@@ -31,5 +38,7 @@ const sendTransaction = async () => {
     }
     console.log(decoded)
 }
+
+
 
 export default sendTransaction;

@@ -1,8 +1,17 @@
+//  getTokenPrice.script.js
+//
+//  v1
+//  Récupère le prix d'un token placé en paramètre
+
+
+
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
 
+
+
 const getTokenPriceScript=`
-import MarketplaceContract from 0x1f7da62a915f01c7
+import MarketplaceContract from 0xWordlet
 
 pub fun main(id: UInt64): UFix64? {
 	let account1 = getAccount(0x1f7da62a915f01c7)
@@ -14,9 +23,9 @@ pub fun main(id: UInt64): UFix64? {
 	return acct1saleRef.idPrice(tokenID: id)
 }
 `
-/**
- * Execute un script et renvoie la valeur de retour dans la console
- */
+
+
+
 const getTokenPrice = async (id) => {
     try {
         // Execute un script placé en paramètre 
@@ -33,5 +42,7 @@ const getTokenPrice = async (id) => {
         console.error(error)
     }
 }
+
+
 
 export default getTokenPrice;

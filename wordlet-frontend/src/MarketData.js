@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types"
 
 import checkTokensForSale from "./cadence/checkTokensForSale.script";
 import getTokenMetadata from "./cadence/getTokenMetadata.script";
@@ -11,13 +9,15 @@ const MarketData = () => {
 const [tokensToSell, setTokensToSell] = useState([])
 
 useEffect(() => {
-	checkMarketplace();
+	checkMarketplace("0x1f7da62a915f01c7");
 }, []);
 
-const checkMarketplace = async () => {
+const address = "0x1f7da62a915f01c7"
+
+const checkMarketplace = async (address) => {
 	try {
 		// Récupère les IDs des tokens à vendre sur le compte wordlet
-		const tokens = await checkTokensForSale()
+		const tokens = await checkTokensForSale(address)
 
 		let marketplaceMetadata = [];
 		// Récupère les métadonnées de chaque token
@@ -47,7 +47,7 @@ return (
 				
 				<h4>Price</h4>
 				<p>{parseInt(token.price, 10).toFixed(2)} WOT</p>
-				<button onClick={() => buyToken(token.id)}>Acheter</button>
+				<button onClick={() => buyToken(token.id, address)}>Acheter</button>
 				
 			</div>
 		)

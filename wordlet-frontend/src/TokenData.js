@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types";
 
 import getTokenMetadata from "./cadence/getTokenMetadata.script";
 import listTokenForSale from "./cadence/listTokenForSale.tx";

@@ -1,21 +1,16 @@
-import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types"
+//  linkWOTVault.tx.js
+//  
+//  v1
+//  Permet de créer une référence au WOTVault de l'utilisateur courant, au cas où
 
-const linkWOTVault = async () => {
-    const txId = await fcl
-    .send([
-    fcl.proposer(fcl.authz),
-    fcl.payer(fcl.authz),
-    fcl.authorizations([fcl.authz]),
-    fcl.limit(50),
-    fcl.transaction(linkWOTVaultTx),      
-    ])
-    await fcl.decode(txId);
-    console.log(txId)
-}
+
+
+import * as fcl from "@onflow/fcl";
+
+
 
 const linkWOTVaultTx = `
-import WOToken from 0x1f7da62a915f01c7
+import WOToken from 0xWordlet
 
 transaction {
   prepare(acct: AuthAccount) {
@@ -32,5 +27,22 @@ transaction {
 }
 
 `
+
+
+
+const linkWOTVault = async () => {
+    const txId = await fcl
+    .send([
+    fcl.proposer(fcl.authz),
+    fcl.payer(fcl.authz),
+    fcl.authorizations([fcl.authz]),
+    fcl.limit(50),
+    fcl.transaction(linkWOTVaultTx),      
+    ])
+    await fcl.decode(txId);
+    console.log(txId)
+}
+
+
 
 export default linkWOTVault

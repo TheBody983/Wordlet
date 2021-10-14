@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TokenData from './TokenData';
 import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types";
 
 import getUserTokens from "./cadence/getUserTokens.script";
 

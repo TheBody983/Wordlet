@@ -1,4 +1,13 @@
+//  template.script.js
+//
+//  v1
+//  Execute un script qui renvoie "ça marche"
+
+
+
 import * as fcl from "@onflow/fcl";
+
+
 
 const script = `
 pub fun main(): String {
@@ -6,9 +15,8 @@ pub fun main(): String {
 }
 `
 
-/**
- * Execute un script et renvoie la valeur de retour dans la console
- */
+
+
 const executeScript = async () => {
     try {
         // Execute un script placé en paramètre 
@@ -21,5 +29,7 @@ const executeScript = async () => {
         console.error(error)
     }
 }
+
+
 
 export default executeScript;

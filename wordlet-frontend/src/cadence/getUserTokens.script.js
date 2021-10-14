@@ -1,8 +1,18 @@
+//  getUserTokens.script.js
+//
+//  v1
+//  Récupère les tokens d'un utilisateur
+
+
+
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types";
 
+
+
 const getUserTokensScript = `
-import WordletContract from 0x1f7da62a915f01c7
+import WordletContract from 0xWordlet
+
 pub fun main(address: Address) : [UInt64] {
 
 // Voir les NFT de address
@@ -15,6 +25,8 @@ let receiverRef = capability.borrow()
 return receiverRef.getIDs()
 }
 `
+
+
 
 const getUserTokens = async (address) => {
     try{
@@ -32,5 +44,7 @@ const getUserTokens = async (address) => {
         return(null)
     }
 };
+
+
 
 export default getUserTokens

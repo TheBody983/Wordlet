@@ -7,7 +7,6 @@ import App from './App';
 import Market from './Market';
 
 import Dev from './Dev';
-import Discord from "./Discord";
 import SetupAccount from "./SetupAccount"
 
 ReactDOM.render(

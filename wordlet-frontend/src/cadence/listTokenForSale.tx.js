@@ -1,10 +1,19 @@
+//	listTokenForSale.tx.js
+//
+//	v1
+//	Met un token en vente
+
+
+
 import * as fcl from "@onflow/fcl";
 import * as t from "@onflow/types"
 
+
+
 const listTokenForSaleTx=`
-import WordletContract from 0x1f7da62a915f01c7
-import WOToken from 0x1f7da62a915f01c7
-import MarketplaceContract from 0x1f7da62a915f01c7
+import WordletContract from 0xWordlet
+import WOToken from 0xWordlet
+import MarketplaceContract from 0xWordlet
 
 transaction (tokenId: UInt64, value: UFix64){
 
@@ -28,6 +37,8 @@ transaction (tokenId: UInt64, value: UFix64){
 }
 `
 
+
+
 const listTokenForSale = async (tokenId, value) => {
 	const txId = await fcl
         .send([
@@ -43,5 +54,7 @@ const listTokenForSale = async (tokenId, value) => {
         ])
 	console.log(txId)
 }
+
+
 
 export default listTokenForSale
