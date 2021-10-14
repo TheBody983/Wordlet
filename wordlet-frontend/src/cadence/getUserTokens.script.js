@@ -28,8 +28,8 @@ const getUserTokens = async (address) => {
         var decoded = await fcl.decode(encoded)
         return(decoded)
     } catch (error) {
-        return(null)
         console.log("UserData : Pas de NFT trouvés")
+        return(null)
     }
 };
 
