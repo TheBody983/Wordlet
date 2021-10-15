@@ -1,4 +1,4 @@
-# Wordlet
+# [Wordlet](https://thebody983.github.io/Wordlet/)
 *NFT wallet for words*
 
 ## Installation
