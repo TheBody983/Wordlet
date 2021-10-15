@@ -10,10 +10,8 @@
 
 3. [Installer NodeJS](https://nodejs.org/en/download/)
 
-4. Dans wordlet-frontend, faire un `npm install` (Powershell)
-
-5. Dans wordlet-frontend, faire un `npm i @onflow/fcl @onflow/types` (Powershell)
+4. Installer les dépendances `npm i @onflow/fcl @onflow/types` (Powershell)
 
 ## Lancement
 
-* Dans wordlet-frontend, démarrer l'application avec `npm start`
+* Démarrer l'application avec `npm start`
