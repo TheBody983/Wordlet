@@ -1,52 +1,53 @@
 import React, { useState } from "react";
-import * as fcl from "@onflow/fcl";
-// import * as t from "@onflow/types";
 
-const TokenData = () => {
-  const [nftInfo, setNftInfo] = useState(null)
-  const fetchTokenData = async () => {
-    const encoded = await fcl
-      .send([
-        fcl.script`
-        import PinataPartyContract from 0xf8d6e0586b0a20c7
-        pub fun main() : {String : String} {
-          // Voir les NFT de 0xf8d6e0586b0a20c7
-          let nftOwner = getAccount(0xf8d6e0586b0a20c7)  
-          let capability = nftOwner.getCapability<&{PinataPartyContract.NFTReceiver}>(/public/NFTReceiver)
-      
-          let receiverRef = capability.borrow()
-              ?? panic("Could not borrow the receiver reference")
-      
-          return receiverRef.getMetadata(id: 1)
-        }
-      `
-      ])
-    
-    const decoded = await fcl.decode(encoded)
-    setNftInfo(decoded)
-  };
-  return (
-    <div className="token-data">
-      <div className="center">
-        <button className="btn-primary" onClick={() => fetchTokenData()}>Raw TokenID</button>        
-      </div>
-      {
-        nftInfo &&
-        <div>
-          {
-            Object.keys(nftInfo).map(k => {
-              return (
-                <p>{k}: {nftInfo[k]}</p>
-              )
-            })
-          }
-            <div>
-              <button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
-            </div>       
-        </div>
-      }
-    </div>
-  );
+import getTokenMetadata from "./cadence/getTokenMetadata.script";
+import listTokenForSale from "./cadence/listTokenForSale.tx";
+
+const TokenData = (props) => {
+let tokenId = parseInt(props.tokenId)
+console.log("id : " + tokenId)
+console.log("type : " + typeof(tokenId))
+
+const [nftInfo, setNftInfo] = useState(null)
+
+const fetchTokenData = async (tokenId) => {
+	try {
+		const data = await getTokenMetadata(tokenId)
+		setNftInfo(data)
+	} catch (error) {
+		console.error(error)
+	}
+}
+
+return (
+	<div className="token-data">
+	<div className="center">
+		<button className="btn-primary" onClick={() =>fetchTokenData(props.tokenId)}>Token {props.tokenId}</button>        
+	</div>
+	{
+		nftInfo &&
+		<div>
+		{
+			<div>{
+				Object.keys(nftInfo).map(k => {
+				return (
+					
+					<p>{k}: {nftInfo[k]}</p>
+					
+				)
+				})}
+				<button className="btn-primary" onClick={() =>listTokenForSale(props.tokenId, "100.0")}>Mettre en vente</button>        
+			</div>
+			}
+			<div className="center video">
+				<div>
+				<button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
+				</div>
+			</div>          
+		</div>
+	}
+	</div>
+);
 };
 
 export default TokenData;
