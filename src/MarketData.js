@@ -10,8 +10,10 @@ import * as fcl from "@onflow/fcl";
 const MarketData = () => {
 const [tokensToSell, setTokensToSell] = useState([])
 
+let address = "0x1f7da62a915f01c7"
+
 useEffect(() => {
-	checkMarketplace(user.addr);
+	checkMarketplace();
 }, []);
 
 const [user, setUser] = useState({loggedIn: null})
@@ -20,7 +22,7 @@ useEffect(() => fcl.currentUser().subscribe(setUser), [])
 const checkMarketplace = async () => {
 	try {
 		// Récupère les IDs des tokens à vendre sur le compte wordlet
-		const tokens = await checkTokensForSale(user.addr)
+		const tokens = await checkTokensForSale(address)
 
 		let marketplaceMetadata = [];
 		// Récupère les métadonnées de chaque token
@@ -38,6 +40,7 @@ const checkMarketplace = async () => {
 
 return (
 	<div className="market-listings">
+		<p> Tokens de {address} </p>
 	{
 		tokensToSell.map(token => {
 		return (
