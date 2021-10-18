@@ -1,17 +1,43 @@
 import React, {useState, useEffect} from 'react'
 import * as fcl from "@onflow/fcl"
 
+import userIsinitialized from './cadence/userIsInitialized.script'
+import createWOTVault from "./cadence/createWOTVault.tx";
+import createWordletCollection from "./cadence/createWordletCollection.tx";
+
+
 const AuthCluster = () => {
 	const [user, setUser] = useState({loggedIn: null})
+	const [state, setState] = useState("Not Ready")
 	useEffect(() => fcl.currentUser().subscribe(setUser), [])
-	if (user.loggedIn) {
+	
+	userIsinitialized(user?.addr)
+		.then((result)=>{
+			if(result) setState("Ready")
+		})
+
+	if (user.loggedIn && state === "Ready") {
 		return (
 			<div>
-				<span>{user?.addr ?? "Pas d'Adresse"}</span>
+				<span>{user?.addr ?? "Pas d'Adresse"}{state}</span>
 				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
 			</div>
 			)
-	} else {
+	} 
+	else if(user.loggedIn){
+		return (
+			<div>
+				<span>{user?.addr ?? "Pas d'Adresse"} - {state}</span>
+				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
+				<div id="setup-account-div">
+					<p> Setup </p>
+					<button onClick={() => createWOTVault()}>WOToken</button>
+					<button onClick={() => createWordletCollection()}>Wordlet Wallet</button>
+        		</div>
+			</div>
+			)
+	}
+	else {
 		return (
 		<div>
 			<button className="btn-primary" onClick={fcl.authenticate}>Connexion</button>
