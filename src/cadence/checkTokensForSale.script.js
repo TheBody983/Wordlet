@@ -13,14 +13,14 @@ import * as t from "@onflow/types"
 
 
 const checkTokensForSaleScript=`
-import MarketplaceContract from 0xWordlet
+import MarketplaceContract from 0xMarketPlace
 
 pub fun main(address: Address): [UInt64] {
-	let account = getAccount(address)
+    let account = getAccount(address)
 
 	let saleRef = account.getCapability<&AnyResource{MarketplaceContract.SalePublic}>(/public/NFTSale)
 		.borrow()
-		?? panic("Could not borrow acct1 nft sale reference")
+		?? panic("Impossible d'emprunter la Référence WordletSale")
 
 	return saleRef.getIDs()
 }
@@ -28,13 +28,13 @@ pub fun main(address: Address): [UInt64] {
 
 
 
-const checkTokensForSale = async (adresse) => {
+const checkTokensForSale = async (address) => {
     try {
         const encoded = await fcl
             .send([
                 fcl.script(checkTokensForSaleScript),
                 fcl.args([
-                    fcl.arg(adresse, t.Address)
+                    fcl.arg(address, t.Address)
                 ])
             ])
         return await fcl.decode(encoded)
