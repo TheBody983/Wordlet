@@ -2,11 +2,12 @@ import WOToken from 0x1f7da62a915f01c7
 /*
 v1
 
-Créé 100 WOT pour le compte Wordlet
+Créé n WOT pour le compte Wordlet
 */
 
 
-transaction {
+transaction (receiverAddr: Address, amount: UFix64){
+
     let mintingRef: &WOToken.VaultMinter
 
     var receiver: Capability<&WOToken.Vault{WOToken.Receiver}>
@@ -15,15 +16,15 @@ transaction {
         self.mintingRef = acct.borrow<&WOToken.VaultMinter>(from: /storage/MainMinter)
             ?? panic("Could not borrow a reference to the minter")
         
-        let recipient = getAccount(0x1f7da62a915f01c7)
+        let recipient = getAccount(receiverAddr)
       
         self.receiver = recipient.getCapability<&WOToken.Vault{WOToken.Receiver}>(/public/MainReceiver)
 
 	}
 
     execute {
-        self.mintingRef.mintTokens(amount: 1000.0, recipient: self.receiver)
+        self.mintingRef.mintTokens(amount: amount, recipient: self.receiver)
 
-        log("30 tokens minted and deposited to account 0x1f7da62a915f01c7")
+        log(amount.toString().concat(" WOT minted and deposited to account ".concat(receiverAddr.toString())))
     }
 }

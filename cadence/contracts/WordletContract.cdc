@@ -47,6 +47,7 @@ pub contract WordletContract {
             return <-token
         }
 
+        // Depose un NFT et ses métadonnées dans la collection
         pub fun deposit(token: @NFT, metadata: {String : String}) {
             self.metadataObjs[token.id] = metadata
             self.ownedNFTs[token.id] <-! token
