@@ -20,8 +20,7 @@ pub fun main(): String {
 const executeScript = async () => {
     try {
         // Execute un script placé en paramètre 
-        const encoded = await fcl
-            .send([fcl.script(script)])
+        const encoded = await fcl.send([fcl.script(script)])
         const decoded = fcl.decode(encoded)
         console.log(decoded)
     }
