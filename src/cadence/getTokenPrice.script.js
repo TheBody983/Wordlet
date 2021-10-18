@@ -11,16 +11,18 @@ import * as t from "@onflow/types";
 
 
 const getTokenPriceScript=`
-import MarketplaceContract from 0xWordlet
+import MarketplaceContract from 0xMarketPlace
 
 pub fun main(id: UInt64): UFix64? {
-	let account1 = getAccount(0x1f7da62a915f01c7)
+    // Récupère le compte vendeur
+	let seller = getAccount(0x1f7da62a915f01c7)
 
-	let acct1saleRef = account1.getCapability<&AnyResource{MarketplaceContract.SalePublic}>(/public/NFTSale)
+    // Emprunte la référence de vente du vendeur
+	let saleRef = seller.getCapability<&AnyResource{MarketplaceContract.SalePublic}>(/public/NFTSale)
 		.borrow()
-		?? panic("Could not borrow acct nft sale reference")
+		?? panic("Impossible d'emprunter la référence de vente du vendeur")
 
-	return acct1saleRef.idPrice(tokenID: id)
+	return saleRef.idPrice(tokenID: id)
 }
 `
 
