@@ -8,14 +8,12 @@ const UserData = () => {
 	const [userTokens, setUserTokens] = useState(null)
 
 	const fetchUserTokens = async (address) => {
-		try{
-		
-		setUserTokens(await getUserTokens(address))
+		try {
+			setUserTokens(await getUserTokens(address))
 		} 
 		catch (error) {
-		setUserTokens(null);
-
-		console.log("UserData : Pas de NFT trouvés")
+			setUserTokens(null);
+			console.log("UserData : Pas de NFT trouvés")
 		}
 	};
 
@@ -36,9 +34,9 @@ const UserData = () => {
 			<div className="horizontal-scroll-wrapper squares">
 			{
 				Object.keys(userTokens).map(k => {
-				return (
-					<TokenData tokenId={userTokens[k]}/>       
-				)
+					return (
+						<TokenData tokenId={userTokens[k]}/>       
+					)
 				})
 			}
 			</div>   
