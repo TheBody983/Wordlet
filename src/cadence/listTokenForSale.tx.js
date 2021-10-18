@@ -41,17 +41,17 @@ transaction (tokenId: UInt64, value: UFix64){
 
 const listTokenForSale = async (tokenId, value) => {
 	const txId = await fcl
-        .send([
-        fcl.proposer(fcl.authz),
-        fcl.payer(fcl.authz),
-        fcl.authorizations([fcl.authz]),
-        fcl.limit(50),
-        fcl.args([
-            fcl.arg(tokenId, t.UInt64),
-            fcl.arg(value, t.UFix64)
-        ]),
-        fcl.transaction(listTokenForSaleTx)
-        ])
+		.send([
+			fcl.proposer(fcl.authz),
+			fcl.payer(fcl.authz),
+			fcl.authorizations([fcl.authz]),
+			fcl.limit(50),
+			fcl.args([
+				fcl.arg(tokenId, t.UInt64),
+				fcl.arg(value, t.UFix64)
+			]),
+			fcl.transaction(listTokenForSaleTx)
+		])
 	console.log(txId)
 }
 
