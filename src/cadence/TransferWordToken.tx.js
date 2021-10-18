@@ -74,6 +74,4 @@ const sendTransaction = async (address, tokenId) => {
     console.log(decoded)
 }
 
-
-
 export default sendTransaction;
