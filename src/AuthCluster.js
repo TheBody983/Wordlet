@@ -4,20 +4,21 @@ import * as fcl from "@onflow/fcl"
 const AuthCluster = () => {
 	const [user, setUser] = useState({loggedIn: null})
 	useEffect(() => fcl.currentUser().subscribe(setUser), [])
+
 	if (user.loggedIn) {
 		return (
 			<div>
 				<span>{user?.addr ?? "Pas d'Adresse"}</span>
 				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
 			</div>
-			)
-	} else {
-		return (
+		)
+	}
+
+	return (
 		<div>
 			<button className="btn-primary" onClick={fcl.authenticate}>Connexion</button>
 		</div>
-		)
-	}
+	)
 }
 
 export default AuthCluster
