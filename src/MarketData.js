@@ -43,20 +43,20 @@ return (
 		<p> Tokens de {address} </p>
 	{
 		tokensToSell.map(token => {
-		return (
-			<div key={token.id} className="listing">
-			
-				<h3>{token.mot}</h3>
-				<p>{token.id}</p>
-				<p>Source: {token.source}</p>
-				<p>Type: {token.type}</p>
+			return (
+				<div key={token.id} className="listing">
 				
-				<h4>Price</h4>
-				<p>{parseInt(token.price, 10).toFixed(2)} WOT</p>
-				<button onClick={() => buyToken(token.id, user.addr)}>Acheter</button>
-				
-			</div>
-		)
+					<h3>{token.mot}</h3>
+					<p>{token.id}</p>
+					<p>Source: {token.source}</p>
+					<p>Type: {token.type}</p>
+					
+					<h4>Price</h4>
+					<p>{parseInt(token.price, 10).toFixed(2)} WOT</p>
+					<button onClick={() => buyToken(token.id, address)}>Acheter</button>
+					
+				</div>
+			)
 		})
 	}
 	</div>
