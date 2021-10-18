@@ -1,11 +1,7 @@
 // 	buyToken.tx.js
 //	
+// 	v1
 //  Permet d'acheter un token placé en paramètre
-// 	v0 [WIP]
-//
-//	Pour la v1
-//	Doit pouvoir récupérer le prix du listing, pas de magic number
-//	-> Modification du script en conséquence
 
 
 
@@ -62,7 +58,7 @@ const buyToken = async (tokenId, address) => {
 	fcl.proposer(fcl.authz),
 	fcl.payer(fcl.authz),
 	fcl.authorizations([fcl.authz]),
-	fcl.limit(50),
+	fcl.limit(100),
 	fcl.args([
 		fcl.arg(tokenId, t.UInt64),
 		fcl.arg(address, t.Address)
