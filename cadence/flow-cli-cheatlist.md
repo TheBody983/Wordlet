@@ -11,7 +11,7 @@ Exemple :
 `flow transactions send [-flag] PATH [args]` 
 
 Exemple :
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/MintWOT.cdc`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/MintWOT.tx.cdc 1000`
 > Mine des WOT grace à la transaction MintWOT.cdc
 
 ## Consulter une Transaction

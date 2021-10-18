@@ -20,7 +20,7 @@ const [user, setUser] = useState({loggedIn: null})
 useEffect(() => fcl.currentUser().subscribe(setUser), [])
 
 const checkMarketplace = async () => {
-	try {
+
 		// Récupère les IDs des tokens à vendre sur le compte wordlet
 		const tokens = await checkTokensForSale(address)
 
@@ -33,9 +33,7 @@ const checkMarketplace = async () => {
 			marketplaceMetadata.push(decodedMetadata);
 		}
 		setTokensToSell(marketplaceMetadata);
-	} catch (error) {
-		console.error(error)
-	}
+
 };
 
 return (

@@ -2,7 +2,7 @@ import WordletContract from 0x1f7da62a915f01c7
 
 /*
 v1
-Créé un Mot avec sa source et son type
+Créé un Mot avec sa source et son type dans le compte wordlet
 */
 
 transaction (mot: String, source: String, type: String){

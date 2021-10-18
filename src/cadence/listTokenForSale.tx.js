@@ -11,9 +11,7 @@ import * as t from "@onflow/types"
 
 
 const listTokenForSaleTx=`
-import WordletContract from 0xWordlet
-import WOToken from 0xWordlet
-import MarketplaceContract from 0xWordlet
+import WordletContract, WOToken, MarketplaceContract from 0xWordlet
 
 transaction (tokenId: UInt64, value: UFix64){
 

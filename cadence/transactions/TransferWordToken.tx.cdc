@@ -1,7 +1,7 @@
 import WordletContract from 0x1f7da62a915f01c7
 
 /*
-Transfère un NFT du signer à un autre compte
+Transfère un NFT du signataire au compte dont l'adresse est passé en paramètre
  */
 
 transaction (address: Address, tokenId: UInt64){
@@ -22,6 +22,7 @@ transaction (address: Address, tokenId: UInt64){
     }
 
     execute {
+
         let recepteur = getAccount(address)
 
         let receiverRef = recepteur.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)
