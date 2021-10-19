@@ -18,7 +18,7 @@ const AuthCluster = () => {
 
 	if (user.loggedIn && state === "Ready") {
 		return (
-			<div>
+			<div id="auth-cluster">
 				<span>{user?.addr ?? "Pas d'Adresse"}{state}</span>
 				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
 			</div>
@@ -26,7 +26,7 @@ const AuthCluster = () => {
 	} 
 	else if(user.loggedIn){
 		return (
-			<div>
+			<div id="auth-cluster">
 				<span>{user?.addr ?? "Pas d'Adresse"} - {state}</span>
 				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
 				<div id="setup-account-div">
