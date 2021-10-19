@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TokenData from './TokenData';
+import TokenForSaleData from "./TokenForSaleData";
 import * as fcl from "@onflow/fcl";
 
 import getUserTokens from "./cadence/getUserTokens.script";
@@ -53,7 +54,7 @@ const UserData = () => {
 				return (
 					<div>
 					<p>for sale</p>
-					<TokenData tokenId={userTokensSale[k]}/>  
+					<TokenForSaleData tokenId={userTokensSale[k]}/>  
 					</div>     
 				)
 				})
