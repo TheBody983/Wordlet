@@ -11,27 +11,27 @@ import * as t from "@onflow/types"
 
 
 const listTokenForSaleTx=`
-import WordletContract, WOToken, MarketplaceContract from 0xWordlet
+import WordletContract, WOToken, MarketplaceContract from 0x1f7da62a915f01c7
+
+
+//import WordTokenContract, WOTContract, MarketplaceContract from 0x1f7da62a915f01c7
+
+
+/*
+v1
+*/
 
 transaction (tokenId: UInt64, value: UFix64){
 
-	prepare(acct: AuthAccount) {
-		let receiver = acct.getCapability<&{WOToken.Receiver}>(/public/MainReceiver)
-		let sale <- MarketplaceContract.createSaleCollection(ownerVault: receiver)
+    prepare(acct: AuthAccount) {
+        let sale = acct.borrow<&MarketplaceContract.SaleCollection>(from: /storage/NFTSale)
+            ?? panic("Impossible d'emprunter la ressource de vente")
 
-		let collectionRef = acct.borrow<&WordletContract.Collection>(from: /storage/NFTCollection)
-			?? panic("Could not borrow owner's nft collection reference")
+        let collectionRef = acct.borrow<&WordletContract.Collection>(from: /storage/NFTCollection)
+            ?? panic("Impossible d'emprunter la référence à la collection")
 
-		let token <- collectionRef.withdraw(withdrawID: tokenId)
-
-		sale.listForSale(token: <-token, price: value)
-
-		acct.save(<-sale, to: /storage/NFTSale)
-
-		acct.link<&MarketplaceContract.SaleCollection{MarketplaceContract.SalePublic}>(/public/NFTSale, target: /storage/NFTSale)
-
-		//log("Vente du NFT ".concat(tokenId).concat(" pour ").concat(value).concat("jetons"))
-	}
+        sale.listForSale(token: <- collectionRef.withdraw(withdrawID: tokenId), price: value)
+    }
 }
 `
 
@@ -46,7 +46,7 @@ const listTokenForSale = async (tokenId, value) => {
         fcl.limit(50),
         fcl.args([
             fcl.arg(tokenId, t.UInt64),
-            fcl.arg(value, t.UFix64)
+            fcl.arg("117.0", t.UFix64)
         ]),
         fcl.transaction(listTokenForSaleTx)
         ])
