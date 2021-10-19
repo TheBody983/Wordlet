@@ -3,13 +3,15 @@ import TokenData from './TokenData';
 import * as fcl from "@onflow/fcl";
 
 import getUserTokens from "./cadence/getUserTokens.script";
+import checkTokensForSale from "./cadence/checkTokensForSale.script"
 
 const UserData = () => {
 	const [userTokens, setUserTokens] = useState(null)
+	const [userTokensSale, setUserTokensSale] = useState(null)
 
 	const fetchUserTokens = async (address) => {
 		try{
-		
+		setUserTokensSale(await checkTokensForSale(address))
 		setUserTokens(await getUserTokens(address))
 		} 
 		catch (error) {
@@ -38,6 +40,21 @@ const UserData = () => {
 				Object.keys(userTokens).map(k => {
 				return (
 					<TokenData tokenId={userTokens[k]}/>       
+				)
+				})
+			}
+			</div> 
+		}
+		{
+			userTokensSale &&
+			<div className="horizontal-scroll-wrapper squares">
+			{
+				Object.keys(userTokensSale).map(k => {
+				return (
+					<div>
+					<p>for sale</p>
+					<TokenData tokenId={userTokensSale[k]}/>  
+					</div>     
 				)
 				})
 			}
