@@ -66,7 +66,11 @@ pub contract MarketplaceContract {
             
             vaultRef.deposit(from: <-buyTokens)
 
-            let metadata = recipient.getMetadata(id: tokenID)
+            let wordlet = getAccount(0x1f7da62a915f01c7)!
+            let cap = wordlet.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)!
+            let metadataHarvester = cap.borrow()!
+
+            let metadata = metadataHarvester.getMetadata(id: tokenID)
             recipient.deposit(token: <-self.withdraw(tokenID: tokenID), metadata: metadata)
 
             emit TokenPurchased(id: tokenID, price: price)

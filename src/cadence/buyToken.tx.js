@@ -1,11 +1,7 @@
 // 	buyToken.tx.js
 //	
+// 	v1
 //  Permet d'acheter un token placé en paramètre
-// 	v0 [WIP]
-//
-//	Pour la v1
-//	Doit pouvoir récupérer le prix du listing, pas de magic number
-//	-> Modification du script en conséquence
 
 
 
@@ -16,31 +12,40 @@ import * as t from "@onflow/types";
 
 const buyTokenTx=`
 import WordletContract from 0xWordlet
-import WOToken from 0xWordlet
-import MarketplaceContract from 0xWordlet
+import WOToken from 0xWOToken
+import MarketplaceContract from 0xMarketPlace
 
 transaction (tokenId: UInt64, sellerAddress: Address){
 
 	let collectionRef: &AnyResource{WordletContract.NFTReceiver}
 	let temporaryVault: @WOToken.Vault
+	let saleRef: &AnyResource{MarketplaceContract.SalePublic}
 
-	prepare(acct: AuthAccount) {
-		self.collectionRef = acct.borrow<&AnyResource{WordletContract.NFTReceiver}>(from: /storage/NFTCollection)!
+	prepare(buyer: AuthAccount) {
+		// Récupère le compte du propriétaire/vendeur
+		let seller = getAccount(sellerAddress)
+		
+		// Emprunte la référence de vente du propriétaire/vendeur
+		self.saleRef = seller.getCapability<&AnyResource{MarketplaceContract.SalePublic}>(/public/NFTSale)
+			.borrow()
+			?? panic("Impossible d'emprunter la référence de vente du propriétaire")
 
-		let vaultRef = acct.borrow<&WOToken.Vault>(from: /storage/MainVault)
-			?? panic("Could not borrow owner's vault reference")
+		// Emprunte la référence au wordlet de l'acheteur
+		self.collectionRef = buyer.borrow<&AnyResource{WordletContract.NFTReceiver}>(from: /storage/NFTCollection)!
 
-		self.temporaryVault <- vaultRef.withdraw(amount: 420.0)
+		// Emprunte la référence au WOTVault de l'acheteur
+		let vaultRef = buyer.borrow<&WOToken.Vault>(from: /storage/MainVault)
+			?? panic("Impossible d'emprunter la référence au WOTVault de l'acheteur")
+
+		// Récupère le prix du token à acheter
+		let price = self.saleRef.idPrice(tokenID: tokenId)
+			?? panic("Impossible de trouver le prix du token correspondant")
+
+		self.temporaryVault <- vaultRef.withdraw(amount: price)
 	}
 
 	execute {
-		let seller = getAccount(sellerAddress)
-
-		let saleRef = seller.getCapability<&AnyResource{MarketplaceContract.SalePublic}>(/public/NFTSale)
-			.borrow()
-			?? panic("Could not borrow seller's sale reference")
-
-		saleRef.purchase(tokenID: tokenId, recipient: self.collectionRef, buyTokens: <-self.temporaryVault)
+		self.saleRef.purchase(tokenID: tokenId, recipient: self.collectionRef, buyTokens: <-self.temporaryVault)
 	}
 }
 `
@@ -53,7 +58,7 @@ const buyToken = async (tokenId, address) => {
 	fcl.proposer(fcl.authz),
 	fcl.payer(fcl.authz),
 	fcl.authorizations([fcl.authz]),
-	fcl.limit(50),
+	fcl.limit(100),
 	fcl.args([
 		fcl.arg(tokenId, t.UInt64),
 		fcl.arg(address, t.Address)

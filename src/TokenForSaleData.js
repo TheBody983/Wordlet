@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 
 import getTokenMetadata from "./cadence/getTokenMetadata.script";
-import listTokenForSale from "./cadence/listTokenForSale.tx";
-import transferWordToken from "./cadence/transferWordToken.tx";
-import deleteWordToken from "./cadence/deleteWordToken.tx";
+import removeTokenFromSale from "./cadence/removeTokenFromSale.tx";
 
-const TokenData = (props) => {
+const TokenForSaleData = (props) => {
 let tokenId = parseInt(props.tokenId)
 console.log("id : " + tokenId)
 console.log("type : " + typeof(tokenId))
@@ -41,17 +39,8 @@ return (
 			</div>
 			}
 			<div>
-				<label>Receiver address : </label>
-				<input type="text" id="ReceiverAddr" placeholder="Entrez un destinataire"/>
-				<button className="btn-primary" onClick={() => transferWordToken(document.getElementById("ReceiverAddr").value, props.tokenId)}>Transfer Token</button> 
-			</div>
-			<div>
 				<label>Prix : </label>
-				<input type="text" id="price" placeholder="Entrez un prix"/>
-				<button className="btn-primary" onClick={() => listTokenForSale(props.tokenId, document.getElementById("price").value)}>Vendre le token</button> 
-			</div>
-			<div>
-				<button className="btn-secondary" onClick={console.log("no")/*() =>deleteWordToken(props.tokenId)*/}>Delete WordToken (no) </button> 
+				<button className="btn-primary" onClick={() => removeTokenFromSale(props.tokenId)}>Retirer de la vente</button> 
 			</div>
 			<div className="center video">
 				<div>
@@ -64,4 +53,4 @@ return (
 );
 };
 
-export default TokenData;
+export default TokenForSaleData;
