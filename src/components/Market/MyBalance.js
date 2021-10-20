@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
 
-import getUserBalance from "./cadence/getUserBalance.script";
+import getUserBalance from "../../cadence/getUserBalance.script";
 
 const MyBalance = () => {
     const [balance, setBalance] = useState(null);

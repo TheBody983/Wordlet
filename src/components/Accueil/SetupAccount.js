@@ -1,8 +1,8 @@
 import React from "react";
 
-import createWOTVault from "./cadence/createWOTVault.tx";
-import linkWOTVault from "./cadence/linkWOTVault.tx";
-import createWordletCollection from "./cadence/createWordletCollection.tx";
+import createWOTVault from "../../cadence/createWOTVault.tx";
+import linkWOTVault from "../../cadence/linkWOTVault.tx";
+import createWordletCollection from "../../cadence/createWordletCollection.tx";
 
 const SetupAccount = () => {
     return (

@@ -3,10 +3,10 @@ import TokenData from './TokenData';
 import TokenForSaleData from "./TokenForSaleData";
 import * as fcl from "@onflow/fcl";
 
-import getUserTokens from "./cadence/getUserTokens.script";
-import checkTokensForSale from "./cadence/checkTokensForSale.script"
+import getUserTokens from "../../cadence/getUserTokens.script";
+import checkTokensForSale from "../../cadence/checkTokensForSale.script"
 
-const UserData = () => {
+const UserTokens = () => {
 	const [userTokens, setUserTokens] = useState(null)
 	const [userTokensSale, setUserTokensSale] = useState(null)
 
@@ -30,17 +30,17 @@ const UserData = () => {
 	}
 
 	return (
-		<div className="token-data">
-		<div className="center">
+		<>
+		<div>
 			<button className="btn-primary" onClick={() =>fetchUserTokens(user.addr)}>Actualiser</button>
 		</div>
 		{
 			userTokens &&
-			<div className="horizontal-scroll-wrapper squares">
+			<div>
 			{
 				Object.keys(userTokens).map(k => {
 				return (
-					<TokenData tokenId={userTokens[k]}/>       
+					<TokenData key={userTokens[k].tokenId} tokenId={userTokens[k]}/>       
 				)
 				})
 			}
@@ -48,7 +48,7 @@ const UserData = () => {
 		}
 		{
 			userTokensSale &&
-			<div className="horizontal-scroll-wrapper squares">
+			<div>
 			{
 				Object.keys(userTokensSale).map(k => {
 				return (
@@ -61,8 +61,8 @@ const UserData = () => {
 			}
 			</div>   
 		}
-		</div>
+		</>
 	);
 };
 
-export default UserData;
+export default UserTokens;
