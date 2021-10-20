@@ -3,8 +3,8 @@ import TokenData from './TokenData';
 import TokenForSaleData from "./TokenForSaleData";
 import * as fcl from "@onflow/fcl";
 
-import getUserTokens from "./cadence/getUserTokens.script";
-import checkTokensForSale from "./cadence/checkTokensForSale.script"
+import getUserTokens from "../../cadence/getUserTokens.script";
+import checkTokensForSale from "../../cadence/checkTokensForSale.script"
 
 const UserTokens = () => {
 	const [userTokens, setUserTokens] = useState(null)

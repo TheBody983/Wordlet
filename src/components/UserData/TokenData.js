@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import getTokenMetadata from "./cadence/getTokenMetadata.script";
-import listTokenForSale from "./cadence/listTokenForSale.tx";
-import transferWordToken from "./cadence/transferWordToken.tx";
-import deleteWordToken from "./cadence/deleteWordToken.tx";
+import getTokenMetadata from "../../cadence/getTokenMetadata.script";
+import listTokenForSale from "../../cadence/listTokenForSale.tx";
+import transferWordToken from "../../cadence/transferWordToken.tx";
+import deleteWordToken from "../../cadence/deleteWordToken.tx";
 
 const TokenData = (props) => {
 let tokenId = parseInt(props.tokenId)

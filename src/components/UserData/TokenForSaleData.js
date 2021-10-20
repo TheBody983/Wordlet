@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import getTokenMetadata from "./cadence/getTokenMetadata.script";
-import removeTokenFromSale from "./cadence/removeTokenFromSale.tx";
+import getTokenMetadata from "../../cadence/getTokenMetadata.script";
+import removeTokenFromSale from "../../cadence/removeTokenFromSale.tx";
 
 const TokenForSaleData = (props) => {
 let tokenId = parseInt(props.tokenId)
