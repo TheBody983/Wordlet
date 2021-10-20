@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import * as fcl from "@onflow/fcl"
 
-import userIsinitialized from './cadence/userIsInitialized.script'
-import createWOTVault from "./cadence/createWOTVault.tx";
-import createWordletCollection from "./cadence/createWordletCollection.tx";
+import userIsinitialized from '../../cadence/userIsInitialized.script'
+import createWOTVault from "../../cadence/createWOTVault.tx";
+import createWordletCollection from "../../cadence/createWordletCollection.tx";
 
 
 const AuthCluster = () => {
@@ -39,9 +39,7 @@ const AuthCluster = () => {
 	}
 	else {
 		return (
-		<div>
-			<button className="btn-primary" onClick={fcl.authenticate}>Connexion</button>
-		</div>
+			<button className="btn-primary auth-cluster" onClick={fcl.authenticate}>Connexion</button>
 		)
 	}
 }
