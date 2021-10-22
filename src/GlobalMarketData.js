@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import getSellerCatalog from "./cadence/getSellerCatalog.script"
 import checkTokensForSale from "./cadence/checkTokensForSale.script";
 import getTokenMetadata from "./cadence/getTokenMetadata.script";
 import getTokenPrice from "./cadence/getTokenPrice.script";
@@ -7,11 +8,9 @@ import buyToken from "./cadence/buyToken.tx";
 
 import * as fcl from "@onflow/fcl";
 
-const MarketData = (address) => {
+const GlobalMarketData = () => {
 	
 	const [tokensToSell, setTokensToSell] = useState([])
-
-	address = "0x5be6fee0409b4842"
 
 	useEffect(() => {
 		checkMarketplace();
@@ -23,26 +22,32 @@ const MarketData = (address) => {
 	
 	const checkMarketplace = async () => {
 
-			// Récupère les IDs des tokens à vendre sur le compte wordlet
-			const tokens = await checkTokensForSale(address)
+        const sellerList = await getSellerCatalog()
 
-			let marketplaceMetadata = [];
+        let marketplaceMetadata = [];
+
+        for(const sellerAddr of sellerList){
+
+			// Récupère les IDs des tokens à vendre sur le compte wordlet
+			const tokens = await checkTokensForSale(sellerAddr)
+
 			// Récupère les métadonnées de chaque token
 			for (const id of tokens) {
 				const decodedMetadata = await getTokenMetadata(id)
 				decodedMetadata["price"] = await getTokenPrice(id)
 				decodedMetadata["id"] = id
+                decodedMetadata["seller"] = sellerAddr
 				marketplaceMetadata.push(decodedMetadata);
 			}
-			setTokensToSell(marketplaceMetadata);
+        }
+        setTokensToSell(marketplaceMetadata);
 
 	};
 
 	return (
 
 		<div className="market-listings">
-			
-		<p> Tokens de {address} </p>
+
 		{
 			tokensToSell.map(token => {
 				return (
@@ -55,7 +60,8 @@ const MarketData = (address) => {
 						
 						<h4>Price</h4>
 						<p>{parseInt(token.price, 10).toFixed(2)} WOT</p>
-						<button onClick={() => buyToken(token.id, address)}>Acheter</button>
+                        <p>Seller: {token.seller}</p>
+						<button onClick={() => buyToken(token.id, token.seller)}>Acheter</button>
 						
 					</div>
 				)
@@ -65,4 +71,4 @@ const MarketData = (address) => {
 	);
 };
 
-export default MarketData;
+export default GlobalMarketData

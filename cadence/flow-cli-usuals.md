@@ -35,9 +35,20 @@
 `flow scripts execute --network testnet ./cadence/scripts/CheckMarketplace.script.cdc 0x1f7da62a915f01c7`
 > Affiche le marketplace du compte wordlet
 
+`flow scripts execute --network testnet ./cadence/scripts/GetSellerCatalog.script.cdc`
+> Affiche le catalogue de vendeurs inscrit dans le compte wordlet
+
 -----------------------------------------------ADRESSES-------------------------------------------------
 
 Wordlet : 0x1f7da62a915f01c7
 Lucas : 0x5be6fee0409b4842
 Damien : 0xfa5995123fa7a207
 Ludovic : 0x0741eca75483b285
+
+
+
+
+
+
+-----------------------------------------------PROJECT-DEPLOYMENT-------------------------------------------------
+`flow project deploy --network testnet --update`

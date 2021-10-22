@@ -92,4 +92,41 @@ pub contract MarketplaceContract {
     pub fun createSaleCollection(ownerVault: Capability<&AnyResource{WOToken.Receiver}>): @SaleCollection {
         return <- create SaleCollection(vault: ownerVault)
     }
+
+    // interface publique du catalogue
+    pub resource interface SellerCatalog {
+        pub fun addSeller(sellerAddr: Address)
+        pub fun getSellerList(): [Address]
+    }
+
+    // catalogue de tous les vendeurs
+    pub resource SellerList: SellerCatalog {
+
+        pub var sellerAddresses: [Address]
+
+        init() {
+            self.sellerAddresses = [0x1f7da62a915f01c7]
+        }
+
+        pub fun addSeller(sellerAddr: Address){
+            self.sellerAddresses.append(sellerAddr)
+        }
+
+        pub fun getSellerList(): [Address] {
+            return self.sellerAddresses!
+        }
+
+    }
+
+            // Créé puis retourne une liste vide
+        pub fun createSellerList(): @SellerList {
+            return <- create SellerList()
+        }
+
+    init() {
+
+        self.account.save(<-self.createSellerList(), to: /storage/SellerList)
+        self.account.link<&{SellerCatalog}>(/public/SellerCatalog, target: /storage/SellerList)
+
+    }
 }
