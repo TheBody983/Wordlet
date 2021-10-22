@@ -21,6 +21,12 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/DeleteWordToken.tx.cdc 12`
 > Supprime le WordToken 11 du compte signataire (wordlet)
 
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/AddToSellerCatalog.tx.cdc`
+> Ajoute le compte wordlet au catalogue des vendeurs
+
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/RemoveFromSellerCatalog.tx.cdc`
+> Retire le compte wordlet du catalogue des vendeurs
+
 -----------------------------------------------SCRIPTS-------------------------------------------------
 
 `flow scripts execute --network testnet ./cadence/scripts/CheckUserWOTBalance.script.cdc 0x1f7da62a915f01c7`
@@ -37,6 +43,9 @@
 
 `flow scripts execute --network testnet ./cadence/scripts/GetSellerCatalog.script.cdc`
 > Affiche le catalogue de vendeurs inscrit dans le compte wordlet
+
+`flow scripts execute --network testnet ./cadence/scripts/CheckifCataloged.script.cdc 0x1f7da62a915f01c7`
+> Affiche si le compte wordlet est inscrit dans le catalogue
 
 -----------------------------------------------ADRESSES-------------------------------------------------
 

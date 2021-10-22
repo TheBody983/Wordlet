@@ -6,6 +6,8 @@ import * as fcl from "@onflow/fcl";
 import getUserTokens from "./cadence/getUserTokens.script";
 import checkTokensForSale from "./cadence/checkTokensForSale.script"
 import addToSellerCatalog from "./cadence/addToSellerCatalog.tx"
+import removeFromSellerCatalog from "./cadence/removeFromSellerCatalog.tx"
+import checkIfCataloged from "./cadence/checkIfCataloged.script"
 
 const UserData = () => {
 	const [userTokens, setUserTokens] = useState(null)
@@ -65,11 +67,17 @@ const UserData = () => {
 		
 		{
 			<div className="horizontal-scroll-wrapper squares">
-			{
-				<div>
-					<button className="btn-primary" onClick={() =>addToSellerCatalog()}>Ajouter a la liste des vendeurs</button>
-				</div>     
-			}
+				{
+					<div>
+						<button className="btn-primary" onClick={() =>addToSellerCatalog()}>S'ajouter a la liste des vendeurs</button>
+					</div>     
+				}
+
+				{
+					<div>
+						<button className="btn-primary" onClick={() =>removeFromSellerCatalog()}>Se retirer de la liste des vendeurs</button>
+					</div>     
+				}
 			</div>   
 		}
 		</div>

@@ -1,7 +1,7 @@
 import MarketplaceContract from 0x1f7da62a915f01c7
 
 /*
- Ajoute le signataire au catalogue des vendeurs
+ Retire le signataire au catalogue des vendeurs
  */
 
 transaction (){
@@ -13,7 +13,7 @@ transaction (){
             .borrow()
             ?? panic("Could not borrow wordlet sales catalog reference")
 
-        wordletCatalogRef.addSeller(sellerAcct: account)
+        wordletCatalogRef.removeSeller(sellerAcct: account)
 
     }
 }

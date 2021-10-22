@@ -95,7 +95,9 @@ pub contract MarketplaceContract {
 
     // interface publique du catalogue
     pub resource interface SellerCatalog {
-        pub fun addSeller(sellerAddr: Address)
+        pub fun addSeller(sellerAcct: AuthAccount)
+        pub fun removeSeller(sellerAcct: AuthAccount)
+        pub fun isInCatalog(sellerAddress: Address): Bool
         pub fun getSellerList(): [Address]
     }
 
@@ -108,8 +110,24 @@ pub contract MarketplaceContract {
             self.sellerAddresses = [0x1f7da62a915f01c7]
         }
 
-        pub fun addSeller(sellerAddr: Address){
-            self.sellerAddresses.append(sellerAddr)
+        pub fun addSeller(sellerAcct: AuthAccount){
+            if !self.sellerAddresses.contains(sellerAcct.address){
+                self.sellerAddresses.append(sellerAcct.address)
+            }
+        }
+
+        pub fun removeSeller(sellerAcct: AuthAccount){
+            var i = self.sellerAddresses.length-1
+            while i >= 0 {
+                if self.sellerAddresses[i] == sellerAcct.address {
+                    self.sellerAddresses.remove(at: i)
+                }
+                i = i - 1
+            }
+        }
+
+        pub fun isInCatalog(sellerAddress: Address): Bool {
+            return self.sellerAddresses.contains(sellerAddress)
         }
 
         pub fun getSellerList(): [Address] {
