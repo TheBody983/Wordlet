@@ -8,8 +8,8 @@ import checkTokensForSale from "./cadence/checkTokensForSale.script"
 import addToSellerCatalog from "./cadence/addToSellerCatalog.tx"
 import removeFromSellerCatalog from "./cadence/removeFromSellerCatalog.tx"
 import checkIfCataloged from "./cadence/checkIfCataloged.script"
-
-const UserData = () => {
+ 
+const UserTokens = () => {
 	const [userTokens, setUserTokens] = useState(null)
 	const [userTokensSale, setUserTokensSale] = useState(null)
 
@@ -33,17 +33,17 @@ const UserData = () => {
 	}
 
 	return (
-		<div className="token-data">
-		<div className="center">
+		<>
+		<div>
 			<button className="btn-primary" onClick={() =>fetchUserTokens(user.addr)}>Actualiser</button>
 		</div>
 		{
 			userTokens &&
-			<div className="horizontal-scroll-wrapper squares">
+			<div>
 			{
 				Object.keys(userTokens).map(k => {
 				return (
-					<TokenData tokenId={userTokens[k]}/>       
+					<TokenData key={userTokens[k].tokenId} tokenId={userTokens[k]}/>       
 				)
 				})
 			}
@@ -51,7 +51,7 @@ const UserData = () => {
 		}
 		{
 			userTokensSale &&
-			<div className="horizontal-scroll-wrapper squares">
+			<div>
 			{
 				Object.keys(userTokensSale).map(k => {
 				return (
@@ -84,4 +84,4 @@ const UserData = () => {
 	);
 };
 
-export default UserData;
+export default UserTokens;

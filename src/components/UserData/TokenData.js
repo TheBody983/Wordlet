@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import getTokenMetadata from "./cadence/getTokenMetadata.script";
-import listTokenForSale from "./cadence/listTokenForSale.tx";
-import transferWordToken from "./cadence/transferWordToken.tx";
-import deleteWordToken from "./cadence/deleteWordToken.tx";
+import getTokenMetadata from "../../cadence/getTokenMetadata.script";
+import listTokenForSale from "../../cadence/listTokenForSale.tx";
+import transferWordToken from "../../cadence/transferWordToken.tx";
+import deleteWordToken from "../../cadence/deleteWordToken.tx";
 
 const TokenData = (props) => {
 let tokenId = parseInt(props.tokenId)
@@ -22,13 +22,13 @@ const fetchTokenData = async (tokenId) => {
 }
 
 return (
-	<div className="token-data">
-	<div className="center">
+	<>
+	<div >
 		<button className="btn-primary" onClick={() =>fetchTokenData(props.tokenId)}>Token {props.tokenId}</button>    
 	</div>
 	{
 		nftInfo &&
-		<div>
+		<div className="card">
 			{
 			<div>{
 				Object.keys(nftInfo).map(k => {
@@ -53,14 +53,14 @@ return (
 			<div>
 				<button className="btn-secondary" onClick={console.log("no")/*() =>deleteWordToken(props.tokenId)*/}>Delete WordToken (no) </button> 
 			</div>
-			<div className="center video">
+			<div>
 				<div>
 				<button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
 				</div>
 			</div>          
 		</div>
 	}
-	</div>
+	</>
 );
 };
 

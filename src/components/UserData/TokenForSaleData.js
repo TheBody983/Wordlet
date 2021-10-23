@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import getTokenMetadata from "./cadence/getTokenMetadata.script";
-import removeTokenFromSale from "./cadence/removeTokenFromSale.tx";
+import getTokenMetadata from "../../cadence/getTokenMetadata.script";
+import removeTokenFromSale from "../../cadence/removeTokenFromSale.tx";
 
 const TokenForSaleData = (props) => {
 let tokenId = parseInt(props.tokenId)
@@ -20,8 +20,8 @@ const fetchTokenData = async (tokenId) => {
 }
 
 return (
-	<div className="token-data">
-	<div className="center">
+	<div>
+	<div>
 		<button className="btn-primary" onClick={() =>fetchTokenData(props.tokenId)}>Token {props.tokenId}</button>    
 	</div>
 	{
@@ -42,7 +42,7 @@ return (
 				<label>Prix : </label>
 				<button className="btn-primary" onClick={() => removeTokenFromSale(props.tokenId)}>Retirer de la vente</button> 
 			</div>
-			<div className="center video">
+			<div>
 				<div>
 				<button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
 				</div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import TransferWordToken from "./cadence/transferWordToken.tx";
+import TransferWordToken from "../../cadence/transferWordToken.tx";
 
 const TransferWT = () => {
     return (

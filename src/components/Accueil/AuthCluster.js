@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import * as fcl from "@onflow/fcl"
 
-import userIsinitialized from './cadence/userIsInitialized.script'
-import createWOTVault from "./cadence/createWOTVault.tx";
-import createWordletCollection from "./cadence/createWordletCollection.tx";
+import userIsinitialized from '../../cadence/userIsInitialized.script'
+import createWOTVault from "../../cadence/createWOTVault.tx";
+import createWordletCollection from "../../cadence/createWordletCollection.tx";
 
 
 const AuthCluster = () => {
@@ -18,7 +18,7 @@ const AuthCluster = () => {
 
 	if (user.loggedIn && state === "Ready") {
 		return (
-			<div>
+			<div id="auth-cluster">
 				<span>{user?.addr ?? "Pas d'Adresse"}{state}</span>
 				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
 			</div>
@@ -26,7 +26,7 @@ const AuthCluster = () => {
 	} 
 	else if(user.loggedIn){
 		return (
-			<div>
+			<div id="auth-cluster">
 				<span>{user?.addr ?? "Pas d'Adresse"} - {state}</span>
 				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
 				<div id="setup-account-div">
@@ -39,9 +39,7 @@ const AuthCluster = () => {
 	}
 	else {
 		return (
-		<div>
-			<button className="btn-primary" onClick={fcl.authenticate}>Connexion</button>
-		</div>
+			<button className="btn-primary auth-cluster" onClick={fcl.authenticate}>Connexion</button>
 		)
 	}
 }
