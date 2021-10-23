@@ -12,6 +12,6 @@
 
 4. Installer les dépendances `npm i @onflow/fcl @onflow/types` (Powershell)
 
-## Lancement
+## Lancement 
 
 * Démarrer l'application avec `npm start`
