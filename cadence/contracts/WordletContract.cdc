@@ -112,6 +112,7 @@ pub contract WordletContract {
 
         self.account.save(<-self.createEmptyCollection(), to: /storage/NFTCollection)
         self.account.link<&{NFTReceiver}>(/public/NFTReceiver, target: /storage/NFTCollection)
+        
         self.account.save(<-create NFTMinter(), to: /storage/NFTMinter)
     }
 }

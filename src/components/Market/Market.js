@@ -1,11 +1,12 @@
-import MarketData from './MarketData';
+import './Market.css';
+import GlobalMarketData from './GlobalMarketData';
 import Balance from './MyBalance';
 
 function Market() {
     return(
         <>
             <h2> Marché </h2>
-            <MarketData />
+            <GlobalMarketData/>
             <Balance />
         </>
     );
