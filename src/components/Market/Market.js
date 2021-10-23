@@ -1,4 +1,3 @@
-import './Market.css';
 import GlobalMarketData from './GlobalMarketData';
 import Balance from './MyBalance';
 

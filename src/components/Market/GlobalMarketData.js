@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import getSellerCatalog from "./cadence/getSellerCatalog.script"
-import checkTokensForSale from "./cadence/checkTokensForSale.script";
-import getTokenMetadata from "./cadence/getTokenMetadata.script";
-import getTokenPrice from "./cadence/getTokenPrice.script";
-import buyToken from "./cadence/buyToken.tx";
+import getSellerCatalog from "../../cadence/getSellerCatalog.script"
+import checkTokensForSale from "../../cadence/checkTokensForSale.script";
+import getTokenMetadata from "../../cadence/getTokenMetadata.script";
+import getTokenPrice from "../../cadence/getTokenPrice.script";
+import buyToken from "../../cadence/buyToken.tx";
 
 import * as fcl from "@onflow/fcl";
 

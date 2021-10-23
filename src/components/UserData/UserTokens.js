@@ -3,11 +3,11 @@ import TokenData from './TokenData';
 import TokenForSaleData from "./TokenForSaleData";
 import * as fcl from "@onflow/fcl";
 
-import getUserTokens from "./cadence/getUserTokens.script";
-import checkTokensForSale from "./cadence/checkTokensForSale.script"
-import addToSellerCatalog from "./cadence/addToSellerCatalog.tx"
-import removeFromSellerCatalog from "./cadence/removeFromSellerCatalog.tx"
-import checkIfCataloged from "./cadence/checkIfCataloged.script"
+import getUserTokens from "../../cadence/getUserTokens.script";
+import checkTokensForSale from "../../cadence/checkTokensForSale.script"
+import addToSellerCatalog from "../../cadence/addToSellerCatalog.tx"
+import removeFromSellerCatalog from "../../cadence/removeFromSellerCatalog.tx"
+import checkIfCataloged from "../../cadence/checkIfCataloged.script"
  
 const UserTokens = () => {
 	const [userTokens, setUserTokens] = useState(null)
@@ -80,7 +80,7 @@ const UserTokens = () => {
 				}
 			</div>   
 		}
-		</div>
+		</>
 	);
 };
 
