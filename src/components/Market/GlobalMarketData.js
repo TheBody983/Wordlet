@@ -34,7 +34,7 @@ const GlobalMarketData = () => {
 			// Récupère les métadonnées de chaque token
 			for (const id of tokens) {
 				const decodedMetadata = await getTokenMetadata(id)
-				decodedMetadata["price"] = await getTokenPrice(id)
+				decodedMetadata["price"] = await getTokenPrice(sellerAddr, id)
 				decodedMetadata["id"] = id
                 decodedMetadata["seller"] = sellerAddr
 				marketplaceMetadata.push(decodedMetadata);
