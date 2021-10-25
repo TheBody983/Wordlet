@@ -15,6 +15,10 @@ body{
     background: linear-gradient(#2b1055, #7597de);
 }
 
+div{
+    display: flex;
+}
+
 #root{
     display: flex;
     flex-direction: column;
@@ -109,8 +113,9 @@ section img#mountains_behind{
     padding: 8px 30px;
     border-radius: 40px;
     background: #ffff;
-    color: #2b1055;
+    color: #2b1055F0;
     z-index: 9;
+    font-size: 25px;
     transform: translateY(100px);
 }
 
@@ -150,22 +155,16 @@ section img#mountains_behind{
 }
   
 button {
-    padding: 10;
-    height: 50px;
+    padding: 0.5em;
+    margin: 1em;
+    font-size: 1em;
     min-width: 100px;
     cursor: pointer;
-    border-radius: 10px;
-    border: 3px ridge #FDB635;
+    border: #ffff 20px;
+    border-radius: 20px;
+    color: #2b1055;
+    background-color: #fff;
 }
-
-.btn-primary {
-    background: rgb(255, 224, 0);
-}
-
-.btn-secondary {
-    background: rgb(0, 190, 221);
-}
-
 
 .market-listing{
     display: flex;
@@ -176,8 +175,21 @@ button {
     margin: 1em;
     padding: 1em;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    background-color: #3E3277F0;
+    background-color: #2b1055F0;
     border-radius: 10px;
-    border: 5px ridge #FDB635;
+    border: 5px ridge #FDC867;
+    flex-direction: column;
 }
 
+a {
+    color: #FDC867;
+}
+
+.balance{
+    flex-direction: column;
+    align-items: center;
+}
+
+ul {
+    list-style: none;
+}
