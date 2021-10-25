@@ -17,6 +17,7 @@ body{
 
 div{
     display: flex;
+    flex-direction: column;
 }
 
 #root{
@@ -115,7 +116,6 @@ section img#mountains_behind{
     background: #ffff;
     color: #2b1055F0;
     z-index: 9;
-    font-size: 25px;
     transform: translateY(100px);
 }
 
@@ -155,7 +155,7 @@ section img#mountains_behind{
 }
   
 button {
-    padding: 0.5em;
+    padding: 1em;
     margin: 1em;
     font-size: 1em;
     min-width: 100px;
@@ -166,8 +166,13 @@ button {
     background-color: #fff;
 }
 
-.market-listing{
-    display: flex;
+.btn-secondary {
+    color: #fff;
+    background-color: #2b1055;
+
+}
+
+.market-listings{
     flex-direction: row;
 }
 

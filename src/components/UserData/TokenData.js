@@ -24,7 +24,7 @@ const fetchTokenData = async (tokenId) => {
 return (
 	<>
 	<div >
-		<button className="btn-primary" onClick={() =>fetchTokenData(props.tokenId)}>Token {props.tokenId}</button>    
+		<button  onClick={() =>fetchTokenData(props.tokenId)}>WordToken #{props.tokenId}</button>    
 	</div>
 	{
 		nftInfo &&
@@ -43,19 +43,19 @@ return (
 			<div>
 				<label>Receiver address : </label>
 				<input type="text" id="ReceiverAddr" placeholder="Entrez un destinataire"/>
-				<button className="btn-primary" onClick={() => transferWordToken(document.getElementById("ReceiverAddr").value, props.tokenId)}>Transfer Token</button> 
+				<button onClick={() => transferWordToken(document.getElementById("ReceiverAddr").value, props.tokenId)}>Transfer Token</button> 
 			</div>
 			<div>
 				<label>Prix : </label>
 				<input type="text" id="price" placeholder="Entrez un prix"/>
-				<button className="btn-primary" onClick={() => listTokenForSale(props.tokenId, document.getElementById("price").value)}>Vendre le token</button> 
+				<button  onClick={() => listTokenForSale(props.tokenId, document.getElementById("price").value)}>Vendre le token</button> 
 			</div>
 			<div>
-				<button className="btn-secondary" onClick={console.log("no")/*() =>deleteWordToken(props.tokenId)*/}>Delete WordToken (no) </button> 
+				<button onClick={console.log("no")/*() =>deleteWordToken(props.tokenId)*/}>Delete WordToken (no) </button> 
 			</div>
 			<div>
 				<div>
-				<button onClick={() => setNftInfo(null)} className="btn-secondary">Clear Token Info</button>
+				<button onClick={() => setNftInfo(null)}>Clear Token Info</button>
 				</div>
 			</div>          
 		</div>
