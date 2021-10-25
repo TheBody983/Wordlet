@@ -19,11 +19,17 @@ pub contract WOTContract: FungibleToken {
     // Event émis lorsque des Tokens sont mintés
     pub event TokensMinted(amount: UFix64)
 
+    pub event TokensBurned(amount: UFix64)
+
     // Event émis lors de la création d'une Ressource Minter
     pub event MinterCreated()
 
     // Chemin vers la Ressource Admin
     pub let AdminStoragePath: StoragePath
+
+    pub let VaultStoragePath: StoragePath
+
+    pub let ReceiverPublicPath: PublicPath
 
     // Chemin vers le MinterProxy
     pub let MinterProxyStoragePath: StoragePath
@@ -87,6 +93,9 @@ pub contract WOTContract: FungibleToken {
         // retire son solde du montant total en circulation
         destroy() {
             WOTContract.totalSupply = WOTContract.totalSupply - self.balance
+            if(self.balance > 0.0) {
+                emit TokensBurned(amount: self.balance)
+            }
         }
     }
 
@@ -94,7 +103,7 @@ pub contract WOTContract: FungibleToken {
     //
     // Fonction qui créé un nouveau Vault
     // avec un solde de 0 WOT
-    // post: Vérifie que le montant est bien égal à zéro
+    // FT - post: Vérifie que le montant est bien égal à zéro
     // Retourne ce Vault
     pub fun createEmptyVault(): @WOTContract.Vault {
         return <- create Vault(balance: 0.0)
