@@ -29,12 +29,9 @@ const MyBalance = () => {
     }
 
     return (
-    <div>
-        <div>
-            <div>Mon Compte : </div>
-            {parseInt(balance, 10).toFixed(2)} WOT
-        </div>
-        
+    <div className="balance">
+        <p>Mon Compte : </p>
+        <p>{parseInt(balance, 10).toFixed(2)} WOT</p>
         <div>
             <button onClick={() => getBalance()}>Actualiser</button>
         </div>

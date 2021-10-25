@@ -19,8 +19,8 @@ const AuthCluster = () => {
 	if (user.loggedIn && state === "Ready") {
 		return (
 			<div id="auth-cluster">
-				<span>{user?.addr ?? "Pas d'Adresse"}{state}</span>
-				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
+				<span>{user?.addr ?? "Pas d'Adresse"} - {state}</span>
+				<button className="btn-secondary" onClick={fcl.unauthenticate}>Déconnexion</button>
 			</div>
 			)
 	} 
@@ -28,7 +28,7 @@ const AuthCluster = () => {
 		return (
 			<div id="auth-cluster">
 				<span>{user?.addr ?? "Pas d'Adresse"} - {state}</span>
-				<button className="btn-primary" onClick={fcl.unauthenticate}>Déconnexion</button>
+				<button className="btn-secondary" onClick={fcl.unauthenticate}>Déconnexion</button>
 				<div id="setup-account-div">
 					<p> Setup </p>
 					<button onClick={() => createWOTVault()}>WOToken</button>
@@ -39,7 +39,7 @@ const AuthCluster = () => {
 	}
 	else {
 		return (
-			<button className="btn-primary auth-cluster" onClick={fcl.authenticate}>Connexion</button>
+			<button className="btn-primary" id="auth-cluster" onClick={fcl.authenticate}>Connexion</button>
 		)
 	}
 }

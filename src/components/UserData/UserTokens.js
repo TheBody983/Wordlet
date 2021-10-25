@@ -39,7 +39,7 @@ const UserTokens = () => {
 		</div>
 		{
 			userTokens &&
-			<div>
+			<>
 			{
 				Object.keys(userTokens).map(k => {
 				return (
@@ -47,22 +47,21 @@ const UserTokens = () => {
 				)
 				})
 			}
-			</div> 
+			</> 
 		}
 		{
 			userTokensSale &&
-			<div>
+			<>
 			{
 				Object.keys(userTokensSale).map(k => {
 				return (
-					<div>
-					<p>for sale</p>
+					<>
 					<TokenForSaleData tokenId={userTokensSale[k]}/>  
-					</div>     
+					</>     
 				)
 				})
 			}
-			</div>   
+			</>   
 		}
 		
 		{
