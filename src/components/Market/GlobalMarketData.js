@@ -51,7 +51,7 @@ const GlobalMarketData = () => {
 		{
 			tokensToSell.map(token => {
 				return (
-					<div key={token.id} className="listing">
+					<div key={token.id} className="card">
 					
 						<h3>{token.mot}</h3>
 						<p>{token.id}</p>
