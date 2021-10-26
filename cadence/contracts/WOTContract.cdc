@@ -35,7 +35,7 @@ pub contract WOTContract: FungibleToken {
     pub let MinterProxyStoragePath: StoragePath
 
     // Chemin public vers la Capability MinterProxy
-    pub let MinterProxyPublicPath: StoragePath
+    pub let MinterProxyPublicPath: PublicPath
 
     // Quantité de Tokens en existence
     pub var totalSupply: UFix64
@@ -176,7 +176,7 @@ pub contract WOTContract: FungibleToken {
     // Une ressource qui permet la création de nouveaux Minters
     //
     // Pour l'instant on a besoin que d'un Minter, mais on ne sait jamais
-    pub ressource Administrator {
+    pub resource Administrator {
 
         // createNewMinter emits MinterCreated
         //
@@ -193,6 +193,8 @@ pub contract WOTContract: FungibleToken {
         self.AdminStoragePath = /storage/wotAdmin
         self.MinterProxyPublicPath = /public/wotMinterProxy
         self.MinterProxyStoragePath = /storage/wotMinterProxy
+        self.VaultStoragePath = /storage/wotVault
+        self.ReceiverPublicPath = /public/wotPublicReceiver
 
         self.totalSupply = 0.0
 

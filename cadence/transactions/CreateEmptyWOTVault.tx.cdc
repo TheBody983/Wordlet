@@ -6,7 +6,7 @@ v1
 transaction (addr: Address){
     prepare(acct: AuthAccount) {
         let vaultA <- WOToken.createEmptyVault()
-          
+        
         acct.save<@WOToken.Vault>(<-vaultA, to: /storage/MainVault)
 
         log("Vault vide Stocké")

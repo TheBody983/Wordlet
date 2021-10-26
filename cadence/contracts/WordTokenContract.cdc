@@ -37,18 +37,24 @@ pub contract WordTokenContract: NonFungibleToken {
 
         init(initID: UInt64, word: String, collection: String) {
             self.id = initID
-            self.word = String
+            self.word = word
             self.collection = collection
             self.metadata = {}
         }
     
-        pub fun getDatas() [AnyStruct] {
+        pub fun getID(): UInt64 {
+            return self.id
+        }
+
+        pub fun getDatas(): [AnyStruct] {
             return [
-                ["id", self.id],
-                ["word", self.word],
-                ["collection", self.collection],
-                ["metadata", self.metadata]
+                {"word": self.word},
+                {"collection": self.collection}
             ]
+        }
+
+        pub fun getMetadata(): {String: String} {
+            return self.metadata
         }
 
         destroy() {
@@ -62,22 +68,22 @@ pub contract WordTokenContract: NonFungibleToken {
     //  NFT - CollectionPublic : deposit, getIDs et borrowNFT
     pub resource Collection: NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic {
         
-        pub var ownedNFTs: @{UInt64: NFT}
+        pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
         init () {
             self.ownedNFTs <- {}
         }
 
-        pub fun withdraw(withdrawID: UInt64): @NFT {
+        pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
             let token <- self.ownedNFTs.remove(key: withdrawID)
                 ?? panic("Inpossible de retirer le WordToken : Il n'est pas dans la Collection")
 
-            emit Withdraw(id: token.id), from:self.owner?.address)
+            emit Withdraw(id: token.id, from:self.owner?.address)
 
-            return token
+            return <- token
         }
 
-        pub fun deposit(token: @NFT) {
+        pub fun deposit(token: @NonFungibleToken.NFT) {
             let token <- token as! @NFT
 
             let id: UInt64 = token.id
@@ -93,8 +99,8 @@ pub contract WordTokenContract: NonFungibleToken {
             return self.ownedNFTs.keys
         }
 
-        pub fun borrowNFT(id: UInt64): &NFT {
-            return &self.ownedNFTs[id] as &NFT
+        pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
+            return &self.ownedNFTs[id] as &NonFungibleToken.NFT
         }
 
         destroy() {
@@ -108,10 +114,10 @@ pub contract WordTokenContract: NonFungibleToken {
 
     pub resource NFTMinter {
         
-        pub fun mintNFT(word: String, collection: String) {
+        pub fun mintNFT(word: String, collection: String): @NFT{
             emit Minted(id: WordTokenContract.totalSupply, word: word, collection: collection)
-            var newNFT <- create NFT(initID: WordTokenContract.totalSupply, word: word, collection: collection)
             WordTokenContract.totalSupply = WordTokenContract.totalSupply + 1 as UInt64
+            var newNFT <- create NFT(initID: WordTokenContract.totalSupply, word: word, collection: collection)
             return <- newNFT
         }
     }
@@ -124,10 +130,10 @@ pub contract WordTokenContract: NonFungibleToken {
 
         self.totalSupply = 0
 
-        self.account.save(<-self.createEmptyCollection(), to: /storage/NFTCollection)
-        self.account.link<&{CollectionPublic}>(/public/NFTReceiver, target: /storage/NFTCollection)
+        self.account.save(<-self.createEmptyCollection(), to: self.CollectionStoragePath)
+        self.account.link<&Collection{NonFungibleToken.CollectionPublic}>(self.CollectionPublicPath, target: self.CollectionStoragePath)
 
-        self.account.save(<-create NFTMinter(), to: /storage/NFTMinter)
+        self.account.save(<-create NFTMinter(), to: self.MinterStoragePath)
 
         emit ContractInitialized()
     }
