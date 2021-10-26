@@ -136,10 +136,10 @@ pub contract MarketplaceContract {
 
     }
 
-            // Créé puis retourne une liste vide
-        pub fun createSellerList(): @SellerList {
-            return <- create SellerList()
-        }
+    // Créé puis retourne une liste vide
+    pub fun createSellerList(): @SellerList {
+        return <- create SellerList()
+    }
 
     init() {
 

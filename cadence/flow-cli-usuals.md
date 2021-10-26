@@ -27,6 +27,9 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/RemoveFromSellerCatalog.tx.cdc`
 > Retire le compte wordlet du catalogue des vendeurs
 
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/MintForgedToken.tx.cdc [20,21]`
+> Créer un ForgedToken a partir des WordTokens 20 et 21
+
 -----------------------------------------------SCRIPTS-------------------------------------------------
 
 `flow scripts execute --network testnet ./cadence/scripts/CheckUserWOTBalance.script.cdc 0x1f7da62a915f01c7`
@@ -59,5 +62,7 @@ Ludovic : 0x0741eca75483b285
 
 
 
+
 -----------------------------------------------PROJECT-DEPLOYMENT-------------------------------------------------
 `flow project deploy --network testnet --update`
+`flow accounts remove-contract ForgeContract --network testnet --signer wordlet`

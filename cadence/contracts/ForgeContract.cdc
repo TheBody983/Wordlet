@@ -1,35 +1,39 @@
-pub contract WordletContract {
+import WordletContract from 0x1f7da62a915f01c7
+import WOToken from 0x1f7da62a915f01c7
 
+pub contract ForgeContract {
 
-    // Déclare une ressource de type NFT
     pub resource NFT {
-        // Identifiant du NFT
-        pub let id: UInt64
 
-        // Données Stockées pas l'objet
+        pub let id: UInt64
+        pub let forged: @{UInt64: WordletContract.NFT}
+        pub let smith: Address
+
         pub var metadata: {String: String}
 
         // Par défaut, initialise le NFT avec son ID et des Métadonnées vides
-        init(initID: UInt64) {
-            self.id = initID            
+        init(initID: UInt64, forged: @{UInt64: WordletContract.NFT}, smith: Address) {
+            self.id = initID
+            self.forged <- forged
+            self.smith = smith
             self.metadata = {}
         }   
+
+        destroy(){
+            destroy self.forged
+        }
     }
 
-
-
-    // Interface Publique : Les fonctions auxquelles tout le monde à accès 
-    pub resource interface NFTReceiver {
+    // Interface Publique : Les fonctions auxquelles tout le monde à accès (voué à changer)
+    pub resource interface CollectionInterface {
         pub fun deposit(token: @NFT, metadata: {String : String})
         pub fun getIDs(): [UInt64]
         pub fun idExists(id: UInt64): Bool
         pub fun getMetadata(id: UInt64) : {String : String}
     }
 
-
-
-    // Définition de la Collection de Tokens d'un Utilisateur
-    pub resource Collection: NFTReceiver {
+    // Définition de la Collection de ForgedTokens d'un Utilisateur (voué à changer)
+    pub resource Collection: CollectionInterface {
         pub var ownedNFTs: @{UInt64: NFT} // le @ signifie que ce champ est une ressource et que donc toutes les règles s'appliquant aux ressources s'appliquent aussi à ce champ
         pub var metadataObjs: {UInt64: { String : String }}
 
@@ -73,32 +77,24 @@ pub contract WordletContract {
             return self.metadataObjs[id]!
         }
 
-        pub fun getSubCollection(toForgeIds: [UInt64]): @{UInt64: NFT} {
-            var subCollection: @{UInt64: NFT} <- {}
-            var i: UInt64 = 0
-            while i < UInt64(toForgeIds.length) {
-                subCollection[i] <-! self.withdraw(withdrawID: toForgeIds[i])
-                i = i + 1
-            }
-            return <- subCollection
-        }
-
         // Détruit la collection
         destroy() {
             destroy self.ownedNFTs
         }
     }
-
-
-
+    
     // Créé puis retourne une Collection vide
     pub fun createEmptyCollection(): @Collection {
         return <- create Collection()
     }
 
+    
+    pub resource interface ForgeMinterInterface {
+        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordletContract.NFT}): @NFT
+    }
 
-    // Le Minter permet de créer des NFTs
-    pub resource NFTMinter {
+    pub resource NFTMinter : ForgeMinterInterface {
+
         pub var idCount: UInt64
 
         // Initialise les IDs à 1
@@ -106,11 +102,11 @@ pub contract WordletContract {
             self.idCount = 1
         }
 
-        // Créé un nouveau Token vierge et le retourne
-        pub fun mintNFT(): @NFT {
-            var newNFT <- create NFT(initID: self.idCount)
+        // Créé un nouveau Token et le retourne
+        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordletContract.NFT}): @NFT {
+            var newNFT <- create NFT(initID: self.idCount, forged: <- toForge, smith: smithAcct.address)
             self.idCount = self.idCount + 1 as UInt64
-            return <-newNFT
+            return <- newNFT
         }
     }
 
@@ -120,9 +116,12 @@ pub contract WordletContract {
         // - Publie une référence vers cette même colelction dans le stockage
         // - Stocke une ressource minter
 
-        self.account.save(<-self.createEmptyCollection(), to: /storage/NFTCollection)
-        self.account.link<&{NFTReceiver}>(/public/NFTReceiver, target: /storage/NFTCollection)
+        self.account.save(<-self.createEmptyCollection(), to: /storage/ForgeCollection)
+        self.account.link<&{CollectionInterface}>(/public/ForgeCollectionInterface, target: /storage/ForgeCollection)
         
-        self.account.save(<-create NFTMinter(), to: /storage/NFTMinter)
+        self.account.save(<-create NFTMinter(), to: /storage/ForgeMinter)
+        self.account.link<&{ForgeMinterInterface}>(/public/ForgeMinterInterface, target: /storage/ForgeMinter)
     }
+    
 }
+
