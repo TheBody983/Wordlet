@@ -11,7 +11,7 @@ transaction {
         
         acct.save<@WOTContract.Vault>(<-vaultA, to: WOTContract.VaultStoragePath)
 
-        let ReceiverRef = acct.link<&WOTContract.Vault{FungibleToken.Receiver, FungibleToken.Balance}>(WOTContract.ReceiverPublicPath, target: WOTContract.VaultStoragePath)
+        acct.link<&WOTContract.Vault{FungibleToken.Receiver, FungibleToken.Balance}>(WOTContract.ReceiverPublicPath, target: WOTContract.VaultStoragePath)
     }
 
     post {
