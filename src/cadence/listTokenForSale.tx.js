@@ -46,7 +46,7 @@ const listTokenForSale = async (tokenId, value) => {
         fcl.limit(50),
         fcl.args([
             fcl.arg(tokenId, t.UInt64),
-            fcl.arg("117.0", t.UFix64)
+            fcl.arg(value, t.UFix64)
         ]),
         fcl.transaction(listTokenForSaleTx)
         ])

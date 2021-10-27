@@ -1,11 +1,11 @@
-import MarketData from './MarketData';
+import GlobalMarketData from './GlobalMarketData';
 import Balance from './MyBalance';
 
 function Market() {
     return(
         <>
             <h2> Marché </h2>
-            <MarketData />
+            <GlobalMarketData/>
             <Balance />
         </>
     );

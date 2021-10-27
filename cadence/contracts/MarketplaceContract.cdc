@@ -92,4 +92,59 @@ pub contract MarketplaceContract {
     pub fun createSaleCollection(ownerVault: Capability<&AnyResource{WOToken.Receiver}>): @SaleCollection {
         return <- create SaleCollection(vault: ownerVault)
     }
+
+    // interface publique du catalogue
+    pub resource interface SellerCatalog {
+        pub fun addSeller(sellerAcct: AuthAccount)
+        pub fun removeSeller(sellerAcct: AuthAccount)
+        pub fun isInCatalog(sellerAddress: Address): Bool
+        pub fun getSellerList(): [Address]
+    }
+
+    // catalogue de tous les vendeurs
+    pub resource SellerList: SellerCatalog {
+
+        pub var sellerAddresses: [Address]
+
+        init() {
+            self.sellerAddresses = [0x1f7da62a915f01c7]
+        }
+
+        pub fun addSeller(sellerAcct: AuthAccount){
+            if !self.sellerAddresses.contains(sellerAcct.address){
+                self.sellerAddresses.append(sellerAcct.address)
+            }
+        }
+
+        pub fun removeSeller(sellerAcct: AuthAccount){
+            var i = self.sellerAddresses.length-1
+            while i >= 0 {
+                if self.sellerAddresses[i] == sellerAcct.address {
+                    self.sellerAddresses.remove(at: i)
+                }
+                i = i - 1
+            }
+        }
+
+        pub fun isInCatalog(sellerAddress: Address): Bool {
+            return self.sellerAddresses.contains(sellerAddress)
+        }
+
+        pub fun getSellerList(): [Address] {
+            return self.sellerAddresses!
+        }
+
+    }
+
+            // Créé puis retourne une liste vide
+        pub fun createSellerList(): @SellerList {
+            return <- create SellerList()
+        }
+
+    init() {
+
+        self.account.save(<-self.createSellerList(), to: /storage/SellerList)
+        self.account.link<&{SellerCatalog}>(/public/SellerCatalog, target: /storage/SellerList)
+
+    }
 }
