@@ -16,7 +16,8 @@ transaction {
     }
 
     post {
-        !getAccount(self.address).getCapability<&WordTokenContract.Collection{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath)
+        !getAccount(self.address)
+            .getCapability<&WordTokenContract.Collection{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath)
             .check():  
             "Référence CollectionPublic de Collection créée incorrectement"
     }
