@@ -21,9 +21,8 @@ const fetchTokenData = async (tokenId) => {
 
 return (
 	<div>
-	<div>
-		<button className="btn-primary" onClick={() =>fetchTokenData(props.tokenId)}>Token {props.tokenId}</button>    
-	</div>
+		<p> WordTokens en Vente </p>
+		<button className="btn-primary" onClick={() =>fetchTokenData(props.tokenId)}>WordToken {props.tokenId}</button>    
 	{
 		nftInfo &&
 		<div>
