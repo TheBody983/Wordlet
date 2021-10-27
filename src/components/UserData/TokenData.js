@@ -3,12 +3,9 @@ import React, { useState } from "react";
 import getTokenMetadata from "../../cadence/getTokenMetadata.script";
 import listTokenForSale from "../../cadence/listTokenForSale.tx";
 import transferWordToken from "../../cadence/transferWordToken.tx";
-import deleteWordToken from "../../cadence/deleteWordToken.tx";
 
 const TokenData = (props) => {
 let tokenId = parseInt(props.tokenId)
-console.log("id : " + tokenId)
-console.log("type : " + typeof(tokenId))
 
 const [nftInfo, setNftInfo] = useState(null)
 

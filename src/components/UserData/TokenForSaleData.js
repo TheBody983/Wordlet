@@ -5,8 +5,6 @@ import removeTokenFromSale from "../../cadence/removeTokenFromSale.tx";
 
 const TokenForSaleData = (props) => {
 let tokenId = parseInt(props.tokenId)
-console.log("id : " + tokenId)
-console.log("type : " + typeof(tokenId))
 
 const [nftInfo, setNftInfo] = useState(null)
 
