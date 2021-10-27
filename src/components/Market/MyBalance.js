@@ -2,8 +2,17 @@ import React, { useState, useEffect } from "react";
 import * as fcl from "@onflow/fcl";
 
 import getUserBalance from "../../cadence/getUserBalance.script";
+import { useAuth } from "../../providers/AuthProvider";
+import { useUser } from "../../providers/UserProvider";
 
 const MyBalance = () => {
+    const { user } = useAuth()
+    const { WOTBalance, getWOTBalance } = useUser
+
+        
+    console.log(getWOTBalance)
+    console.log(WOTBalance)
+
     const [balance, setBalance] = useState(null);
     useEffect(() => {
         try{ getBalance();}
@@ -12,7 +21,7 @@ const MyBalance = () => {
     
     const getBalance = async () => {
         try {
-            const bal = await getUserBalance(user.addr)
+            const bal = await getUserBalance(user?.addr)
             setBalance(bal)
         }
         catch (error) {
@@ -20,11 +29,7 @@ const MyBalance = () => {
         }
     }
     
-
-    const [user, setUser] = useState({loggedIn: null})
-    useEffect(() => fcl.currentUser().subscribe(setUser), [])
-  
-    if(!balance && user.addr){
+    if(!balance && user?.addr){
         getBalance()
     }
 
