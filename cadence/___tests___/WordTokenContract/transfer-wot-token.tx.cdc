@@ -8,7 +8,8 @@ transaction {
     prepare(acct: AuthAccount) {
         self.collection <- WordTokenContract.createEmptyCollection()
 
-        let collectionRef = acct.borrow<&WordTokenContract.Collection>(from: WordTokenContract.CollectionStoragePath)
+        let collectionRef = acct
+            .borrow<&WordTokenContract.Collection>(from: WordTokenContract.CollectionStoragePath)
             ?? panic("Impossible d'emprunter la référence à la Collection du propriétaire")
 
         self.collection.deposit(token: <-collectionRef.withdraw(withdrawID: 1))
@@ -17,7 +18,8 @@ transaction {
     execute {
         let recepteur = getAccount(0x1f7da62a915f01c7)
 
-        let receiverRef = recepteur.getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath)
+        let receiverRef = recepteur
+            .getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath)
             .borrow()
             ?? panic("Impossible d'emprunter la référence receiver")
 

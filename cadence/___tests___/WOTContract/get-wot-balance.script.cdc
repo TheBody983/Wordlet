@@ -4,7 +4,8 @@ import FungibleToken from 0x9a0766d93b6608b7
 pub fun main(addr: Address): UFix64? {
     let acct = getAccount(addr)
 
-    let balanceRef = acct.getCapability<&WOTContract.Vault{FungibleToken.Balance}>(WOTContract.ReceiverPublicPath)
+    let balanceRef = acct
+        .getCapability<&WOTContract.Vault{FungibleToken.Balance}>(WOTContract.ReceiverPublicPath)
         .borrow()
 
     return balanceRef?.balance

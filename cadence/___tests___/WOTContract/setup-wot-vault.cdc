@@ -15,7 +15,8 @@ transaction {
     }
 
     post {
-        getAccount(self.addr).getCapability<&WOTContract.Vault{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
+        getAccount(self.addr)
+            .getCapability<&WOTContract.Vault{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
             .check():  
             "Référence Reciever du Vault créée incorrectement"
     }

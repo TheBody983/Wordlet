@@ -7,7 +7,8 @@ transaction {
     let tokenReceiver: &{FungibleToken.Receiver}
 
     prepare(acct: AuthAccount) {
-        self.tokenMinter = acct.borrow<&WOTContract.MinterProxy>(from: WOTContract.MinterProxyStoragePath)
+        self.tokenMinter = acct
+            .borrow<&WOTContract.MinterProxy>(from: WOTContract.MinterProxyStoragePath)
             ?? panic("Pas de Minter Disponible")
 
         self.tokenReceiver = acct
