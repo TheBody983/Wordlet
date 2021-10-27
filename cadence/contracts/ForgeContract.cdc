@@ -30,6 +30,7 @@ pub contract ForgeContract {
         pub fun getIDs(): [UInt64]
         pub fun idExists(id: UInt64): Bool
         pub fun getMetadata(id: UInt64) : {String : String}
+        pub fun getSmith(id: UInt64): Address
     }
 
     // Définition de la Collection de ForgedTokens d'un Utilisateur (voué à changer)
@@ -76,6 +77,13 @@ pub contract ForgeContract {
         pub fun getMetadata(id: UInt64): {String : String} {
             return self.metadataObjs[id]!
         }
+        
+        // Retourne le smith d'un Token
+        pub fun getSmith(id: UInt64): Address {
+            return self.ownedNFTs[id]?.smith!
+        }
+
+
 
         // Détruit la collection
         destroy() {

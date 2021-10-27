@@ -38,7 +38,7 @@
 `flow scripts execute --network testnet ./cadence/scripts/CheckUserWordTokens.script.cdc 0x1f7da62a915f01c7`
 > Affiche les identifiants de tous les WordTokens presents sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckTokenMetadata.script.cdc 0x1f7da62a915f01c7 6`
+`flow scripts execute --network testnet ./cadence/scripts/CheckWordTokenMetadata.script.cdc 0x1f7da62a915f01c7 6`
 > Affiche les metadonnées du WordToken 6 sur le compte Wordlet
 
 `flow scripts execute --network testnet ./cadence/scripts/CheckMarketplace.script.cdc 0x1f7da62a915f01c7`
@@ -49,6 +49,12 @@
 
 `flow scripts execute --network testnet ./cadence/scripts/CheckifCataloged.script.cdc 0x1f7da62a915f01c7`
 > Affiche si le compte wordlet est inscrit dans le catalogue
+
+`flow scripts execute --network testnet ./cadence/scripts/CheckUserForgedTokens.script.cdc 0x1f7da62a915f01c7`
+> Affiche les identifiants de tous les ForgedTokens presents sur le compte Wordlet
+
+`flow scripts execute --network testnet ./cadence/scripts/CheckForgedTokenMetadata.script.cdc 0x1f7da62a915f01c7 1`
+> Affiche les metadonnées du ForgedToken 1 sur le compte Wordlet
 
 -----------------------------------------------ADRESSES-------------------------------------------------
 
@@ -65,4 +71,5 @@ Ludovic : 0x0741eca75483b285
 
 -----------------------------------------------PROJECT-DEPLOYMENT-------------------------------------------------
 `flow project deploy --network testnet --update`
+`flow accounts update-contract ForgeContract ./cadence/contracts/ForgeContract.cdc --network testnet --signer wordlet`
 `flow accounts remove-contract ForgeContract --network testnet --signer wordlet`
