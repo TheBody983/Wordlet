@@ -1,117 +1,140 @@
-import WordletContract from 0x1f7da62a915f01c7
+import WordTokenContract from 0x1f7da62a915f01c7
 import WOToken from 0x1f7da62a915f01c7
 
 pub contract ForgeContract {
 
+     // NFT - Event emis lors de la création du Contrat
+    pub event ContractInitialized()
+
+    // NFT - Event emis lorsqu'un token est retiré
+    pub event Withdraw(id: UInt64, from: Address?)
+
+    // NFT - Event emis lorsqu'un token est déposé
+    pub event Deposit(id: UInt64, to: Address?)
+
+    pub event Minted(id: UInt64, smithAcct: Address, forged: @{UInt64: WordTokenContract.NFT})
+
+    // initialistaion des constantes de Path 
+    pub let CollectionStoragePath: StoragePath
+    pub let CollectionPublicPath: PublicPath
+    pub let MinterStoragePath: StoragePath
+    pub let MinterPublicPath: PublicPath
+
+    // NFT - Le nombre total de WordToken en existence
+    pub var totalSupply: UInt64
+
     pub resource NFT {
 
         pub let id: UInt64
-        pub let forged: @{UInt64: WordletContract.NFT}
+        pub let forged: @{UInt64: WordTokenContract.NFT}
         pub let smith: Address
 
         pub var metadata: {String: String}
 
         // Par défaut, initialise le NFT avec son ID et des Métadonnées vides
-        init(initID: UInt64, forged: @{UInt64: WordletContract.NFT}, smith: Address) {
+        init(initID: UInt64, forged: @{UInt64: WordTokenContract.NFT}, smith: Address) {
             self.id = initID
             self.forged <- forged
             self.smith = smith
             self.metadata = {}
         }   
 
+        pub fun getID(): UInt64 {
+            return self.id
+        }
+
+        pub fun getDatas(): [AnyStruct] {
+            return [
+                {"forged": self.forged},
+                {"smith": self.smith}
+            ]
+        }
+
+        pub fun getMetadata(): {String: String} {
+            return self.metadata
+        }
+
         destroy(){
             destroy self.forged
         }
     }
 
-    // Interface Publique : Les fonctions auxquelles tout le monde à accès (voué à changer)
-    pub resource interface CollectionInterface {
-        pub fun deposit(token: @NFT, metadata: {String : String})
-        pub fun getIDs(): [UInt64]
-        pub fun idExists(id: UInt64): Bool
-        pub fun getMetadata(id: UInt64) : {String : String}
-        pub fun getSmith(id: UInt64): Address
-    }
 
-    // Définition de la Collection de ForgedTokens d'un Utilisateur (voué à changer)
-    pub resource Collection: CollectionInterface {
-        pub var ownedNFTs: @{UInt64: NFT} // le @ signifie que ce champ est une ressource et que donc toutes les règles s'appliquant aux ressources s'appliquent aussi à ce champ
-        pub var metadataObjs: {UInt64: { String : String }}
+    // NFT - Une Collection est soumise aux Interfaces
+    //  NFT - Provider : withdraw
+    //  NFT - Receiver : deposit
+    //  NFT - CollectionPublic : deposit, getIDs et borrowNFT
+    pub resource Collection: NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic {
+        pub var ownedNFTs: @{UInt64: NFT} 
 
-        // Initialisation à vide de la Collection d'objets
+
         init () {
             self.ownedNFTs <- {}
-            self.metadataObjs = {}
         }
 
-        // Retire un Token de la Collection
-        pub fun withdraw(withdrawID: UInt64): @NFT {
-            // Retire un Token de la Collection, revert si introuvable
-            let token <- self.ownedNFTs.remove(key: withdrawID)!
+        pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
+            let token <- self.ownedNFTs.remove(key: withdrawID)
+                ?? panic("Inpossible de retirer le WordToken : Il n'est pas dans la Collection")
 
-            return <-token
+            emit Withdraw(id: token.id, from:self.owner?.address)
+
+            return <- token
         }
 
-        // Depose un NFT et ses métadonnées dans la collection
-        pub fun deposit(token: @NFT, metadata: {String : String}) {
-            self.metadataObjs[token.id] = metadata
-            self.ownedNFTs[token.id] <-! token
+        pub fun deposit(token: @NonFungibleToken.NFT) {
+            let token <- token as! @NFT
+
+            let id: UInt64 = token.id
+
+            let oldToken <- self.ownedNFTs[id] <- token
+
+            emit Deposit(id: id, to: self.owner?.address)
+
+            destroy oldToken
         }
 
-        // Cherche si la Collection contient un Token
-        pub fun idExists(id: UInt64): Bool {
-            return self.ownedNFTs[id] != nil
-        }
-
-        // Retourne les IDs des Tokens présents dans la collection
         pub fun getIDs(): [UInt64] {
             return self.ownedNFTs.keys
         }
 
-        // Permet de mettre 0 jour les métadonnées d'un token (au cas où)
-        pub fun updateMetadata(id: UInt64, metadata: {String: String}) {
-            self.metadataObjs[id] = metadata
-        }
-
-        // Retourne les Métadonnées d'un Token
-        pub fun getMetadata(id: UInt64): {String : String} {
-            return self.metadataObjs[id]!
+        pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
+            return &self.ownedNFTs[id] as &NonFungibleToken.NFT
         }
         
-        // Retourne le smith d'un Token
         pub fun getSmith(id: UInt64): Address {
             return self.ownedNFTs[id]?.smith!
         }
 
-
-
-        // Détruit la collection
         destroy() {
             destroy self.ownedNFTs
         }
     }
     
-    // Créé puis retourne une Collection vide
+    pub resource interface CollectionInterface {
+        pub fun getSmith(id: UInt64): Address
+    }
+
     pub fun createEmptyCollection(): @Collection {
         return <- create Collection()
     }
 
     
     pub resource interface ForgeMinterInterface {
-        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordletContract.NFT}): @NFT
+        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordTokenContract.NFT}): @NFT
     }
 
     pub resource NFTMinter : ForgeMinterInterface {
 
         pub var idCount: UInt64
 
-        // Initialise les IDs à 1
         init() {
             self.idCount = 1
         }
 
         // Créé un nouveau Token et le retourne
-        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordletContract.NFT}): @NFT {
+        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordTokenContract.NFT}): @NFT {
+            emit Minted(id: ForgeContract.totalSupply, smithAcct: smithAcct, forged: toForge)
+            ForgeContract.totalSupply = ForgeContract.totalSupply + 1 as UInt64
             var newNFT <- create NFT(initID: self.idCount, forged: <- toForge, smith: smithAcct.address)
             self.idCount = self.idCount + 1 as UInt64
             return <- newNFT
@@ -119,16 +142,17 @@ pub contract ForgeContract {
     }
 
     init() {
-        // A l'initiailisation du Smart Contract :
-        // - Stocke une collection vide de Tokens
-        // - Publie une référence vers cette même colelction dans le stockage
-        // - Stocke une ressource minter
+        // Path Setting
+        self.CollectionStoragePath = /storage/ForgedTokenCollection
+        self.CollectionPublicPath = /public/ForgedTokenCollection
+        self.MinterStoragePath = /storage/ForgedTokenMinter
+        self.MinterPublicPath = /public/ForgedTokenMinter
 
-        self.account.save(<-self.createEmptyCollection(), to: /storage/ForgeCollection)
-        self.account.link<&{CollectionInterface}>(/public/ForgeCollectionInterface, target: /storage/ForgeCollection)
+        self.account.save(<-self.createEmptyCollection(), to: self.CollectionStoragePath)
+        self.account.link<&{CollectionInterface}>(self.CollectionPublicPath, target: self.CollectionStoragePath)
         
-        self.account.save(<-create NFTMinter(), to: /storage/ForgeMinter)
-        self.account.link<&{ForgeMinterInterface}>(/public/ForgeMinterInterface, target: /storage/ForgeMinter)
+        self.account.save(<-create NFTMinter(), to: self.MinterStoragePath)
+        self.account.link<&{ForgeMinterInterface}>(self.MinterPublicPath, target: self.MinterStoragePath)
     }
     
 }
