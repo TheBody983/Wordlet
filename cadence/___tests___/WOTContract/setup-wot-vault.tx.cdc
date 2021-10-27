@@ -11,11 +11,12 @@ transaction {
         
         acct.save<@WOTContract.Vault>(<-vaultA, to: WOTContract.VaultStoragePath)
 
-        let ReceiverRef = acct.link<&WOTContract.Vault{FungibleToken.Receiver, FungibleToken.Balance}>(WOTContract.ReceiverPublicPath, target: WOTContract.VaultStoragePath)
+        acct.link<&WOTContract.Vault{FungibleToken.Receiver, FungibleToken.Balance}>(WOTContract.ReceiverPublicPath, target: WOTContract.VaultStoragePath)
     }
 
     post {
-        getAccount(self.addr).getCapability<&WOTContract.Vault{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
+        getAccount(self.addr)
+            .getCapability<&WOTContract.Vault{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
             .check():  
             "Référence Reciever du Vault créée incorrectement"
     }

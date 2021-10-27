@@ -14,7 +14,8 @@ transaction {
     }
 
     post {
-        getAccount(self.addr).getCapability<&WOTContract.MinterProxy{WOTContract.MinterProxyPublic}>(WOTContract.MinterProxyPublicPath)
+        getAccount(self.addr)
+            .getCapability<&WOTContract.MinterProxy{WOTContract.MinterProxyPublic}>(WOTContract.MinterProxyPublicPath)
             .check():  
             "Référence Publique du Minter créée incorrectement"
     }

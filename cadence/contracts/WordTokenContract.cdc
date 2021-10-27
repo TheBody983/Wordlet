@@ -41,32 +41,30 @@ pub contract WordTokenContract: NonFungibleToken {
             self.collection = collection
             self.metadata = {}
         }
-    
-        pub fun getID(): UInt64 {
-            return self.id
-        }
-
-        pub fun getDatas(): [AnyStruct] {
-            return [
-                {"word": self.word},
-                {"collection": self.collection}
-            ]
-        }
-
-        pub fun getMetadata(): {String: String} {
-            return self.metadata
-        }
 
         destroy() {
-            // WordTokenContract.totalSupply = WordletContract.totalSupply - UInt64(1)
+
         }
+    }
+
+    pub resource interface WordTokenCollectionPublic {
+        pub fun deposit(token: @NonFungibleToken.NFT)
+        pub fun getIDs(): [UInt64]
+        pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT
+        pub fun borrowWordToken(id: UInt64): &WordTokenContract.NFT? {
+            post {
+                (result == nil) || (result?.id == id):
+                    "Impossible d'emprunter le Référence au WordToken: l'ID de la Référence retournée est incorrect"
+            }
+        }
+
     }
 
     // NFT - Une Collection est soumise aux Interfaces
     //  NFT - Provider : withdraw
     //  NFT - Receiver : deposit
     //  NFT - CollectionPublic : deposit, getIDs et borrowNFT
-    pub resource Collection: NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic {
+    pub resource Collection: NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, WordTokenCollectionPublic {
         
         pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
 
@@ -76,7 +74,7 @@ pub contract WordTokenContract: NonFungibleToken {
 
         pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
             let token <- self.ownedNFTs.remove(key: withdrawID)
-                ?? panic("Inpossible de retirer le WordToken : Il n'est pas dans la Collection")
+                ?? panic("Impossible de retirer le WordToken : Il n'est pas dans la Collection")
 
             emit Withdraw(id: token.id, from:self.owner?.address)
 
@@ -101,6 +99,15 @@ pub contract WordTokenContract: NonFungibleToken {
 
         pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
             return &self.ownedNFTs[id] as &NonFungibleToken.NFT
+        }
+
+        pub fun borrowWordToken (id: UInt64): &WordTokenContract.NFT? {
+            if self.ownedNFTs[id] != nil {
+                let ref = &self.ownedNFTs[id] as auth &NonFungibleToken.NFT
+                return ref as! &WordTokenContract.NFT
+            } else {
+                return nil
+            }
         }
 
         destroy() {
@@ -131,7 +138,7 @@ pub contract WordTokenContract: NonFungibleToken {
         self.totalSupply = 0
 
         self.account.save(<-self.createEmptyCollection(), to: self.CollectionStoragePath)
-        self.account.link<&Collection{NonFungibleToken.CollectionPublic}>(self.CollectionPublicPath, target: self.CollectionStoragePath)
+        self.account.link<&Collection{WordTokenCollectionPublic}>(self.CollectionPublicPath, target: self.CollectionStoragePath)
 
         self.account.save(<-create NFTMinter(), to: self.MinterStoragePath)
 
