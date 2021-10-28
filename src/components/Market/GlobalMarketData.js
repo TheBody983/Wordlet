@@ -7,6 +7,7 @@ import getTokenPrice from "../../cadence/getTokenPrice.script";
 import buyToken from "../../cadence/buyToken.tx";
 
 import * as fcl from "@onflow/fcl";
+import WordToken from "../WordToken";
 
 const GlobalMarketData = () => {
 	
@@ -47,19 +48,7 @@ const GlobalMarketData = () => {
 		{
 			tokensToSell.map(token => {
 				return (
-					<div key={token.id} className="card">
-					
-						<h3>{token.mot}</h3>
-						<p>{token.id}</p>
-						<p>Source: {token.source}</p>
-						<p>Type: {token.type}</p>
-						
-						<h4>Price</h4>
-						<p>{parseInt(token.price, 10).toFixed(2)} WOT</p>
-                        <p>Seller: {token.seller}</p>
-						<button onClick={() => buyToken(token.id, token.seller)}>Acheter</button>
-						
-					</div>
+					<WordToken market tokenId={token.id}/>
 				)
 			})
 		}

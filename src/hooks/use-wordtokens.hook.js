@@ -3,27 +3,26 @@ import { useEffect, useState } from "react";
 import { query} from '@onflow/fcl'
 import { GET_TOKEN_DATA } from "../cadence/get-token-data.script";
 
-export default function getTokenData( id ) {
-    const [ tokenData, setTokenData ] = useState(null)
+export default function useWordTokens( ) {
 
-    useEffect( () => getTokenData(), [ id ] )
-
-    const getTokenData = async () => {
+    const getTokenData = async (setTokenData, tokenId) => {
+        debugger
         try {
             await query({
                 cadence: GET_TOKEN_DATA,
                 args: (arg, t) => [
-                    arg(user?.addr, t.Address)
+                    arg(tokenId, t.UInt64)
                 ]
             })
             .then(function(data) {
-                setUserWordTokens(data)
+                setTokenData(data)
             })
             
         } catch (error) {
+            console.debug("use-wordtokens: getTokenData Failed")
             console.error(error)
         }
     }
 
-    return { tokenData, getTokenData }
+    return { getTokenData }
 }

@@ -22,7 +22,7 @@ const UserTokens = () => {
 				Object.keys(userWordTokens).map(k => {
 				return (
 					<li>
-						<TokenData key={userWordTokens[k].tokenId} tokenId={userWordTokens[k]}/>       
+						<WordToken collection tokenId={userWordTokens[k]}/>
 					</li>
 				)
 				})
@@ -36,7 +36,8 @@ const UserTokens = () => {
 				Object.keys(userSalelist).map(k => {
 				return (
 					<li>
-						<TokenForSaleData key={userSalelist[k].tokenId} tokenId={userSalelist[k]}/>  
+						<WordToken forSale tokenId={userSalelist[k]}/>
+						{/* <TokenForSaleData key={userSalelist[k].tokenId} tokenId={userSalelist[k]}/>   */}
 					</li>     
 				)
 				})
