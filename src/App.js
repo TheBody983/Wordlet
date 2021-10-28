@@ -1,10 +1,10 @@
 import './App.css';
 
-import Accueil from './components/Accueil/Accueil';
+import Accueil from './components/Accueil';
 import Market from './components/Market/Market';
 import UserData from './components/UserData/UserData';
-import Header from './components/Header/Header';
-import APropos from './components/APropos/APropos';
+import Header from './components/Header';
+import APropos from './components/APropos';
 import Community from './components/Community/Community';
 import Providers from './providers/Providers.comp';
 
@@ -14,12 +14,7 @@ function App() {
 				<header>
 					<Header />
 				</header>
-				<section id="accueil">
-					<Accueil/>
-					<img src="etoiles.png" id="stars" alt=""/>
-					<img src="lune.png" id="moon" alt=""/>
-					<img src="montagne_derriere.png" id="mountains_behind" alt=""/>
-				</section>
+				<Accueil/>
 				<section id="marche">
 					<Market />
 					<img src="marche.png" id="marche" alt=""/>
@@ -28,13 +23,8 @@ function App() {
 					<UserData />
 					<img src="cave.png" id="mountains_front" alt=""/>
 				</section>
-				<section id="communaute">
-					<Community />
-					<img src="lava1.jpg" id="mountains_front" alt=""/>
-				</section>
-				<section id="apropos">
-					<APropos/>
-				</section>
+				<Community />
+				<APropos/>
 		</Providers>
 	);
 }
