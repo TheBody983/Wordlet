@@ -48,9 +48,6 @@ return (
 				<button  onClick={() => listTokenForSale(props.tokenId, document.getElementById("price").value)}>Vendre le token</button> 
 			</div>
 			<div>
-				<button onClick={console.log("no")/*() =>deleteWordToken(props.tokenId)*/}>Delete WordToken (no) </button> 
-			</div>
-			<div>
 				<div>
 				<button onClick={() => setNftInfo(null)}>Clear Token Info</button>
 				</div>
