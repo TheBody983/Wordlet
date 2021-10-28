@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+
 import TokenData from './TokenData';
+import WordToken from "../WordToken";
 import TokenForSaleData from "./TokenForSaleData";
 import * as fcl from "@onflow/fcl";
 
@@ -12,14 +14,16 @@ const UserTokens = () => {
 	const { userWordTokens, userSalelist } = useUser( )
 
 	return (
-		<>
+		<ul>
 		{
 			userWordTokens &&
 			<>
 			{
 				Object.keys(userWordTokens).map(k => {
 				return (
-					<TokenData key={userWordTokens[k].tokenId} tokenId={userWordTokens[k]}/>       
+					<li>
+						<TokenData key={userWordTokens[k].tokenId} tokenId={userWordTokens[k]}/>       
+					</li>
 				)
 				})
 			}
@@ -31,9 +35,9 @@ const UserTokens = () => {
 			{
 				Object.keys(userSalelist).map(k => {
 				return (
-					<>
-					<TokenForSaleData key={userSalelist[k].tokenId} tokenId={userSalelist[k]}/>  
-					</>     
+					<li>
+						<TokenForSaleData key={userSalelist[k].tokenId} tokenId={userSalelist[k]}/>  
+					</li>     
 				)
 				})
 			}
@@ -55,7 +59,7 @@ const UserTokens = () => {
 				}
 			</div>   
 		}
-		</>
+		</ul>
 	);
 };
 
