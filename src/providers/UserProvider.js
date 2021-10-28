@@ -11,7 +11,7 @@ export default function UserProvider({ children }) {
     const { user } = useAuth()
     const { WOTBalance, getWOTBalance, createWOTVault } = useWOT( user )
     const { userWordTokens, getUserWordTokens } = useUserWordTokens( user )
-    const { userSalelist, getUserSalelist } = useMarket( user )
+    const { userSalelist, getCurrentUserSalelist } = useMarket( user )
 
     return (
         <UserContext.Provider value={{
@@ -21,7 +21,7 @@ export default function UserProvider({ children }) {
             userWordTokens,
             getUserWordTokens,
             userSalelist,
-            getUserSalelist,
+            getCurrentUserSalelist,
         }}>
             { children }
         </UserContext.Provider>
