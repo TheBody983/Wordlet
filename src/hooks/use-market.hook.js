@@ -9,7 +9,6 @@ export default function useMarket( user ) {
     useEffect( () => getUserSalelist(), [ user ] )
 
     const getUserSalelist = async () => {
-        console.debug(user)
         try {
             await query({
                 cadence: GET_USER_SALELIST,
@@ -19,7 +18,6 @@ export default function useMarket( user ) {
             })
             .then(function(data) {
                 setUserSalelist(data)
-                console.debug(userSalelist)
             })
             
         } catch (error) {

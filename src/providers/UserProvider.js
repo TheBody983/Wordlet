@@ -13,9 +13,6 @@ export default function UserProvider({ children }) {
     const { userWordTokens, getUserWordTokens } = useUserWordTokens( user )
     const { userSalelist, getUserSalelist } = useMarket( user )
 
-    console.log("UserProvider : userSalelist")
-    console.log(userSalelist)
-
     return (
         <UserContext.Provider value={{
             WOTBalance,

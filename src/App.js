@@ -6,13 +6,11 @@ import UserData from './components/UserData/UserData';
 import Header from './components/Header/Header';
 import APropos from './components/APropos/APropos';
 import Community from './components/Community/Community';
-import AuthProvider from './providers/AuthProvider';
-import UserProvider from './providers/UserProvider';
+import Providers from './providers/Providers.comp';
 
 function App() {
 	return (
-		<AuthProvider>
-			<UserProvider>
+		<Providers>
 				<header>
 					<Header />
 				</header>
@@ -37,8 +35,7 @@ function App() {
 				<section id="apropos">
 					<APropos/>
 				</section>
-			</UserProvider>
-		</AuthProvider>
+		</Providers>
 	);
 }
 

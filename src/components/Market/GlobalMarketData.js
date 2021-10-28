@@ -15,10 +15,6 @@ const GlobalMarketData = () => {
 	useEffect(() => {
 		checkMarketplace();
 	}, []);
-
-	const [user, setUser] = useState({loggedIn: null})
-	useEffect(() => fcl.currentUser().subscribe(setUser), [])
-
 	
 	const checkMarketplace = async () => {
 
