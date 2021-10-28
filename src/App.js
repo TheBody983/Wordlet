@@ -11,9 +11,7 @@ import Providers from './providers/Providers.comp';
 function App() {
 	return (
 		<Providers>
-				<header>
-					<Header />
-				</header>
+				<Header />
 				<Accueil/>
 				<section id="marche">
 					<Market />
