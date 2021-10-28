@@ -1,18 +1,18 @@
 -----------------------------------------------TRANSACTIONS-------------------------------------------------
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/MintWOT.tx.cdc 0x1f7da62a915f01c7 1000.0`
+`flow transactions send --network testnet --signer wordlet ./cadence/WOT/transactions/mint-wot.tx.cdc 1000.0`
 > Mine 1000 WOTs via la transaction MintWOT.tx.cdc dans le compte wordlet
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/TransferWOT.tx.cdc 0x5be6fee0409b4842 1000.0`
+`flow transactions send --network testnet --signer wordlet ./cadence/WOT/transactions/transfer-wot.tx.cdc 0x5be6fee0409b4842 1000.0`
 > Transfert 1000 WOT du compte wordlet vers le compte de Lucas
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/MintWordToken.tx.cdc "yoya" "20000 lieux sous les mers" "inconnu"`
+`flow transactions send --network testnet --signer wordlet ./cadence/WordToken/transactions/mint-wordtoken.tx.cdc "yoya" "20000 lieux sous les mers"`
 > Mine un mot via la transaction MintWOT.cdc dans le compte signataire (wordlet)
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/TransferWordToken.tx.cdc 0x5be6fee0409b4842 6`
+`flow transactions send --network testnet --signer wordlet ./cadence/WordToken/transactions/transfer-wordtoken.tx.cdc 0x5be6fee0409b4842 6`
 > transfert le WordToken 6 du compte wordlet au compte de Lucas
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/ListTokenForSale.tx.cdc 7 250.0`
+`flow transactions send --network testnet --signer wordlet ./cadence/Marketplace/transactions/list-token-for-sale.tx.cdc 7 250.0`
 > met le token 7 du compte wordlet en vente pour 250 WOT
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/BuyToken.tx.cdc 0x5be6fee0409b4842 5`
@@ -32,13 +32,13 @@
 
 -----------------------------------------------SCRIPTS-------------------------------------------------
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckUserWOTBalance.script.cdc 0x1f7da62a915f01c7`
+`flow scripts execute --network testnet ./cadence/WOT/scripts/get-wot-balance.script.cdc 0x1f7da62a915f01c7`
 > Affiche le total de WOT sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckUserWordTokens.script.cdc 0x1f7da62a915f01c7`
+`flow scripts execute --network testnet ./cadence/WordToken/scripts/get-wordtoken-collection.script.cdc 0x1f7da62a915f01c7`
 > Affiche les identifiants de tous les WordTokens presents sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckWordTokenMetadata.script.cdc 0x1f7da62a915f01c7 6`
+`flow scripts execute --network testnet ./cadence/WordToken/scripts/get-wordtoken-data.script.cdc 0x1f7da62a915f01c7 6`
 > Affiche les metadonnées du WordToken 6 sur le compte Wordlet
 
 `flow scripts execute --network testnet ./cadence/scripts/CheckMarketplace.script.cdc 0x1f7da62a915f01c7`
@@ -53,7 +53,7 @@
 `flow scripts execute --network testnet ./cadence/scripts/CheckUserForgedTokens.script.cdc 0x1f7da62a915f01c7`
 > Affiche les identifiants de tous les ForgedTokens presents sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckForgedTokenMetadata.script.cdc 0x1f7da62a915f01c7 1`
+`flow scripts execute --network testnet ./cadence/scripts/CheckForgedTokenSmith.script.cdc 0x1f7da62a915f01c7 1`
 > Affiche les metadonnées du ForgedToken 1 sur le compte Wordlet
 
 -----------------------------------------------ADRESSES-------------------------------------------------
@@ -71,5 +71,7 @@ Ludovic : 0x0741eca75483b285
 
 -----------------------------------------------PROJECT-DEPLOYMENT-------------------------------------------------
 `flow project deploy --network testnet --update`
-`flow accounts update-contract ForgeContract ./cadence/contracts/ForgeContract.cdc --network testnet --signer wordlet`
-`flow accounts remove-contract ForgeContract --network testnet --signer wordlet`
+
+`flow accounts add-contract ForgedTokenContract ./cadence/contracts/ForgedTokenContract.cdc --network testnet --signer wordlet`
+`flow accounts update-contract ForgedTokenContract ./cadence/contracts/ForgedTokenContract.cdc --network testnet --signer wordlet`
+`flow accounts remove-contract ForgedTokenContract --network testnet --signer wordlet`

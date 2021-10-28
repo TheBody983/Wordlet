@@ -1,7 +1,7 @@
 import WOTContract from 0x1f7da62a915f01c7
 import FungibleToken from 0x9a0766d93b6608b7
 
-transaction {
+transaction(amount: UFix64) {
 
     let tokenMinter: &WOTContract.MinterProxy
     let tokenReceiver: &{FungibleToken.Receiver}
@@ -18,6 +18,6 @@ transaction {
     }
 
     execute {
-        self.tokenReceiver.deposit(from: <- self.tokenMinter.mintTokens(amount: 10.0))
+        self.tokenReceiver.deposit(from: <- self.tokenMinter.mintTokens(amount: amount))
     }
 }

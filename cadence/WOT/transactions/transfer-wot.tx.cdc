@@ -1,7 +1,7 @@
 import WOTContract from 0x1f7da62a915f01c7
 import FungibleToken from 0x9a0766d93b6608b7
 
-transaction {
+transaction(address: Address, amount: UFix64) {
     var temporaryVault: @FungibleToken.Vault
 
     prepare(acct: AuthAccount) {
@@ -9,11 +9,11 @@ transaction {
             .borrow<&FungibleToken.Vault>(from: WOTContract.VaultStoragePath)
             ?? panic("Impossible d'emprunter la référence au Vault du propriétaire")
         
-        self.temporaryVault <- vaultRef.withdraw(amount: 10.0)
+        self.temporaryVault <- vaultRef.withdraw(amount: amount)
     }
 
     execute {
-        let recipient = getAccount(0x1f7da62a915f01c7)
+        let recipient = getAccount(address)
 
         let receiverRef = recipient
             .getCapability(WOTContract.ReceiverPublicPath)!
