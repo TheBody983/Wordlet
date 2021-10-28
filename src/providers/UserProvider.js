@@ -7,11 +7,16 @@ const UserContext = createContext()
 
 export default function UserProvider({ children }) {
     const { user } = useAuth()
-    const { getWOTBalance } = useWOT( user )
+    const { WOTBalance, getWOTBalance, createWOTVault } = useWOT( user )
+
+    console.log("UserProvider")
+    console.log(WOTBalance)
 
     return (
         <UserContext.Provider value={{
-            getWOTBalance
+            WOTBalance,
+            getWOTBalance,
+            createWOTVault,
         }}>
             { children }
         </UserContext.Provider>

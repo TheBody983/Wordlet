@@ -21,7 +21,7 @@ const AuthCluster = () => {
 		return (
 			<div id="auth-cluster">
 				<span>{user?.addr ?? "Pas d'Adresse"} - {state}</span>
-				<button className="btn-secondary" onClick={ () => logOut }>Déconnexion</button>
+				<button className="btn-secondary" onClick={ () => logOut() }>Déconnexion</button>
 			</div>
 			)
 	} 
