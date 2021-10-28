@@ -3,60 +3,36 @@ import TokenData from './TokenData';
 import TokenForSaleData from "./TokenForSaleData";
 import * as fcl from "@onflow/fcl";
 
-import getUserTokens from "../../cadence/getUserTokens.script";
-import checkTokensForSale from "../../cadence/checkTokensForSale.script"
 import addToSellerCatalog from "../../cadence/addToSellerCatalog.tx"
 import removeFromSellerCatalog from "../../cadence/removeFromSellerCatalog.tx"
 import checkIfCataloged from "../../cadence/checkIfCataloged.script"
- 
+import { useUser } from "../../providers/UserProvider";
+
 const UserTokens = () => {
-	const [userTokens, setUserTokens] = useState(null)
-	const [userTokensSale, setUserTokensSale] = useState(null)
-
-	const fetchUserTokens = async (address) => {
-		try{
-		setUserTokensSale(await checkTokensForSale(address))
-		setUserTokens(await getUserTokens(address))
-		} 
-		catch (error) {
-		setUserTokens(null);
-
-		console.log("UserData : Pas de NFT trouvés")
-		}
-	};
-
-	const [user, setUser] = useState({loggedIn: null})
-	useEffect(() => fcl.currentUser().subscribe(setUser), [])
-
-	if(!userTokens && user.addr){
-		fetchUserTokens(user.addr);
-	}
+	const { userWordTokens, userSalelist } = useUser( )
 
 	return (
 		<>
-		<div>
-			<button className="btn-primary" onClick={() =>fetchUserTokens(user.addr)}>Actualiser</button>
-		</div>
 		{
-			userTokens &&
+			userWordTokens &&
 			<>
 			{
-				Object.keys(userTokens).map(k => {
+				Object.keys(userWordTokens).map(k => {
 				return (
-					<TokenData key={userTokens[k].tokenId} tokenId={userTokens[k]}/>       
+					<TokenData key={userWordTokens[k].tokenId} tokenId={userWordTokens[k]}/>       
 				)
 				})
 			}
 			</> 
 		}
 		{
-			userTokensSale &&
+			userSalelist &&
 			<>
 			{
-				Object.keys(userTokensSale).map(k => {
+				Object.keys(userSalelist).map(k => {
 				return (
 					<>
-					<TokenForSaleData tokenId={userTokensSale[k]}/>  
+					<TokenForSaleData key={userSalelist[k].tokenId} tokenId={userSalelist[k]}/>  
 					</>     
 				)
 				})

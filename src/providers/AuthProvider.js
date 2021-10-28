@@ -7,6 +7,7 @@ const AuthContext = createContext()
 export default function AuthProvider({ children }) {
     const [user, loggedIn, tools] = useCurrentUser()
 
+    console.debug("loggedIn?"+loggedIn)
     return (
         <AuthContext.Provider value={{
             user,

@@ -4,7 +4,6 @@ import { useUser } from "../../providers/UserProvider";
 
 const MyBalance = () => {
     const { WOTBalance, getWOTBalance, createWOTVault } = useUser()
-    console.log(WOTBalance)
     return (
     <div className="balance">
     {WOTBalance?
