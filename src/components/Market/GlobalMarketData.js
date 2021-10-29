@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import getSellerCatalog from "../../cadence/getSellerCatalog.script"
 import checkTokensForSale from "../../cadence/checkTokensForSale.script";
-import getTokenMetadata from "../../cadence/getTokenMetadata.script";
 import getTokenPrice from "../../cadence/getTokenPrice.script";
-import buyToken from "../../cadence/buyToken.tx";
 
-import * as fcl from "@onflow/fcl";
 import WordToken from "../WordToken";
 
 const GlobalMarketData = () => {
@@ -30,7 +27,7 @@ const GlobalMarketData = () => {
 
 			// Récupère les métadonnées de chaque token
 			for (const id of tokens) {
-				const decodedMetadata = await getTokenMetadata(id)
+				var decodedMetadata = {}
 				decodedMetadata["price"] = await getTokenPrice(sellerAddr, id)
 				decodedMetadata["id"] = id
                 decodedMetadata["seller"] = sellerAddr
@@ -48,7 +45,7 @@ const GlobalMarketData = () => {
 		{
 			tokensToSell.map(token => {
 				return (
-					<WordToken market tokenId={token.id}/>
+					<WordToken market key={token.id} tokenId={token.id} seller={token.seller} price={token.price}/>
 				)
 			})
 		}

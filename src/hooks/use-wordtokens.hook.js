@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import { query} from '@onflow/fcl'
 import { GET_TOKEN_DATA } from "../cadence/get-token-data.script";
 

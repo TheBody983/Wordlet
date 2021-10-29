@@ -4,7 +4,6 @@ import getTokenMetadata from "../../cadence/getTokenMetadata.script";
 import removeTokenFromSale from "../../cadence/removeTokenFromSale.tx";
 
 const TokenForSaleData = (props) => {
-let tokenId = parseInt(props.tokenId)
 
 const [nftInfo, setNftInfo] = useState(null)
 

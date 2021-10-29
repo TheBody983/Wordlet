@@ -23,6 +23,7 @@ export default function useWOT( user ) {
             })
             
         } catch (error) {
+            console.debug("Impossible de récupérer le solde de WOT de l'utilisateur")
             console.error(error)
         }
     }

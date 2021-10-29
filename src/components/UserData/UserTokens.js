@@ -1,29 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import TokenData from './TokenData';
 import WordToken from "../WordToken";
-import TokenForSaleData from "./TokenForSaleData";
-import * as fcl from "@onflow/fcl";
 
 import addToSellerCatalog from "../../cadence/addToSellerCatalog.tx"
 import removeFromSellerCatalog from "../../cadence/removeFromSellerCatalog.tx"
-import checkIfCataloged from "../../cadence/checkIfCataloged.script"
+// import checkIfCataloged from "../../cadence/checkIfCataloged.script"
 import { useUser } from "../../providers/UserProvider";
 
 const UserTokens = () => {
 	const { userWordTokens, userSalelist } = useUser( )
 
 	return (
-		<ul>
+		<>
 		{
 			userWordTokens &&
 			<>
 			{
 				Object.keys(userWordTokens).map(k => {
 				return (
-					<li>
-						<WordToken collection tokenId={userWordTokens[k]}/>
-					</li>
+						<WordToken collection key={userWordTokens[k]} tokenId={userWordTokens[k]}/>
 				)
 				})
 			}
@@ -35,14 +30,11 @@ const UserTokens = () => {
 			{
 				Object.keys(userSalelist).map(k => {
 				return (
-					<li>
 						<WordToken forSale tokenId={userSalelist[k]}/>
-						{/* <TokenForSaleData key={userSalelist[k].tokenId} tokenId={userSalelist[k]}/>   */}
-					</li>     
 				)
 				})
 			}
-			</>   
+			</>
 		}
 		
 		{
@@ -50,17 +42,17 @@ const UserTokens = () => {
 				{
 					<div>
 						<button className="btn-primary" onClick={() =>addToSellerCatalog()}>S'ajouter a la liste des vendeurs</button>
-					</div>     
+					</div>
 				}
 
 				{
 					<div>
 						<button className="btn-primary" onClick={() =>removeFromSellerCatalog()}>Se retirer de la liste des vendeurs</button>
-					</div>     
+					</div>
 				}
-			</div>   
+			</div>
 		}
-		</ul>
+		</>
 	);
 };
 

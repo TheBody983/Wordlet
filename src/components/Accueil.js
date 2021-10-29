@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import * as fcl from "@onflow/fcl"
 
 import { useAuth } from '../providers/AuthProvider';
-import { useUser } from '../providers/UserProvider';
 
 const Accueil = () => {
     const { user, loggedIn, logOut } = useAuth()

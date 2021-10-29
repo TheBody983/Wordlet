@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { query, mutate, tx } from '@onflow/fcl'
+import { query } from '@onflow/fcl'
 import { GET_USER_SALELIST } from "../cadence/get-user-salelist.script";
 import { GET_SELLER_CATALOG } from "../cadence/get-seller-catalog.script";
 
-export default function useMarket( user ) {
+export default function useMarketHook( user ) {
     const [ userSalelist, setUserSalelist ] = useState(null)
     const [ sellerCatalog, setSellerCatalog ] = useState(null)
     // const [ marketListings, setMarketListings ] = useState(null)
@@ -32,6 +32,7 @@ export default function useMarket( user ) {
         }
     }
 
+    // TODO makework
     const getSellerCatalog = async () => {
         try {
             await query({
@@ -39,7 +40,6 @@ export default function useMarket( user ) {
             })
             .then(function(data) {
                 setSellerCatalog(data)
-                console.debug(sellerCatalog)
             })
             
         } catch (error) {
@@ -47,22 +47,22 @@ export default function useMarket( user ) {
         }
     }
 
-    const getUserSalelist = async (addr) => {
-        try {
-            await query({
-                cadence: GET_USER_SALELIST,
-                args: (arg, t) => [
-                    arg(addr, t.Address)
-                ]
-            })
-            .then(function(data) {
-                setUserSalelist(data)
-            })
+    // const getUserSalelist = async (addr) => {
+    //     try {
+    //         await query({
+    //             cadence: GET_USER_SALELIST,
+    //             args: (arg, t) => [
+    //                 arg(addr, t.Address)
+    //             ]
+    //         })
+    //         .then(function(data) {
+    //             setUserSalelist(data)
+    //         })
             
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    //     } catch (error) {
+    //         console.error(error)
+    //     }
+    // }
 
     // TODO get-token-price.script
 

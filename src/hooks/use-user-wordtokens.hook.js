@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { query, mutate, tx } from '@onflow/fcl'
+import { query } from '@onflow/fcl'
 import { GET_USER_WORDTOKENS } from "../cadence/get-user-wordtokens.script";
 
 export default function useUserWordTokens( user ) {
@@ -9,7 +9,6 @@ export default function useUserWordTokens( user ) {
     useEffect( () => getUserWordTokens(), [ user ] )
 
     const getUserWordTokens = async () => {
-        console.debug(user)
         try {
             await query({
                 cadence: GET_USER_WORDTOKENS,
@@ -19,10 +18,10 @@ export default function useUserWordTokens( user ) {
             })
             .then(function(data) {
                 setUserWordTokens(data)
-                console.debug(userWordTokens)
             })
             
         } catch (error) {
+            console.debug("Impossible de récupérer le collection de l'utilisateur")
             console.error(error)
         }
     }
