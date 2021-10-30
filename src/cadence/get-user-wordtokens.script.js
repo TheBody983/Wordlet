@@ -1,7 +1,7 @@
 export const GET_USER_WORDTOKENS = `
 import WordletContract from 0xWordlet
 
-pub fun main(address: Address) : [UInt64] {
+pub fun main(address: Address) : [UInt64]? {
 
 // Voir les NFT de address
 let nftOwner = getAccount(address)  

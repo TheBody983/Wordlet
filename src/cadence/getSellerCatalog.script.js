@@ -12,7 +12,7 @@ import * as fcl from "@onflow/fcl";
 const getSellerCatalogScript = `
 import MarketplaceContract from 0x1f7da62a915f01c7
 
-pub fun main(): [Address] {
+pub fun main(): [Address]? {
 
     let wordlet = getAccount(0x1f7da62a915f01c7)
     let wordletCatalogRef = wordlet.getCapability<&{MarketplaceContract.SellerCatalog}>(/public/SellerCatalog)
