@@ -9,20 +9,22 @@ export default function useUserWordTokens( user ) {
     useEffect( () => getUserWordTokens(), [ user ] )
 
     const getUserWordTokens = async () => {
-        try {
-            await query({
-                cadence: GET_USER_WORDTOKENS,
-                args: (arg, t) => [
-                    arg(user?.addr, t.Address)
-                ]
-            })
-            .then(function(data) {
-                setUserWordTokens(data)
-            })
-            
-        } catch (error) {
-            console.debug("Impossible de récupérer le collection de l'utilisateur")
-            console.error(error)
+        if( user ){
+            try {
+                await query({
+                    cadence: GET_USER_WORDTOKENS,
+                    args: (arg, t) => [
+                        arg(user?.addr, t.Address)
+                    ]
+                })
+                .then(function(data) {
+                    setUserWordTokens(data)
+                })
+                
+            } catch (error) {
+                console.debug("Impossible de récupérer le collection de l'utilisateur")
+                console.error(error)
+            }
         }
     }
 
