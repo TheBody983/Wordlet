@@ -1,7 +1,7 @@
 import WordTokenContract from 0x1f7da62a915f01c7
 import NonFungibleToken from 0x631e88ae7f1d7c20
 
-transaction(address: Address, wordTokenID: UInt64) {
+transaction {
 
     let collection: @NonFungibleToken.Collection
 
@@ -12,18 +12,18 @@ transaction(address: Address, wordTokenID: UInt64) {
             .borrow<&WordTokenContract.Collection>(from: WordTokenContract.CollectionStoragePath)
             ?? panic("Impossible d'emprunter la référence à la Collection du propriétaire")
 
-        self.collection.deposit(token: <-collectionRef.withdraw(withdrawID: wordTokenID))
+        self.collection.deposit(token: <-collectionRef.withdraw(withdrawID: 1))
     }
 
     execute {
-        let recepteur = getAccount(address)
+        let recepteur = getAccount(0x1f7da62a915f01c7)
 
         let receiverRef = recepteur
             .getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath)
             .borrow()
             ?? panic("Impossible d'emprunter la référence receiver")
 
-        receiverRef.deposit(token: <-self.collection.withdraw(withdrawID: wordTokenID))
+        receiverRef.deposit(token: <-self.collection.withdraw(withdrawID: 1))
 
         destroy self.collection
     }

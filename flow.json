@@ -6,10 +6,10 @@
 		}
 	},
 	"contracts": {
-		"MarketplaceContract": "./cadence/Marketplace/contract/MarketplaceContract.cdc",
-		"WOTContract": "./cadence/WOT/contract/WOTContract.cdc",
-		"WordTokenContract": "./cadence/WordToken/contract/WordTokenContract.cdc",
-		"ForgedTokenContract": "./cadence/ForgedToken/contract/ForgedTokenContract.cdc"
+		"MarketplaceContract": "./cadence/contracts/MarketplaceContract.cdc",
+		"WOTContract": "./cadence/contracts/WOTContract.cdc",
+		"WordTokenContract": "./cadence/contracts/WordTokenContract.cdc",
+		"ForgedTokenContract": "./cadence/contracts/ForgedTokenContract.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",

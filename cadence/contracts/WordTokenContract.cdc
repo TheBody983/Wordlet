@@ -110,11 +110,11 @@ pub contract WordTokenContract: NonFungibleToken {
             }
         }
 
-        pub fun getSubCollection(toForgeIds: [UInt64]): @{UInt64: NonFungibleToken.NFT} {
-            var subCollection: @{UInt64: NonFungibleToken.NFT} <- {}
+        pub fun getWordTokenSubCollection(toForgeIds: [UInt64]): @{UInt64: WordTokenContract.NFT} {
+            var subCollection: @{UInt64: WordTokenContract.NFT} <- {}
             var i: UInt64 = 0
             while i < UInt64(toForgeIds.length) {
-                subCollection[i] <-! self.withdraw(withdrawID: toForgeIds[i])
+                subCollection[i] <-! self.withdraw(withdrawID: toForgeIds[i]) as! @WordTokenContract.NFT
                 i = i + 1
             }
             return <- subCollection

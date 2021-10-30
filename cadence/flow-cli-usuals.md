@@ -6,7 +6,7 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/WOT/transactions/transfer-wot.tx.cdc 0x5be6fee0409b4842 1000.0`
 > Transfert 1000 WOT du compte wordlet vers le compte de Lucas
 
-`flow transactions send --network testnet --signer wordlet ./cadence/WordToken/transactions/mint-wordtoken.tx.cdc "yoya" "20000 lieux sous les mers"`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-wordtoken.tx.cdc "yoya" "20000 lieux sous les mers"`
 > Mine un mot via la transaction MintWOT.cdc dans le compte signataire (wordlet)
 
 `flow transactions send --network testnet --signer wordlet ./cadence/WordToken/transactions/transfer-wordtoken.tx.cdc 0x5be6fee0409b4842 6`
@@ -27,18 +27,18 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/RemoveFromSellerCatalog.tx.cdc`
 > Retire le compte wordlet du catalogue des vendeurs
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/MintForgedToken.tx.cdc [20,21]`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/mint-forgedtoken.tx.cdc [5,4]`
 > Créer un ForgedToken a partir des WordTokens 20 et 21
 
 -----------------------------------------------SCRIPTS-------------------------------------------------
 
-`flow scripts execute --network testnet ./cadence/WOT/scripts/get-wot-balance.script.cdc 0x1f7da62a915f01c7`
+`flow scripts execute --network testnet ./cadence/scripts/WOT/get-wot-balance.script.cdc 0x1f7da62a915f01c7`
 > Affiche le total de WOT sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/WordToken/scripts/get-wordtoken-collection.script.cdc 0x1f7da62a915f01c7`
+`flow scripts execute --network testnet ./cadence/scripts/WordToken/get-wordtoken-collection.script.cdc 0x1f7da62a915f01c7`
 > Affiche les identifiants de tous les WordTokens presents sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/WordToken/scripts/get-wordtoken-data.script.cdc 0x1f7da62a915f01c7 6`
+`flow scripts execute --network testnet ./cadence/scripts/WordToken/get-wordtoken-data.script.cdc 0x1f7da62a915f01c7 6`
 > Affiche les metadonnées du WordToken 6 sur le compte Wordlet
 
 `flow scripts execute --network testnet ./cadence/scripts/CheckMarketplace.script.cdc 0x1f7da62a915f01c7`
@@ -50,11 +50,16 @@
 `flow scripts execute --network testnet ./cadence/scripts/CheckifCataloged.script.cdc 0x1f7da62a915f01c7`
 > Affiche si le compte wordlet est inscrit dans le catalogue
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckUserForgedTokens.script.cdc 0x1f7da62a915f01c7`
+`flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-user-forgedtokens.script.cdc 0x1f7da62a915f01c7`
 > Affiche les identifiants de tous les ForgedTokens presents sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckForgedTokenSmith.script.cdc 0x1f7da62a915f01c7 1`
+`flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-smith.script.cdc 0x1f7da62a915f01c7 1`
 > Affiche les metadonnées du ForgedToken 1 sur le compte Wordlet
+
+`flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-wt.script.cdc --arg Address:0x1f7da62a915f01c7 --arg UInt64:1`
+> Affiche les données des tokens compris dans le ForgedToken ciblé
+------------------⚠️ DEPRECATION WARNING---------------------
+
 
 -----------------------------------------------ADRESSES-------------------------------------------------
 
