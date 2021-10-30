@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useUser } from "../../providers/UserProvider";
+import { useUser } from "../providers/UserProvider";
 
 const MyBalance = () => {
     const { WOTBalance, getWOTBalance, createWOTVault } = useUser()

@@ -18,7 +18,7 @@ const WordToken = (props) => {
 	if(!display){
 		return (
 			<div >
-				<button  onClick={() =>setDisplay(true)}>WordToken #{props.tokenId}</button>    
+				<button  onClick={() =>setDisplay(true)}>WordToken #{props.tokenId}</button>
 			</div>
 		)
 	}

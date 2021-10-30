@@ -1,17 +1,17 @@
 import React from "react";
 
-import WordToken from "../WordToken";
+import WordToken from "./WordToken";
 
-import addToSellerCatalog from "../../cadence/addToSellerCatalog.tx"
-import removeFromSellerCatalog from "../../cadence/removeFromSellerCatalog.tx"
-// import checkIfCataloged from "../../cadence/checkIfCataloged.script"
-import { useUser } from "../../providers/UserProvider";
+import addToSellerCatalog from "../cadence/addToSellerCatalog.tx"
+import removeFromSellerCatalog from "../cadence/removeFromSellerCatalog.tx"
+import { useUser } from "../providers/UserProvider";
 
 const UserTokens = () => {
 	const { userWordTokens, userSalelist } = useUser( )
 
 	return (
-		<>
+
+        <section id="collection">
 		{
 			userWordTokens &&
 			<>
@@ -30,14 +30,14 @@ const UserTokens = () => {
 			{
 				Object.keys(userSalelist).map(k => {
 				return (
-						<WordToken forSale tokenId={userSalelist[k]}/>
+						<WordToken forSale key={userSalelist[k]} tokenId={userSalelist[k]}/>
 				)
 				})
 			}
 			</>
 		}
-		
 		{
+		// TODO Affichage conditionnel
 			<div className="horizontal-scroll-wrapper squares">
 				{
 					<div>
@@ -52,7 +52,8 @@ const UserTokens = () => {
 				}
 			</div>
 		}
-		</>
+            <img src="cave.png" id="mountains_front" alt=""/>
+        </section>
 	);
 };
 
