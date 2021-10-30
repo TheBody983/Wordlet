@@ -42,7 +42,5 @@ export default function useWordTokens( ) {
         }
     }
 
-
-
     return { getTokenData, transferWordToken }
 }

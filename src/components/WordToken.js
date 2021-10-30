@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 import listTokenForSale from "../cadence/listTokenForSale.tx";
-import transferWordToken from "../cadence/transferWordToken.tx";
 import buyToken from "../cadence/buyToken.tx";
 import removeTokenFromSale from "../cadence/removeTokenFromSale.tx";
 import useWordTokens from "../hooks/use-wordtokens.hook";
+import { useUser } from "../providers/UserProvider";
 
 const WordToken = (props) => {
-	const { getTokenData } = useWordTokens( )
+	const { getTokenData, transferWordToken } = useUser( )
 	const [tokenData, setTokenData] = useState({})
 	const [display, setDisplay] = useState(false)
 	

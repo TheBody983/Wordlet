@@ -10,10 +10,6 @@ const GlobalMarketData = () => {
 	const { user } = useAuth( )
 	const { tokensToSell, checkMarketplace } = useUser( user )
 
-	const refresh = async () => checkMarketplace()
-	
-	console.debug(tokensToSell)
-
 	return (
 		
 		<section id="marche">
