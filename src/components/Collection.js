@@ -2,13 +2,10 @@ import React from "react";
 
 import WordToken from "./WordToken";
 
-import addToSellerCatalog from "../cadence/addToSellerCatalog.tx"
-import removeFromSellerCatalog from "../cadence/removeFromSellerCatalog.tx"
 import { useUser } from "../providers/UserProvider";
 
 const UserTokens = () => {
-	const { userWordTokens, userSalelist } = useUser( )
-
+	const { userWordTokens, userSalelist, addToSellerCatalog, removeFromSellerCatalog, userIsSeller } = useUser( )
 	return (
 
         <section id="collection">
@@ -37,15 +34,12 @@ const UserTokens = () => {
 			</>
 		}
 		{
-		// TODO Affichage conditionnel
 			<div className="horizontal-scroll-wrapper squares">
-				{
+				{!userIsSeller ?
 					<div>
 						<button className="btn-primary" onClick={() =>addToSellerCatalog()}>S'ajouter a la liste des vendeurs</button>
 					</div>
-				}
-
-				{
+				:
 					<div>
 						<button className="btn-primary" onClick={() =>removeFromSellerCatalog()}>Se retirer de la liste des vendeurs</button>
 					</div>

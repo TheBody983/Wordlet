@@ -8,18 +8,22 @@ import { LIST_TOKEN_FOR_SALE } from "../cadence/list-token-for-sale.tx";
 import { REMOVE_TOKEN_FROM_SALE } from "../cadence/remove-token-from-sale.tx";
 import { GET_TOKEN_PRICE } from "../cadence/get-token-price.script";
 import { GET_MARKET_LISTINGS } from "../cadence/get-market-listings.script";
+import { REMOVE_FROM_SELLER_CATALOG } from "../cadence/remove-from-seller-catalog.tx";
+import { ADD_TO_SELLER_CATALOG } from "../cadence/add-to-seller-catalog.tx";
 
 export default function useMarketHook( user ) {
     const [ userSalelist, setUserSalelist ] = useState(null)
     const [ sellerCatalog, setSellerCatalog ] = useState([])
-	const [ tokensToSell, setTokensToSell ] = useState([])
-    const [ tokenPrice, setTokenPrice ] = useState(null)
     const [ marketListings, setMarketListings] = useState([])
+    const [ userIsSeller, setUserIsSeller ] = useState(null)
 
     useEffect( () => {
         getCurrentUserSalelist()
         getSellerCatalog()
         getMarketListings()
+        setUserIsSeller(sellerCatalog.includes(user?.addr))
+        console.log(sellerCatalog)
+        console.log(user?.addr)
     }, [ user ] )
 
     const getUserSalelist = async (address) => {
@@ -161,5 +165,37 @@ export default function useMarketHook( user ) {
         }
     }
 
-    return { userSalelist, getCurrentUserSalelist, sellerCatalog, setSellerCatalog, listTokenForSale, buyWordtoken, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings }
+    const addToSellerCatalog = async()=>{
+        try {
+            let transaction = await mutate({
+                cadence: ADD_TO_SELLER_CATALOG,
+                limit: 100,
+                args: (arg, t) => []
+            })
+            console.log("TxID : " + transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction Effectuée")
+        } catch (error) {
+            console.log("Transaction Echouée")
+            console.error(error)
+        }
+    }
+
+    const removeFromSellerCatalog = async()=>{
+        try {
+            let transaction = await mutate({
+                cadence: REMOVE_FROM_SELLER_CATALOG,
+                limit: 100,
+                args: (arg, t) => []
+            })
+            console.log("TxID : " + transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction Effectuée")
+        } catch (error) {
+            console.log("Transaction Echouée")
+            console.error(error)
+        }
+    }
+
+    return { userSalelist, getCurrentUserSalelist, sellerCatalog, setSellerCatalog, listTokenForSale, buyWordtoken, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller }
 }
