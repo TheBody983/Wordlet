@@ -59,7 +59,7 @@
 	"Cadence Argument Template": {
 		"prefix": "arg",
 		"body": [
-			"arg(${1:value}, t.${2:type})"
+			"arg(${1:value}, t.${2:type}),"
 		]
 	}
 }
