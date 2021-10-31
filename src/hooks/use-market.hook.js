@@ -7,20 +7,19 @@ import { BUY_WORDTOKEN } from "../cadence/buy-wordtoken.tx";
 import { LIST_TOKEN_FOR_SALE } from "../cadence/list-token-for-sale.tx";
 import { REMOVE_TOKEN_FROM_SALE } from "../cadence/remove-token-from-sale.tx";
 import { GET_TOKEN_PRICE } from "../cadence/get-token-price.script";
-
-// TODO Cleanup
-import checkTokensForSale from "../cadence/checkTokensForSale.script";
+import { GET_MARKET_LISTINGS } from "../cadence/get-market-listings.script";
 
 export default function useMarketHook( user ) {
     const [ userSalelist, setUserSalelist ] = useState(null)
     const [ sellerCatalog, setSellerCatalog ] = useState([])
 	const [ tokensToSell, setTokensToSell ] = useState([])
     const [ tokenPrice, setTokenPrice ] = useState(null)
+    const [ marketListings, setMarketListings] = useState([])
 
     useEffect( () => {
         getCurrentUserSalelist()
         getSellerCatalog()
-        checkMarketplace()
+        getMarketListings()
     }, [ user ] )
 
     const getUserSalelist = async (address) => {
@@ -64,7 +63,7 @@ export default function useMarketHook( user ) {
             })
             .then(function(data) {
                 setSellerCatalog(data)
-                checkMarketplace()
+                getMarketListings()
             })
             
         } catch (error) {
@@ -72,23 +71,21 @@ export default function useMarketHook( user ) {
         }
     }
 
-    // TODO Cleanup
-    const checkMarketplace = async ( ) => {
-        var marketplaceData = []
-        for(const sellerAddr of sellerCatalog){
-			const tokens = await checkTokensForSale(sellerAddr)
-			// Récupère les métadonnées de chaque token
-			for (const id of tokens) {
-				var decodedMetadata = {}
-                decodedMetadata["tokenPrice"] = getTokenPrice(sellerAddr, id)
-                console.debug(decodedMetadata["tokenPrice"])
-				decodedMetadata["id"] = id
-                decodedMetadata["seller"] = sellerAddr
-				marketplaceData.push(decodedMetadata);
-			}
+    const getMarketListings = async()=>{
+        try {
+            await query({
+                cadence: GET_MARKET_LISTINGS,
+                args: (arg, t) => []
+            })
+            .then(function(data) {
+                // This is the power of StackOverflow !!!
+                setMarketListings(Object.entries(data).map((e) => ( { "id": parseInt(e[0]), "seller": e[1]} )) );
+            })
+        } catch (error) {
+            console.debug("getMarketListings Failed")
+            console.error(error)
         }
-        setTokensToSell(marketplaceData);
-	};
+    }
 
     const getTokenPrice = async(address, tokenId, setTokenPrice)=>{
         try {
@@ -127,7 +124,6 @@ export default function useMarketHook( user ) {
         }
     }
 
-
     const removeTokenFromSale = async(tokenId)=>{
         try {
             let transaction = await mutate({
@@ -165,5 +161,5 @@ export default function useMarketHook( user ) {
         }
     }
 
-    return { userSalelist, getCurrentUserSalelist, sellerCatalog, setSellerCatalog, checkMarketplace, tokensToSell, listTokenForSale, buyWordtoken, removeTokenFromSale, getTokenPrice }
+    return { userSalelist, getCurrentUserSalelist, sellerCatalog, setSellerCatalog, listTokenForSale, buyWordtoken, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings }
 }

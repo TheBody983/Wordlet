@@ -8,20 +8,23 @@ import Balance from './Balance';
 
 const GlobalMarketData = () => {
 	const { user } = useAuth( )
-	const { tokensToSell, checkMarketplace } = useUser( user )
+	const { tokensToSell, checkMarketplace, marketListings, getMarketListings} = useUser( user )
+
+	console.log(marketListings)
+	console.log(tokensToSell)
 
 	return (
 		
 		<section id="marche">
 			<h2> Marché </h2>
 			<div className="market-listings">
-			{tokensToSell?.map(token => {
+			{marketListings?.map(token => {
 				return (
-					<WordToken market key={token.id} tokenId={token.id} seller={token.seller} price={token.price}/>
+					<WordToken market key={token.id} tokenId={token.id} seller={token.seller}/>
 				)
 			})
 			}
-			<button onClick={()=>checkMarketplace()}/>
+			<button onClick={()=>getMarketListings()}/>
 			</div>
 			<Balance />
 			<img src="marche.png" id="marche" alt=""/>
