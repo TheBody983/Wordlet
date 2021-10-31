@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { useAuth } from "../providers/AuthProvider";
 import { useUser } from "../providers/UserProvider";
@@ -8,10 +8,7 @@ import Balance from './Balance';
 
 const GlobalMarketData = () => {
 	const { user } = useAuth( )
-	const { tokensToSell, checkMarketplace, marketListings, getMarketListings} = useUser( user )
-
-	console.log(marketListings)
-	console.log(tokensToSell)
+	const { marketListings, getMarketListings} = useUser( user )
 
 	return (
 		

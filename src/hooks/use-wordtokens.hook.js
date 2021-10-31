@@ -1,4 +1,4 @@
-import { query, mutate, tx, transaction } from '@onflow/fcl'
+import { query, mutate, tx } from '@onflow/fcl'
 
 import { GET_TOKEN_DATA } from "../cadence/get-token-data.script";
 import { TRANSFER_WORD_TOKEN } from '../cadence/transfer-word-token.tx';

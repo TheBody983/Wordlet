@@ -23,23 +23,6 @@ export default function useMarketHook( user ) {
         getMarketListings()
         setUserIsSeller(sellerCatalog.includes(user?.addr))
     }, [ user ] )
-
-    const getUserSalelist = async (address) => {
-        try {
-            await query({
-                cadence: GET_USER_SALELIST,
-                args: (arg, t) => [
-                    arg(address, t.Address)
-                ]
-            })
-            .then(function(data) {
-                setUserSalelist(data)
-            })
-            
-        } catch (error) {
-            console.error(error)
-        }
-    }
     
     const getCurrentUserSalelist = async () => {
         try {

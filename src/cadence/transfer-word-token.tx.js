@@ -1,13 +1,3 @@
-//  transferWordToken.tx.js
-//
-//  v1
-//  Envoie une transation signée de l'utilisateur courant
-
-
-import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types"
-
-
 export const TRANSFER_WORD_TOKEN = `
 import WordletContract from 0xWordlet
 
