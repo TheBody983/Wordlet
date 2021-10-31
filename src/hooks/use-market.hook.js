@@ -22,8 +22,6 @@ export default function useMarketHook( user ) {
         getSellerCatalog()
         getMarketListings()
         setUserIsSeller(sellerCatalog.includes(user?.addr))
-        console.log(sellerCatalog)
-        console.log(user?.addr)
     }, [ user ] )
 
     const getUserSalelist = async (address) => {
