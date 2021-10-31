@@ -195,5 +195,19 @@ export default function useMarketHook( user ) {
         }
     }
 
-    return { userSalelist, getCurrentUserSalelist, sellerCatalog, setSellerCatalog, listTokenForSale, buyWordtoken, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller }
+    return { 
+        userSalelist, 
+        sellerCatalog, 
+        marketListings, 
+        userIsSeller,
+        getCurrentUserSalelist, 
+        setSellerCatalog, 
+        listTokenForSale, 
+        buyWordtoken, 
+        removeTokenFromSale, 
+        getTokenPrice, 
+        getMarketListings, 
+        addToSellerCatalog, 
+        removeFromSellerCatalog, 
+    }
 }
