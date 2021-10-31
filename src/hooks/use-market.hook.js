@@ -1,23 +1,21 @@
 import { useEffect, useState } from "react";
 
-import { query } from '@onflow/fcl'
+import { query, mutate, tx } from '@onflow/fcl'
 import { GET_USER_SALELIST } from "../cadence/get-user-salelist.script";
 import { GET_SELLER_CATALOG } from "../cadence/get-seller-catalog.script";
+import { BUY_WORDTOKEN } from "../cadence/buy-wordtoken.tx";
+import { LIST_TOKEN_FOR_SALE } from "../cadence/list-token-for-sale.tx";
+import { REMOVE_TOKEN_FROM_SALE } from "../cadence/remove-token-from-sale.tx";
+import { GET_TOKEN_PRICE } from "../cadence/get-token-price.script";
 
 // TODO Cleanup
 import checkTokensForSale from "../cadence/checkTokensForSale.script";
-import getTokenPrice from "../cadence/getTokenPrice.script";
-import listTokenForSale from "../cadence/listTokenForSale.tx";
-import buyToken from "../cadence/buyToken.tx";
-import removeTokenFromSale from "../cadence/removeTokenFromSale.tx";
-
 
 export default function useMarketHook( user ) {
     const [ userSalelist, setUserSalelist ] = useState(null)
     const [ sellerCatalog, setSellerCatalog ] = useState([])
-    // const [ marketListings, setMarketListings ] = useState(null)
-
-	const [tokensToSell, setTokensToSell] = useState([])
+	const [ tokensToSell, setTokensToSell ] = useState([])
+    const [ tokenPrice, setTokenPrice ] = useState(null)
 
     useEffect( () => {
         getCurrentUserSalelist()
@@ -25,6 +23,23 @@ export default function useMarketHook( user ) {
         checkMarketplace()
     }, [ user ] )
 
+    const getUserSalelist = async (address) => {
+        try {
+            await query({
+                cadence: GET_USER_SALELIST,
+                args: (arg, t) => [
+                    arg(address, t.Address)
+                ]
+            })
+            .then(function(data) {
+                setUserSalelist(data)
+            })
+            
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    
     const getCurrentUserSalelist = async () => {
         try {
             await query({
@@ -49,6 +64,7 @@ export default function useMarketHook( user ) {
             })
             .then(function(data) {
                 setSellerCatalog(data)
+                checkMarketplace()
             })
             
         } catch (error) {
@@ -60,22 +76,94 @@ export default function useMarketHook( user ) {
     const checkMarketplace = async ( ) => {
         var marketplaceData = []
         for(const sellerAddr of sellerCatalog){
-
-			// Récupère les IDs des tokens à vendre sur le compte wordlet
 			const tokens = await checkTokensForSale(sellerAddr)
-
 			// Récupère les métadonnées de chaque token
 			for (const id of tokens) {
 				var decodedMetadata = {}
-				decodedMetadata["price"] = await getTokenPrice(sellerAddr, id)
+                decodedMetadata["tokenPrice"] = getTokenPrice(sellerAddr, id)
+                console.debug(decodedMetadata["tokenPrice"])
 				decodedMetadata["id"] = id
                 decodedMetadata["seller"] = sellerAddr
 				marketplaceData.push(decodedMetadata);
 			}
         }
         setTokensToSell(marketplaceData);
-
 	};
 
-    return { userSalelist, getCurrentUserSalelist, sellerCatalog, setSellerCatalog, checkMarketplace, tokensToSell, listTokenForSale, buyToken, removeTokenFromSale }
+    const getTokenPrice = async(address, tokenId, setTokenPrice)=>{
+        try {
+            await query({
+                cadence: GET_TOKEN_PRICE,
+                args: (arg, t) => [
+                    arg(address, t.Address),
+                    arg(tokenId, t.UInt64)
+                ]
+            })
+            .then(function(data) {
+                setTokenPrice(data)
+            })
+        } catch (error) {
+            console.debug("getTokenPrice Failed")
+            console.error(error)
+        }
+    }
+
+    const buyWordtoken = async(tokenId, address)=>{
+        try {
+            let transaction = await mutate({
+                cadence: BUY_WORDTOKEN,
+                limit: 100,
+                args: (arg, t) => [
+                    arg(tokenId, t.UInt64),
+                    arg(address, t.Address)
+                ]
+            })
+            console.log("TxID : " + transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction Effectuée")
+        } catch (error) {
+            console.log("Transaction Echouée")
+            console.error(error)
+        }
+    }
+
+
+    const removeTokenFromSale = async(tokenId)=>{
+        try {
+            let transaction = await mutate({
+                cadence: REMOVE_TOKEN_FROM_SALE,
+                limit: 100,
+                args: (arg, t) => [
+                    arg(tokenId, t.UInt64)
+                ]
+            })
+            console.log("TxID : " + transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction Effectuée")
+        } catch (error) {
+            console.log("Transaction Echouée")
+            console.error(error)
+        }
+    }
+
+    const listTokenForSale = async(tokenId, price)=>{
+        try {
+            let transaction = await mutate({
+                cadence: LIST_TOKEN_FOR_SALE,
+                limit: 100,
+                args: (arg, t) => [
+                    arg(tokenId, t.UInt64),
+                    arg(price, t.UFix64)
+                ]
+            })
+            console.log("TxID : " + transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction Effectuée")
+        } catch (error) {
+            console.log("Transaction Echouée")
+            console.error(error)
+        }
+    }
+
+    return { userSalelist, getCurrentUserSalelist, sellerCatalog, setSellerCatalog, checkMarketplace, tokensToSell, listTokenForSale, buyWordtoken, removeTokenFromSale, getTokenPrice }
 }
