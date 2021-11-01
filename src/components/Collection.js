@@ -5,10 +5,11 @@ import WordToken from "./WordToken";
 import { useUser } from "../providers/UserProvider";
 
 const UserTokens = () => {
-	const { userWordTokens, userSalelist, addToSellerCatalog, removeFromSellerCatalog, userIsSeller } = useUser( )
+	const { getUserWordTokens, userWordTokens, userSalelist, addToSellerCatalog, removeFromSellerCatalog, userIsSeller } = useUser( )
 	return (
 
         <section id="collection">
+		<button onClick={() => getUserWordTokens()}> Actualiser </button>
 		{
 			userWordTokens &&
 			<>
