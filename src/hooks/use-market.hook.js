@@ -48,6 +48,7 @@ export default function useMarketHook( user ) {
             })
             .then(function(data) {
                 setSellerCatalog(data)
+                setUserIsSeller(sellerCatalog.includes(user?.addr))
                 getMarketListings()
             })
             
