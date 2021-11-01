@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../providers/AuthProvider";
 
 import { useUser } from "../providers/UserProvider";
 
 const WordToken = (props) => {
+	const { user } = useAuth( )
 	const { getTokenData, transferWordToken, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice } = useUser( )
 	const [tokenData, setTokenData] = useState({})
 	const [display, setDisplay] = useState(false)
@@ -10,7 +12,7 @@ const WordToken = (props) => {
 	
 	useEffect(() => {
 		getTokenData(setTokenData, props.tokenId)
-		getTokenPrice(props.seller, props.tokenId, setTokenPrice)
+		getTokenPrice(props.seller?props.seller:user?.addr, props.tokenId, setTokenPrice)
 	}, [ display ])
 
 	if(!display){
@@ -58,6 +60,7 @@ const WordToken = (props) => {
 			<>
 			<div>
 				<label>Prix : </label>
+				<p>{tokenPrice} WOT</p>
 				<button className="btn-primary" onClick={() => removeTokenFromSale(props.tokenId)}>Retirer de la vente</button> 
 			</div>
 			</>
