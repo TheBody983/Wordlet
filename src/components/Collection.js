@@ -24,6 +24,7 @@ const UserTokens = () => {
 		{
 			userSalelist &&
 			<>
+			<p>Mes Tokens en vente :</p>
 			{
 				Object.keys(userSalelist).map(k => {
 				return (
