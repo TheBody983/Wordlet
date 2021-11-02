@@ -1,38 +1,38 @@
-import WordletContract from 0x1f7da62a915f01c7
-import WOToken from 0x1f7da62a915f01c7
+import WOTContract, WordTokenContract from 0x1f7da62a915f01c7
+import FungibleToken from 0x9a0766d93b6608b7
 
-pub contract MarketplaceContract {
+pub contract MarketplaceContract002 {
     pub event ForSale(id: UInt64, price: UFix64)
     pub event PriceChanged(id: UInt64, newPrice: UFix64)
     pub event TokenPurchased(id: UInt64, price: UFix64)
     pub event SaleWithdrawn(id: UInt64)
 
     pub resource interface SalePublic {
-        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordletContract.NFTReceiver}, buyTokens: @WOToken.Vault)
+        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @WOTContract.Vault)
         pub fun idPrice(tokenID: UInt64): UFix64?
         pub fun getIDs(): [UInt64]
     }
 
     pub resource SaleCollection: SalePublic {
-        pub var forSale: @{UInt64: WordletContract.NFT}
+        pub var forSale: @{UInt64: WordTokenContract.NFT}
 
         pub var prices: {UInt64: UFix64}
 
-        access(account) let ownerVault: Capability<&AnyResource{WOToken.Receiver}>
+        access(account) let ownerVault: Capability<&AnyResource{FungibleToken.Receiver}>
 
-        init (vault: Capability<&AnyResource{WOToken.Receiver}>) {
+        init (vault: Capability<&AnyResource{FungibleToken.Receiver}>) {
             self.forSale <- {}
             self.ownerVault = vault
             self.prices = {}
         }
 
-        pub fun withdraw(tokenID: UInt64): @WordletContract.NFT {
+        pub fun withdraw(tokenID: UInt64): @WordTokenContract.NFT {
             self.prices.remove(key: tokenID)
             let token <- self.forSale.remove(key: tokenID) ?? panic("missing NFT")
             return <-token
         }
 
-        pub fun listForSale(token: @WordletContract.NFT, price: UFix64) {
+        pub fun listForSale(token: @WordTokenContract.NFT, price: UFix64) {
             let id = token.id
 
             self.prices[id] = price
@@ -49,7 +49,7 @@ pub contract MarketplaceContract {
             emit PriceChanged(id: tokenID, newPrice: newPrice)
         }
 
-        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordletContract.NFTReceiver}, buyTokens: @WOToken.Vault) {
+        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @WOTContract.Vault) {
             pre {
                 self.forSale[tokenID] != nil && self.prices[tokenID] != nil:
                     "No token matching this ID for sale!"
@@ -65,13 +65,6 @@ pub contract MarketplaceContract {
                 ?? panic("Could not borrow reference to owner token vault")
             
             vaultRef.deposit(from: <-buyTokens)
-
-            let wordlet = getAccount(0x1f7da62a915f01c7)!
-            let cap = wordlet.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)!
-            let metadataHarvester = cap.borrow()!
-
-            let metadata = metadataHarvester.getMetadata(id: tokenID)
-            recipient.deposit(token: <-self.withdraw(tokenID: tokenID), metadata: metadata)
 
             emit TokenPurchased(id: tokenID, price: price)
         }
@@ -89,7 +82,7 @@ pub contract MarketplaceContract {
         }
     }
 
-    pub fun createSaleCollection(ownerVault: Capability<&AnyResource{WOToken.Receiver}>): @SaleCollection {
+    pub fun createSaleCollection(ownerVault: Capability<&AnyResource{FungibleToken.Receiver}>): @SaleCollection {
         return <- create SaleCollection(vault: ownerVault)
     }
 
@@ -143,8 +136,8 @@ pub contract MarketplaceContract {
 
     init() {
 
-        self.account.save(<-self.createSellerList(), to: /storage/SellerList)
-        self.account.link<&{SellerCatalog}>(/public/SellerCatalog, target: /storage/SellerList)
+        self.account.save(<-self.createSellerList(), to: /storage/SellerList002)
+        self.account.link<&{SellerCatalog}>(/public/SellerCatalog002, target: /storage/SellerList002)
 
     }
 }

@@ -6,7 +6,7 @@
 		}
 	},
 	"contracts": {
-		"MarketplaceContract": "./cadence/contracts/MarketplaceContract.cdc",
+		"MarketplaceContract002": "./cadence/contracts/MarketplaceContract002.cdc",
 		"WOTContract": "./cadence/contracts/WOTContract.cdc",
 		"WordTokenContract": "./cadence/contracts/WordTokenContract.cdc",
 		"ForgedTokenContract": "./cadence/contracts/ForgedTokenContract.cdc"
@@ -35,10 +35,10 @@
 	},
 	"deployments": {
 		"emulator": {
-			"emulator-account": ["MarketplaceContract", "WOTContract", "WordTokenContract", "ForgedTokenContract"]
+			"emulator-account": ["MarketplaceContract002", "WOTContract", "WordTokenContract", "ForgedTokenContract"]
 		},
 		"testnet": {
-			"wordlet": ["MarketplaceContract", "WOTContract", "WordTokenContract", "ForgedTokenContract"]
+			"wordlet": ["MarketplaceContract002", "WOTContract", "WordTokenContract", "ForgedTokenContract"]
 		}
 	}
 }

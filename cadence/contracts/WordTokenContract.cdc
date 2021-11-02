@@ -57,7 +57,6 @@ pub contract WordTokenContract: NonFungibleToken {
                     "Impossible d'emprunter le Référence au WordToken: l'ID de la Référence retournée est incorrect"
             }
         }
-
     }
 
     // NFT - Une Collection est soumise aux Interfaces
