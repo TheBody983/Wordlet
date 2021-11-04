@@ -1,16 +1,4 @@
-// 	buyToken.tx.js
-//	
-// 	v1
-//  Permet d'acheter un token placé en paramètre
-
-
-
-import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types";
-
-
-
-const buyTokenTx=`
+export const BUY_WORDTOKEN=`
 import WordletContract from 0xWordlet
 import WOToken from 0xWOToken
 import MarketplaceContract from 0xMarketPlace
@@ -49,26 +37,3 @@ transaction (tokenId: UInt64, sellerAddress: Address){
 	}
 }
 `
-
-
-
-const buyToken = async (tokenId, address) => {
-	const txId = await fcl
-	.send([
-	fcl.proposer(fcl.authz),
-	fcl.payer(fcl.authz),
-	fcl.authorizations([fcl.authz]),
-	fcl.limit(100),
-	fcl.args([
-		fcl.arg(tokenId, t.UInt64),
-		fcl.arg(address, t.Address)
-	]),
-	fcl.transaction(buyTokenTx),      
-	])
-	await fcl.decode(txId);
-	console.log(txId)
-}
-
-
-
-export default buyToken;

@@ -8,22 +8,25 @@ import { CREATE_WOT_VAULT } from '../cadence/create-wot-vault.tx';
 export default function useWOT( user ) {
     const [WOTBalance, setWOTBalance] = useState(null)
 
-    useEffect( () => getWOTBalance())
+    useEffect( () => getWOTBalance(), [ user ])
 
     const getWOTBalance = async () => {
-        try {
-            await query({
-                cadence: GET_WOT_BALANCE,
-                args: (arg, t) => [
-                    arg(user?.addr, t.Address)
-                ]
-            })
-            .then(function(data) {
-                setWOTBalance(JSON.parse(data))
-            })
-            
-        } catch (error) {
-            console.error(error)
+        if(user){
+            try {
+                await query({
+                    cadence: GET_WOT_BALANCE,
+                    args: (arg, t) => [
+                        arg(user?.addr, t.Address)
+                    ]
+                })
+                .then(function(data) {
+                    setWOTBalance(JSON.parse(data))
+                })
+                
+            } catch (error) {
+                console.debug("Impossible de récupérer le solde de WOT de l'utilisateur")
+                console.error(error)
+            }
         }
     }
 

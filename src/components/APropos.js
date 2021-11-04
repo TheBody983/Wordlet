@@ -1,5 +1,7 @@
 import React from "react";
 
+// TODO Refaire le texte
+
 const APropos = () => {
     return (
 		<section id="apropos">

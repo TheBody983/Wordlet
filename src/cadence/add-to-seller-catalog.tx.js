@@ -1,19 +1,5 @@
-//  template.tx.js
-//
-//  v1
-//  Envoie une transation signée de l'utilisateur courant
-
-
-import * as fcl from "@onflow/fcl";
-
-
-
-const transaction = `
+export const ADD_TO_SELLER_CATALOG = `
 import WOToken, WordletContract, MarketplaceContract from 0x1f7da62a915f01c7
-
-/*
- Ajoute le signataire au catalogue des vendeurs
- */
 
 transaction (){
 
@@ -43,30 +29,3 @@ transaction (){
     }
 }
 `
-
-
-
-const sendTransaction = async () => {
-    var decoded
-    var txId
-    try {                                                                                                                                                                                                                                                                                                                        
-        // Envoie une transaction placée en paramètre 
-        txId = await fcl
-        .send([
-            fcl.proposer(fcl.authz),
-            fcl.payer(fcl.authz),
-            fcl.authorizations([fcl.authz]),
-            fcl.limit(50),
-            fcl.transaction(transaction)
-        ])
-        decoded = await fcl.decode(txId)
-    }
-    catch(error){
-        console.error(error)
-    }
-    console.log(decoded)
-}
-
-
-
-export default sendTransaction;

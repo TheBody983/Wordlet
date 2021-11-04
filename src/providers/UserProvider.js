@@ -12,9 +12,10 @@ const UserContext = createContext()
 export default function UserProvider({ children }) {
     const { user } = useAuth()
     const { WOTBalance, getWOTBalance, createWOTVault } = useWOT( user )
-    const { getTokenTokenData } = useUserWordTokens( )
+    const { getTokenData, transferWordToken } = useWordTokens( )
     const { userWordTokens, getUserWordTokens } = useUserWordTokens( user )
-    const { userSalelist, getCurrentUserSalelist } = useMarket( user )
+    const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user )
+
 
     return (
         <UserContext.Provider value={{
@@ -23,9 +24,20 @@ export default function UserProvider({ children }) {
             createWOTVault,
             userWordTokens,
             getUserWordTokens,
+            getTokenData,
             userSalelist,
             getCurrentUserSalelist,
-            getTokenTokenData,
+            transferWordToken,
+            buyWordtoken,
+            listTokenForSale,
+            removeTokenFromSale,
+            getTokenPrice,
+            marketListings, 
+            getMarketListings,
+            addToSellerCatalog,
+            removeFromSellerCatalog,
+            userIsSeller
+
         }}>
             { children }
         </UserContext.Provider>

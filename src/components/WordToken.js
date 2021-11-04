@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../providers/AuthProvider";
 
-import listTokenForSale from "../cadence/listTokenForSale.tx";
-import transferWordToken from "../cadence/transferWordToken.tx";
-import buyToken from "../cadence/buyToken.tx";
-import removeTokenFromSale from "../cadence/removeTokenFromSale.tx";
-import useWordTokens from "../hooks/use-wordtokens.hook";
+import { useUser } from "../providers/UserProvider";
 
 const WordToken = (props) => {
-	const { getTokenData } = useWordTokens( )
+	const { user } = useAuth( )
+	const { getTokenData, transferWordToken, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice } = useUser( )
 	const [tokenData, setTokenData] = useState({})
 	const [display, setDisplay] = useState(false)
+	const [tokenPrice, setTokenPrice] = useState(null)
 	
 	useEffect(() => {
 		getTokenData(setTokenData, props.tokenId)
+		getTokenPrice(props.seller?props.seller:user?.addr, props.tokenId, setTokenPrice)
 	}, [ display ])
 
 	if(!display){
 		return (
 			<div >
-				<button  onClick={() =>setDisplay(true)}>WordToken #{props.tokenId}</button>    
+				<button  onClick={() =>setDisplay(true)}>WordToken #{props.tokenId}</button>
 			</div>
 		)
 	}
@@ -49,17 +49,18 @@ const WordToken = (props) => {
 			<>
 			<div>
 				<h4>Price</h4>
-				<p>{props.price} WOT</p>
+				<p>{tokenPrice} WOT</p>
 			</div>
 			<div>
 				<p>Seller: {props.seller}</p>
-				<button onClick={() => buyToken(props.id, props.seller)}>Acheter</button>
+				<button onClick={() => buyWordtoken(props.tokenId, props.seller)}>Acheter</button>
 			</div>
 			</>
 			} {props.forSale &&
 			<>
 			<div>
 				<label>Prix : </label>
+				<p>{tokenPrice} WOT</p>
 				<button className="btn-primary" onClick={() => removeTokenFromSale(props.tokenId)}>Retirer de la vente</button> 
 			</div>
 			</>

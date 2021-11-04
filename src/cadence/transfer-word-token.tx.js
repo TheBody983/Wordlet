@@ -1,14 +1,4 @@
-//  transferWordToken.tx.js
-//
-//  v1
-//  Envoie une transation signée de l'utilisateur courant
-
-
-import * as fcl from "@onflow/fcl";
-import * as t from "@onflow/types"
-
-
-const transaction = `
+export const TRANSFER_WORD_TOKEN = `
 import WordletContract from 0xWordlet
 
 /*
@@ -49,29 +39,3 @@ transaction (address: Address, tokenId: UInt64){
 
 }
 `
-
-
-
-const sendTransaction = async (address, tokenId) => {
-    var decoded
-    var txId
-                                                                                                                                                                                                                                                                                                                    
-    // Envoie une transaction placée en paramètre 
-    txId = await fcl
-    .send([
-        fcl.proposer(fcl.authz),
-        fcl.payer(fcl.authz),
-        fcl.authorizations([fcl.authz]),
-        fcl.limit(50),
-        fcl.transaction(transaction),
-        fcl.args([
-            fcl.arg(address, t.Address),
-            fcl.arg(tokenId, t.UInt64)
-        ]),
-    ])
-    decoded = await fcl.decode(txId)
-
-    console.log(decoded)
-}
-
-export default sendTransaction;
