@@ -11,7 +11,7 @@ const WordToken = (props) => {
 	const [tokenPrice, setTokenPrice] = useState(null)
 	
 	useEffect(() => {
-		getTokenData(setTokenData, props.tokenId)
+		getTokenData(setTokenData, user?.addr, props.tokenId)
 		getTokenPrice(props.seller?props.seller:user?.addr, props.tokenId, setTokenPrice)
 	}, [ display ])
 
@@ -27,10 +27,9 @@ const WordToken = (props) => {
 		<div className="card" key={props.tokenId}>
 			{tokenData &&
 			<div>
-				<p key="mot">Mot: {tokenData["mot"]}</p>
-				<p key="tokenId">Token #{props.tokenId}</p>
-				<p key="type">Type: {tokenData["type"]}</p>
-				<p key="source">Source: {tokenData["source"]}</p>
+				<p key="mot">Mot: {tokenData.word}</p>
+				<p key="tokenId">Token: #{props.tokenId}</p>
+				<p key="collection">Collection: {tokenData.collection}</p>
 			</div>
 			} {props.collection &&
 			<>
