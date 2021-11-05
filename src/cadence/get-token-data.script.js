@@ -1,13 +1,30 @@
 export const GET_TOKEN_DATA=`
-import WordletContract from 0xWordlet
+import WordTokenContract from 0x1f7da62a915f01c7
+import NonFungibleToken from 0x631e88ae7f1d7c20
 
-pub fun main(id: UInt64) : {String : String} {
-    let nftOwner = getAccount(0x1f7da62a915f01c7)  
-    let capability = nftOwner.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)
 
-    let receiverRef = capability.borrow()
-        ?? panic("Could not borrow the receiver reference")
 
-    return receiverRef.getMetadata(id: id)
+pub fun main(address: Address, wordTokenID: UInt64): WordTokenData? {
+
+    let owner = getAccount(0x1f7da62a915f01c7)
+    if let ref = owner.getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath).borrow() {
+        if let token = ref.borrowWordToken(id: 1) {
+            return WordTokenData(id: token.id, word: token.word, collection: token.collection)
+        }
+    }
+
+    return nil
+}
+
+pub struct WordTokenData {
+    pub let id: UInt64
+    pub let word: String
+    pub let collection: String
+
+    init(id: UInt64, word: String, collection: String) {
+        self.id = id
+        self.word = word
+        self.collection = collection
+    }
 }
 `

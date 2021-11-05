@@ -1,5 +1,5 @@
 export const GET_USER_SALELIST=`
-import MarketplaceContract from 0xMarketPlace
+import MarketplaceContract from 0xWordlet
 
 pub fun main(address: Address): [UInt64] {
     let account = getAccount(address)

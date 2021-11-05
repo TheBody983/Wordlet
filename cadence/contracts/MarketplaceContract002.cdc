@@ -7,6 +7,11 @@ pub contract MarketplaceContract002 {
     pub event TokenPurchased(id: UInt64, price: UFix64)
     pub event SaleWithdrawn(id: UInt64)
 
+    pub let SaleCollectionStoragePath: StoragePath
+    pub let SaleCollectionPublicPath: PublicPath
+    pub let SellerListStoragePath: StoragePath
+    pub let SellerListPublicPath: PublicPath
+
     pub resource interface SalePublic {
         pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @WOTContract.Vault)
         pub fun idPrice(tokenID: UInt64): UFix64?
@@ -135,9 +140,18 @@ pub contract MarketplaceContract002 {
     }
 
     init() {
+        // Path Setting
+        self.SaleCollectionStoragePath = /storage/WordletSaleCollection
+        self.SaleCollectionPublicPath = /public/WordletSaleCollection
+        self.SellerListStoragePath = /storage/WordletSellerList
+        self.SellerListPublicPath = /public/WordletSellerList
 
-        self.account.save(<-self.createSellerList(), to: /storage/SellerList002)
-        self.account.link<&{SellerCatalog}>(/public/SellerCatalog002, target: /storage/SellerList002)
+        let receiver = self.account.getCapability<&{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
+        self.account.save(<-self.createSaleCollection(ownerVault: receiver), to: self.SaleCollectionStoragePath)
+        self.account.link<&{SellerCatalog}>(self.SaleCollectionPublicPath, target: self.SaleCollectionStoragePath)
+
+        self.account.save(<-self.createSellerList(), to: self.SellerListStoragePath)
+        self.account.link<&{SellerCatalog}>(self.SellerListPublicPath, target: self.SellerListStoragePath)
 
     }
 }

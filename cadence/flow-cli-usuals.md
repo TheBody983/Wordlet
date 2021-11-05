@@ -1,18 +1,18 @@
 -----------------------------------------------TRANSACTIONS-------------------------------------------------
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/General/setup-account.tx.cdc`
-> Setup le compte signataire (WordToken)
+> Setup le compte signataire (WOT, WordToken, ForgedToken, Marketplace)
 
 `flow transactions send --network testnet --signer wordlet ./cadence/WOT/transactions/mint-wot.tx.cdc 1000.0`
 > Mine 1000 WOTs via la transaction MintWOT.tx.cdc dans le compte wordlet
 
-`flow transactions send --network testnet --signer wordlet ./cadence/WOT/transactions/transfer-wot.tx.cdc 0x5be6fee0409b4842 1000.0`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/WOT/transfer-wot.tx.cdc 0x5be6fee0409b4842 1000.0`
 > Transfert 1000 WOT du compte wordlet vers le compte de Lucas
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-wordtoken.tx.cdc "yoya" "20000 lieux sous les mers"`
-> Mine un mot via la transaction MintWOT.cdc dans le compte signataire (wordlet)
+> Mine un WordToken via la transaction MintWOT.cdc dans le compte signataire (wordlet)
 
-`flow transactions send --network testnet --signer wordlet ./cadence/WordToken/transactions/transfer-wordtoken.tx.cdc 0x5be6fee0409b4842 6`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/transfer-wordtoken.tx.cdc 0x5be6fee0409b4842 6`
 > transfert le WordToken 6 du compte wordlet au compte de Lucas
 
 `flow transactions send --network testnet --signer wordlet ./cadence/Marketplace/transactions/list-token-for-sale.tx.cdc 7 250.0`

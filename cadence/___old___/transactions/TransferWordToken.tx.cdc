@@ -13,7 +13,7 @@ transaction (address: Address, tokenId: UInt64){
 
         self.collection <- WordletContract.createEmptyCollection()
 
-        let collectionRef = account.borrow<&WordletContract.Collection>(from: /storage/NFTCollection)
+        let collectionRef = account.borrow<&WordletContract.Collection>(from: WordletContract.CollectionStoragePath)
             ?? panic("Impossible d'emprunter la référence à la Collection du propriétaire")
 
         self.metadata = collectionRef.getMetadata(id: tokenId)
@@ -25,7 +25,7 @@ transaction (address: Address, tokenId: UInt64){
 
         let recepteur = getAccount(address)
 
-        let receiverRef = recepteur.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)
+        let receiverRef = recepteur.getCapability<&{WordletContract.NFTReceiver}>(WordletContract.CollectionPublicPath)
             .borrow()
             ?? panic("Impossible d'emprunter la référence Receiver")
 

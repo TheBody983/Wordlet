@@ -43,15 +43,15 @@ transaction {
             account.link<&ForgedTokenContract.Collection{ForgedTokenContract.ForgedTokenCollectionPublic}>(ForgedTokenContract.CollectionPublicPath, target: ForgedTokenContract.CollectionStoragePath)
         }
 
-        //SETUP MARKETPLACE v1
+        //SETUP MARKETPLACE v2
 
-        if(account.borrow<&MarketplaceContract002.SaleCollection>(from: /storage/NFTSale002) == nil){
+        if(account.borrow<&MarketplaceContract002.SaleCollection>(from: MarketplaceContract002.SaleCollectionStoragePath) == nil){
             let receiver = account.getCapability<&{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
-            account.save<@MarketplaceContract002.SaleCollection>(<-MarketplaceContract002.createSaleCollection(ownerVault: receiver), to: /storage/NFTSale002)
+            account.save<@MarketplaceContract002.SaleCollection>(<-MarketplaceContract002.createSaleCollection(ownerVault: receiver), to: MarketplaceContract002.SaleCollectionStoragePath)
         }
 
-        if(!account.getCapability<&MarketplaceContract002.SaleCollection{MarketplaceContract002.SalePublic}>(/public/NFTSale002).check()){
-            account.link<&MarketplaceContract002.SaleCollection{MarketplaceContract002.SalePublic}>(/public/NFTSale002, target: /storage/NFTSale002)
+        if(!account.getCapability<&MarketplaceContract002.SaleCollection{MarketplaceContract002.SalePublic}>(MarketplaceContract002.SaleCollectionPublicPath).check()){
+            account.link<&MarketplaceContract002.SaleCollection{MarketplaceContract002.SalePublic}>(MarketplaceContract002.SaleCollectionPublicPath, target: MarketplaceContract002.SaleCollectionStoragePath)
         }
 
 

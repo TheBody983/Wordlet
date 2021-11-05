@@ -1,7 +1,7 @@
 export const BUY_WORDTOKEN=`
 import WordletContract from 0xWordlet
-import WOToken from 0xWOToken
-import MarketplaceContract from 0xMarketPlace
+import WOToken from 0xWordlet
+import MarketplaceContract from 0xWordlet
 
 transaction (tokenId: UInt64, sellerAddress: Address){
 

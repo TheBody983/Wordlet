@@ -1,5 +1,5 @@
 export const GET_TOKEN_PRICE=`
-import MarketplaceContract from 0xMarketPlace
+import MarketplaceContract from 0xWordlet
 
 pub fun main(sellerAddr: Address, id: UInt64): UFix64? {
     // Récupère le compte vendeur
