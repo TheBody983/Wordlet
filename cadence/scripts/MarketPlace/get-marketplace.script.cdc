@@ -1,11 +1,9 @@
-import MarketplaceContract from 0x1f7da62a915f01c7
+import MarketplaceContract002 from 0x1f7da62a915f01c7
 
-pub fun main(UserAddr: Address): [UInt64] {
+pub fun main(address: Address) : [UInt64]? {
+    let owner = getAccount(address)
+    let ref = owner.getCapability<&{MarketplaceContract002.SalePublic}>(MarketplaceContract002.SaleCollectionPublicPath).borrow()
+        ?? panic("Could not borrow account nft sale collection reference")
 
-    let account1 = getAccount(UserAddr)
-    let acct1saleRef = account1.getCapability<&AnyResource{MarketplaceContract.SalePublic}>(/public/NFTSale)
-        .borrow()
-        ?? panic("Could not borrow acct1 nft sale reference")
-
-    return acct1saleRef.getIDs()
+    return ref.getIDs()
 }

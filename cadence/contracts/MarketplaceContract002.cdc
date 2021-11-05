@@ -1,5 +1,7 @@
 import WOTContract, WordTokenContract from 0x1f7da62a915f01c7
 import FungibleToken from 0x9a0766d93b6608b7
+import NonFungibleToken from 0x631e88ae7f1d7c20
+
 
 pub contract MarketplaceContract002 {
     pub event ForSale(id: UInt64, price: UFix64)
@@ -19,7 +21,7 @@ pub contract MarketplaceContract002 {
     }
 
     pub resource SaleCollection: SalePublic {
-        pub var forSale: @{UInt64: WordTokenContract.NFT}
+        pub var forSale: @{UInt64: NonFungibleToken.NFT}
 
         pub var prices: {UInt64: UFix64}
 
@@ -31,13 +33,13 @@ pub contract MarketplaceContract002 {
             self.prices = {}
         }
 
-        pub fun withdraw(tokenID: UInt64): @WordTokenContract.NFT {
+        pub fun withdraw(tokenID: UInt64): @NonFungibleToken.NFT {
             self.prices.remove(key: tokenID)
             let token <- self.forSale.remove(key: tokenID) ?? panic("missing NFT")
             return <-token
         }
 
-        pub fun listForSale(token: @WordTokenContract.NFT, price: UFix64) {
+        pub fun listForSale(token: @NonFungibleToken.NFT, price: UFix64) {
             let id = token.id
 
             self.prices[id] = price
@@ -148,10 +150,10 @@ pub contract MarketplaceContract002 {
 
         let receiver = self.account.getCapability<&{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
         self.account.save(<-self.createSaleCollection(ownerVault: receiver), to: self.SaleCollectionStoragePath)
-        self.account.link<&{SellerCatalog}>(self.SaleCollectionPublicPath, target: self.SaleCollectionStoragePath)
+        self.account.link<&SaleCollection{SalePublic}>(self.SaleCollectionPublicPath, target: self.SaleCollectionStoragePath)
 
         self.account.save(<-self.createSellerList(), to: self.SellerListStoragePath)
-        self.account.link<&{SellerCatalog}>(self.SellerListPublicPath, target: self.SellerListStoragePath)
+        self.account.link<&SellerList{SellerCatalog}>(self.SellerListPublicPath, target: self.SellerListStoragePath)
 
     }
 }

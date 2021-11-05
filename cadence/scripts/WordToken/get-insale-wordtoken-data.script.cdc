@@ -1,10 +1,9 @@
-export const GET_TOKEN_DATA=`
-import WordTokenContract from 0x1f7da62a915f01c7
+import WordTokenContract, MarketplaceContract002 from 0x1f7da62a915f01c7
 
 pub fun main(address: Address, wordTokenID: UInt64): WordTokenData? {
 
     let owner = getAccount(address)
-    if let ref = owner.getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath).borrow() {
+    if let ref = owner.getCapability<&{MarketplaceContract002.SalePublic}>(MarketplaceContract002.SaleCollectionPublicPath).borrow() {
         if let token = ref.borrowWordToken(id: wordTokenID) {
             return WordTokenData(id: token.id, word: token.word, collection: token.collection)
         }
@@ -24,4 +23,3 @@ pub struct WordTokenData {
         self.collection = collection
     }
 }
-`

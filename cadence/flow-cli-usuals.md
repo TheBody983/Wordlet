@@ -15,7 +15,7 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/transfer-wordtoken.tx.cdc 0x5be6fee0409b4842 6`
 > transfert le WordToken 6 du compte wordlet au compte de Lucas
 
-`flow transactions send --network testnet --signer wordlet ./cadence/Marketplace/transactions/list-token-for-sale.tx.cdc 7 250.0`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/Marketplace/list-token-for-sale.tx.cdc 7 250.0`
 > met le token 7 du compte wordlet en vente pour 250 WOT
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/BuyToken.tx.cdc 0x5be6fee0409b4842 5`
@@ -44,7 +44,7 @@
 `flow scripts execute --network testnet ./cadence/scripts/WordToken/get-wordtoken-data.script.cdc 0x1f7da62a915f01c7 6`
 > Affiche les metadonnées du WordToken 6 sur le compte Wordlet
 
-`flow scripts execute --network testnet ./cadence/scripts/CheckMarketplace.script.cdc 0x1f7da62a915f01c7`
+`flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-marketplace.script.cdc 0x1f7da62a915f01c7`
 > Affiche le marketplace du compte wordlet
 
 `flow scripts execute --network testnet ./cadence/scripts/GetSellerCatalog.script.cdc`
