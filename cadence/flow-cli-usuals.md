@@ -42,10 +42,13 @@
 > Affiche les identifiants de tous les WordTokens presents sur le compte Wordlet
 
 `flow scripts execute --network testnet ./cadence/scripts/WordToken/get-wordtoken-data.script.cdc --arg Address:0x1f7da62a915f01c7 --arg UInt64:20`
-> Affiche les metadonnées du WordToken 20 sur le compte Wordlet
+> Affiche les metadonnées du WordToken 20 sur le compte Wordlet (collection ou espace de vente)
 
 `flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-marketplace.script.cdc 0x1f7da62a915f01c7`
 > Affiche le marketplace du compte wordlet
+
+`flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-token-price.script.cdc 0x1f7da62a915f01c7 20`
+> Affiche le prix du token 20 du compte wordlet
 
 `flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-market-listings.script.cdc`
 > Affiche le marketplace de tous les comptes du catalogue 

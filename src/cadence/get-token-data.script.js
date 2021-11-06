@@ -1,5 +1,5 @@
 export const GET_TOKEN_DATA=`
-import WordTokenContract from 0x1f7da62a915f01c7
+import WordTokenContract, MarketplaceContract002 from 0x1f7da62a915f01c7
 
 pub fun main(address: Address, wordTokenID: UInt64): WordTokenData? {
 
@@ -10,6 +10,12 @@ pub fun main(address: Address, wordTokenID: UInt64): WordTokenData? {
         }
     }
 
+    if let ref = owner.getCapability<&{MarketplaceContract002.SalePublic}>(MarketplaceContract002.SaleCollectionPublicPath).borrow() {
+        if let token = ref.borrowWordToken(id: wordTokenID) {
+            return WordTokenData(id: token.id, word: token.word, collection: token.collection)
+        }
+    }
+    
     return nil
 }
 

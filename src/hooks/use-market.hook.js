@@ -29,7 +29,7 @@ export default function useMarketHook( user ) {
             await query({
                 cadence: GET_USER_SALELIST,
                 args: (arg, t) => [
-                    arg(user?.addr, t.Address)
+                    arg(user?.address, t.Address)
                 ]
             })
             .then(function(data) {
@@ -73,12 +73,12 @@ export default function useMarketHook( user ) {
         }
     }
 
-    const getTokenPrice = async(address, tokenId, setTokenPrice)=>{
+    const getTokenPrice = async(sellerAddr, tokenId, setTokenPrice)=>{
         try {
             await query({
                 cadence: GET_TOKEN_PRICE,
                 args: (arg, t) => [
-                    arg(address, t.Address),
+                    arg(sellerAddr, t.Address),
                     arg(tokenId, t.UInt64)
                 ]
             })
