@@ -1,41 +1,32 @@
 export const TRANSFER_WORD_TOKEN = `
-import WordletContract from 0xWordlet
+import WordTokenContract from 0x1f7da62a915f01c7
+import NonFungibleToken from 0x631e88ae7f1d7c20
 
-/*
-Transfère un NFT du signataire au compte dont l'adresse est passé en paramètre
- */
+transaction (receiverAddress: Address, wordTokenId: UInt64){
 
-transaction (address: Address, tokenId: UInt64){
+    let collection: @NonFungibleToken.Collection
 
-    let collection: @WordletContract.Collection
-    let metadata: {String: String}
+    prepare(acct: AuthAccount) {
+        self.collection <- WordTokenContract.createEmptyCollection()
 
-    prepare(account: AuthAccount) {
-
-        self.collection <- WordletContract.createEmptyCollection()
-
-        let collectionRef = account.borrow<&WordletContract.Collection>(from: /storage/NFTCollection)
+        let collectionRef = acct
+            .borrow<&WordTokenContract.Collection>(from: WordTokenContract.CollectionStoragePath)
             ?? panic("Impossible d'emprunter la référence à la Collection du propriétaire")
 
-        self.metadata = collectionRef.getMetadata(id: tokenId)
-
-        self.collection.deposit(token: <- collectionRef.withdraw(withdrawID: tokenId), metadata: self.metadata)
+        self.collection.deposit(token: <-collectionRef.withdraw(withdrawID: wordTokenId))
     }
 
     execute {
+        let recepteur = getAccount(receiverAddress)
 
-        let recepteur = getAccount(address)
-
-        let receiverRef = recepteur.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)
+        let receiverRef = recepteur
+            .getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath)
             .borrow()
-            ?? panic("Impossible d'emprunter la référence Receiver")
+            ?? panic("Impossible d'emprunter la référence receiver")
 
-        receiverRef.deposit(token: <-self.collection.withdraw(withdrawID: tokenId), metadata: self.metadata)
+        receiverRef.deposit(token: <-self.collection.withdraw(withdrawID: wordTokenId))
 
         destroy self.collection
-
-        log("Transfer effectué")
     }
-
 }
 `
