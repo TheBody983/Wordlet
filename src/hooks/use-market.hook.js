@@ -29,7 +29,7 @@ export default function useMarketHook( user ) {
             await query({
                 cadence: GET_USER_SALELIST,
                 args: (arg, t) => [
-                    arg(user?.address, t.Address)
+                    arg(user?.addr, t.Address)
                 ]
             })
             .then(function(data) {
