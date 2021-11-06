@@ -18,6 +18,7 @@ pub contract MarketplaceContract002 {
         pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @WOTContract.Vault)
         pub fun idPrice(tokenID: UInt64): UFix64?
         pub fun getIDs(): [UInt64]
+        pub fun borrowWordToken (id: UInt64): &WordTokenContract.NFT?
     }
 
     pub resource SaleCollection: SalePublic {
@@ -82,6 +83,15 @@ pub contract MarketplaceContract002 {
 
         pub fun getIDs(): [UInt64] {
             return self.forSale.keys
+        }
+
+        pub fun borrowWordToken (id: UInt64): &WordTokenContract.NFT? {
+            if self.forSale[id] != nil {
+                let ref = &self.forSale[id] as auth &NonFungibleToken.NFT
+                return ref as! &WordTokenContract.NFT
+            } else {
+                return nil
+            }
         }
 
         destroy() {

@@ -47,6 +47,9 @@
 `flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-marketplace.script.cdc 0x1f7da62a915f01c7`
 > Affiche le marketplace du compte wordlet
 
+`flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-insale-wordtoken-data.script.cdc --arg Address:0x1f7da62a915f01c7 --arg UInt64:20`
+> Affiche les données WordToken 20 du compte wordlet en vente
+
 `flow scripts execute --network testnet ./cadence/scripts/GetSellerCatalog.script.cdc`
 > Affiche le catalogue de vendeurs inscrit dans le compte wordlet
 
