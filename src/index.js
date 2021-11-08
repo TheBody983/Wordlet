@@ -13,20 +13,19 @@ import Decoy from './components/Decoy';
 ReactDOM.render(
 	<BrowserRouter>
     <Routes>
-      <Route path = "/" element={<App />}>
-        <Route
-          path="*"
-          element = {
-            <main style = {{ padding: "1rem" }}>
-              <p>Wordlet 404 page not found</p>
-            </main>
-          }
-        />
-      </Route>
-	  <Route path = "/about" element = {<About />} />
-	  <Route path = "/forge" element = {<Forge />} />
-	  <Route path = "/advanced" element = {<Advanced />} />
-    <Route path = "/decoy" element = {<Decoy />} />
+      <Route path = "/" element={<App />}/>
+      <Route
+        path="*"
+        element = {
+          <section>
+            <h1>Wordlet 404 page not found</h1>
+          </section>
+        }
+      />
+	    <Route path = "about" element = {<About />} />
+	    <Route path = "forge" element = {<Forge />} />
+	    <Route path = "advanced" element = {<Advanced />} />
+      <Route path = "decoy" element = {<Decoy />} />
     </Routes>
   </BrowserRouter>,
 document.getElementById('root')
