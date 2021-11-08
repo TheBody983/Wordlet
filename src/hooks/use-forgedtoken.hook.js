@@ -10,7 +10,7 @@ export default function useForgedToken( ) {
                 cadence: MINT_FORGEDTOKEN,
                 limit: 100,
                 args: (arg, t) => [
-                    arg(wordTokenIds, [t.UInt64])
+                    arg(wordTokenIds, t.Array(t.UInt64))
                 ]
             })
             

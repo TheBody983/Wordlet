@@ -10,33 +10,29 @@ transaction (wordTokenIds: [UInt64]){
   let receiverRef: &{ForgedTokenContract.ForgedTokenCollectionPublic}
   let minterRef: &{ForgedTokenContract.NFTMinterPublic}
 
-  prepare(acct: AuthAccount) {
+  prepare(authAcct: AuthAccount) {
 
-    self.collectionRef = acct.borrow<&WordTokenContract.Collection>(from: WordTokenContract.CollectionStoragePath)
-        ?? panic("Impossible d'emprunter la référence NFTCollection de WordToken")
+        let wordletAccount = getAccount(0x1f7da62a915f01c7)
 
-    self.receiverRef = acct.getCapability<&{ForgedTokenContract.ForgedTokenCollectionPublic}>(ForgedTokenContract.CollectionPublicPath)
-        .borrow()
-        ?? panic("Impossible d'emprunter la référence Reciever de ForgedToken")        
+        self.collectionRef = authAcct.borrow<&WordTokenContract.Collection>(from: WordTokenContract.CollectionStoragePath)
+            ?? panic("Impossible d'emprunter la référence NFTCollection de WordToken")
 
-    self.minterRef = acct.getCapability<&{ForgedTokenContract.NFTMinterPublic}>(ForgedTokenContract.MinterPublicPath)
-        .borrow()
-        ?? panic("Impossible d'emprunter la référence ForgeMinter")
+        self.receiverRef = authAcct.getCapability<&{ForgedTokenContract.ForgedTokenCollectionPublic}>(ForgedTokenContract.CollectionPublicPath)
+            .borrow()
+            ?? panic("Impossible d'emprunter la référence Reciever de ForgedToken")        
 
-    var wordTokenCollection: @{UInt64: WordTokenContract.NFT} <- self.collectionRef.getWordTokenSubCollection(toForgeIds: wordTokenIds)
+        self.minterRef = wordletAccount.getCapability<&{ForgedTokenContract.NFTMinterPublic}>(ForgedTokenContract.MinterPublicPath)
+            .borrow()
+            ?? panic("Impossible d'emprunter la référence ForgeMinter")
 
-    let metadata : {String : String} = {
-        "creationDate": "25/12/1985"
-    } 
-        
-    let newNFT <- self.minterRef.mintNFT(smithAcct: acct, toForge: <- wordTokenCollection)
+        let wordTokenCollection: @{UInt64: WordTokenContract.NFT} <- self.collectionRef.getWordTokenSubCollection(toForgeIds: wordTokenIds)
 
-    self.receiverRef.deposit(token: <-newNFT)
-  }
+        let newNFT <- self.minterRef.mintNFT(smithAcct: authAcct, toForge: <- wordTokenCollection)
 
-  execute {
-    
+        self.receiverRef.deposit(token: <-newNFT)
+
         log("NFT Mintée et déposée dans le stockage du compte")
+            
     }
 }
  
