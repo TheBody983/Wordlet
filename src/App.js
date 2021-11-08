@@ -3,9 +3,9 @@ import './App.css';
 import Accueil from './components/Accueil';
 import Market from './components/Market';
 import Header from './components/Header';
-import APropos from './components/APropos';
-import Community from './components/Community';
 import Collection from './components/Collection';
+import Games from './components/Index';
+import Credits from './components/Credits'
 import Providers from './providers/Providers.comp';
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
 			<Accueil/>
 			<Market />
 			<Collection />
-			<Community />
-			<APropos/>
+			<Games />
+			<Credits />
 		</Providers>
 	);
 }

@@ -70,7 +70,7 @@ section{
     position: relative;
     width: 100%;
     height: 100vh;
-    padding: 100px;
+    padding : 430px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,6 +101,7 @@ section img#mountains_behind{
 }
 
 #wordlet-title{
+    text-align : center;
     position: absolute;
     color: #ffff;
     white-space: nowrap;
@@ -197,4 +198,7 @@ a {
 
 ul {
     list-style: none;
+}
+#community{
+    height : 100%;
 }
