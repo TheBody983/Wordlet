@@ -91,14 +91,14 @@ export default function useMarketHook( user ) {
         }
     }
 
-    const buyWordtoken = async(tokenId, address)=>{
+    const buyWordtoken = async(address, tokenId)=>{
         try {
             let transaction = await mutate({
                 cadence: BUY_WORDTOKEN,
                 limit: 100,
                 args: (arg, t) => [
-                    arg(tokenId, t.UInt64),
-                    arg(address, t.Address)
+                    arg(address, t.Address),
+                    arg(tokenId, t.UInt64)
                 ]
             })
             console.log("TxID : " + transaction)

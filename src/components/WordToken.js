@@ -52,7 +52,7 @@ const WordToken = (props) => {
 			</div>
 			<div>
 				<p>Seller: {props.seller}</p>
-				<button onClick={() => buyWordtoken(props.tokenId, props.seller)}>Acheter</button>
+				<button onClick={() => buyWordtoken(props.seller, props.tokenId)}>Acheter</button>
 			</div>
 			</>
 			} {props.forSale &&

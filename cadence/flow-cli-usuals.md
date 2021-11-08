@@ -18,8 +18,8 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/Marketplace/list-token-for-sale.tx.cdc 7 250.0`
 > met le token 7 du compte wordlet en vente pour 250 WOT
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/BuyToken.tx.cdc 0x5be6fee0409b4842 5`
-> achete le token 1 du marketplace de wordlet
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/Marketplace/buy-token.tx.cdc 0x5be6fee0409b4842 17`
+> achete le token 17 du marketplace de Lucas
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/DeleteWordToken.tx.cdc 12`
 > Supprime le WordToken 11 du compte signataire (wordlet)

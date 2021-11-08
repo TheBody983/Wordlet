@@ -15,7 +15,7 @@ pub contract MarketplaceContract002 {
     pub let SellerListPublicPath: PublicPath
 
     pub resource interface SalePublic {
-        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @WOTContract.Vault)
+        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @FungibleToken.Vault)
         pub fun idPrice(tokenID: UInt64): UFix64?
         pub fun getIDs(): [UInt64]
         pub fun borrowWordToken (id: UInt64): &WordTokenContract.NFT?
@@ -57,7 +57,7 @@ pub contract MarketplaceContract002 {
             emit PriceChanged(id: tokenID, newPrice: newPrice)
         }
 
-        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @WOTContract.Vault) {
+        pub fun purchase(tokenID: UInt64, recipient: &AnyResource{WordTokenContract.WordTokenCollectionPublic}, buyTokens: @FungibleToken.Vault) {
             pre {
                 self.forSale[tokenID] != nil && self.prices[tokenID] != nil:
                     "No token matching this ID for sale!"
@@ -73,6 +73,8 @@ pub contract MarketplaceContract002 {
                 ?? panic("Could not borrow reference to owner token vault")
             
             vaultRef.deposit(from: <-buyTokens)
+
+            recipient.deposit(token: <-self.withdraw(tokenID: tokenID))
 
             emit TokenPurchased(id: tokenID, price: price)
         }
