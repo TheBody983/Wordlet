@@ -1,17 +1,28 @@
+import { useState } from "react"
 import React from "react"
 
 const Header = () => {
+    const [active, setActive] = useState("accueil")
+    const buttons = {
+        "accueil": "Accueil", 
+        "marche": "Marché", 
+        "collection": "Collection", 
+        // "jeux": "Jeux",
+        "apropos": "A Propos",
+    }
+
     return (
         <header>
             <ul>
-                <li><a href="#accueil" id="btnaccueil" className="active">Accueil</a></li>
-                <li><a href="#marche" id="btnmarche">Marché</a></li>
-                <li><a href="#collection" id="btncollection">Collection</a></li>
-                <li><a href="#jeux" id="btnjeux">Jeux</a></li>
-                <li><a href="#apropos" id="btnpropos">À propos</a></li>
+            {Object.entries(buttons).map(button => {
+                return (
+                    <li><a href={"#"+button[0]} id={"btn"+button[0]} className={active==button[0]?"active":""} onClick={()=>setActive(button[0])}>{button[1]}</a></li>
+                )
+            })}
             </ul>
         </header>
     )
 }
+
 
 export default Header
