@@ -7,13 +7,11 @@ const Header = () => {
     const [active, setActive] = useState("accueil")
     const buttons = {
         "": "Accueil", 
-        "marche": "Marché", 
-        "collection": "Collection", 
-        // "jeux": "Jeux",
-        "apropos": "A Propos",
         "forge": "Forge",
         "advanced": "Admin",
         "about": "A Propos",
+        "decoy": "Decoy 6",
+
         
     }
 
