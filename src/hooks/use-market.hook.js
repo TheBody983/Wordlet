@@ -129,6 +129,9 @@ export default function useMarketHook( user ) {
     }
 
     const listTokenForSale = async(tokenId, price)=>{
+        // pasage d'argument entiers pose problème ajoute une décimale null si c'est le cas
+        if(price%1==0) price+= ".0"
+
         try {
             let transaction = await mutate({
                 cadence: LIST_TOKEN_FOR_SALE,
