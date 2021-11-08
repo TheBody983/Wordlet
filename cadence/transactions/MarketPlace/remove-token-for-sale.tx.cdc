@@ -1,7 +1,4 @@
-import WordletContract, WOToken, MarketplaceContract from 0x1f7da62a915f01c7
-
-
-//import WordTokenContract, WOTContract, MarketplaceContract from 0x1f7da62a915f01c7
+import WordTokenContract, MarketplaceContract002 from 0x1f7da62a915f01c7
 
 
 /*
@@ -11,13 +8,12 @@ v1
 transaction (tokenID: UInt64){
 
     prepare(account: AuthAccount) {
-        let saleRef = account.borrow<&MarketplaceContract.SaleCollection>(from: /storage/NFTSale)
+        let saleRef = account.borrow<&MarketplaceContract002.SaleCollection>(from: MarketplaceContract002.SaleCollectionStoragePath)
             ?? panic("Impossible d'emprunter la référence de vente du AuthAccount")
 
-        let collectionRef = account.borrow<&WordletContract.Collection>(from: /storage/NFTCollection)
+        let collectionRef = account.borrow<&WordTokenContract.Collection>(from: WordTokenContract.CollectionStoragePath)
             ?? panic("Impossible d'emprunter la référence de la collection")
 
-        let metadata = collectionRef.getMetadata(id: tokenID)
-        collectionRef.deposit(token: <- saleRef.withdraw(tokenID: tokenID), metadata: metadata)
+        collectionRef.deposit(token: <- saleRef.withdraw(tokenID: tokenID))
     }
 }

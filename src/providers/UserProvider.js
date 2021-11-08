@@ -7,6 +7,7 @@ import useWordTokens from "../hooks/use-wordtokens.hook";
 import useUserWordTokens from "../hooks/use-user-wordtokens.hook";
 import useMarket from "../hooks/use-market.hook";
 import useAccountState from "../hooks/use-account-state.hook";
+import useForgedToken from "../hooks/use-forgedtoken.hook";
 
 const UserContext = createContext()
 
@@ -17,6 +18,8 @@ export default function UserProvider({ children }) {
     const { userWordTokens, getUserWordTokens } = useUserWordTokens( user )
     const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user )
     const { setupAccount } = useAccountState( )
+    const { mintForgedToken } = useForgedToken( )
+
 
     return (
         <UserContext.Provider value={{
@@ -38,7 +41,8 @@ export default function UserProvider({ children }) {
             getMarketListings,
             addToSellerCatalog,
             removeFromSellerCatalog,
-            userIsSeller
+            userIsSeller,
+            mintForgedToken
 
         }}>
             { children }
