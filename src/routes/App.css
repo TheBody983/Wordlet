@@ -100,6 +100,7 @@ button {
 }
 
 .market-listings{
+    display: flex;
     flex-direction: row;
 }
 
@@ -116,10 +117,6 @@ button {
 .card a{
     text-decoration: none;
     color: var(--wordlet-yellow);
-}
-
-.market-listings{
-    flex-direction: row;
 }
 
 .row{
