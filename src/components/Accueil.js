@@ -17,7 +17,7 @@ const Accueil = () => {
             }
             <img src="etoiles.png" id="stars" alt=""/>
             <img src="lune.png" id="moon" style={{mixBlendMode:"screen"}} alt=""/>
-            <img src="montagne_derriere.png" style={{marginTop:"225px"}} id="mountains_behind" alt=""/>
+            <img src="montagne_derriere.png" style={{marginTop:"500px"}} id="mountains_behind" alt=""/>
 
         </section>
     )

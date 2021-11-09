@@ -18,15 +18,19 @@
 body{
     width: 100vw;
     overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     background: linear-gradient(var(--wordlet-purple), #7597de);
 }
 
 header{
     display: flex;
+    height: 0;
+    /* background-color: var(--wordlet-purple-trans); */
     position: sticky;
     position: -webkit-sticky;
-    top: 0;
-    width: 100vw;
+    top: 3rem;
+    width: 100%;
     justify-content: space-around;
     align-items: center;
     font-size: 2rem;
@@ -35,6 +39,7 @@ header{
 
 header ul{
     display: flex;
+    flex-wrap: wrap;
     width: 50%;
     justify-content: space-around;
 }
@@ -65,6 +70,7 @@ section img{
     left: 0;
     height: 100%;
     width: 100%;
+    object-fit: cover;
     z-index: -1;
 }
 
@@ -86,8 +92,7 @@ button {
 
 #wordlet-title{
     color: #ffff;
-    font-size: 5rem;
-    padding: 0 2rem;
+    font-size: 3rem;
 }
 
 #apropos{
@@ -113,7 +118,7 @@ button {
 
 .market-listings{
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
 }
@@ -141,4 +146,8 @@ button {
 .column{
     display: flex;
     flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
