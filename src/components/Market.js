@@ -21,7 +21,7 @@ const GlobalMarketData = () => {
                 )
             })
             }
-            <button onClick={()=>getMarketListings()}/>
+            <button onClick={()=>getMarketListings()}>Rafraîchir</button>
             </div>
             <Balance />
             <img src="marche.png" id="marche" alt=""/>
