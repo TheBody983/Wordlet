@@ -2,10 +2,10 @@ import React from "react";
 
 const Credits = () => {
     return (
-		<section id="apropos">
-				<p>
-					Wordlet 2021 © all rights reserved
-				</p>
+        <section id="apropos">
+            <p style={{color:"white"}}>
+                Wordlet 2021 © no rights reserved
+            </p>
         </section>
     )
 }
