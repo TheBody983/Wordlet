@@ -1,7 +1,6 @@
 import React from "react";
 
-import Header from './Header';
-import Community from './Community';
+import Community from '../components/Community';
 
 const About = () => {
     return(
