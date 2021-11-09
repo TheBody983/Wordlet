@@ -94,6 +94,18 @@ button {
     background-color: black;
 }
 
+#auth-cluster{
+    margin: 1rem;
+    padding: 1rem;
+    color: black;
+    background-color: white;
+    border-radius: 30px;
+}
+
+#auth-cluster button{
+    margin: 0;
+}
+
 .btn-secondary {
     color: white;
     background-color: var(--wordlet-purple);
