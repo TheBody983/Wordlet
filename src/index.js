@@ -14,7 +14,7 @@ import Header from "./components/Header";
 ReactDOM.render(
     <BrowserRouter>
         <Routes>
-            <Route path = "/" element={<><Header /><App /></>}/>
+            <Route path = "/" element={<App />}/>
             <Route
                 path="*"
                 element = {
@@ -23,10 +23,10 @@ ReactDOM.render(
                 </section>
                 }
             />
-                <Route path = "about" element = {<><Header /><About /></>} />
-                <Route path = "forge" element = {<><Header /><Forge /></>} />
-                <Route path = "advanced" element = {<><Header /><Advanced /></>} />
-            <Route path = "decoy" element = {<><Header /><Decoy /></>} />
+                <Route path = "about" element = {<About />} />
+                <Route path = "forge" element = {<Forge />} />
+                <Route path = "advanced" element = {<Advanced />} />
+            <Route path = "decoy" element = {<Decoy />} />
         </Routes>
     </BrowserRouter>,
 document.getElementById('root')

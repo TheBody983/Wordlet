@@ -1,9 +1,11 @@
 import React from "react";
+import Header from "../components/Header";
 import Providers from "../providers/Providers.comp";
 
 const Advanced = () => {
     return(
         <Providers>
+            <Header/>
             <section>   
                 <h1>Espace en construction...</h1>
                 

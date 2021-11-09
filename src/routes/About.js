@@ -1,9 +1,11 @@
 import React from "react";
 
 import Community from '../components/Community';
+import Header from "../components/Header";
 
 const About = () => {
-    return(
+    return(<>
+        <Header/>
         <section id="community">
             <div className="row">
             <p className="card" style={{width:"50%"}}>
@@ -41,7 +43,7 @@ const About = () => {
             </div>
             <img src="marche.png" id="marche" alt=""/>
         </section>
-    )
+    </>)
 }
 
 export default About 

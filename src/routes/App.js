@@ -6,10 +6,12 @@ import Collection from '../components/Collection';
 import Games from '../components/Games';
 import Credits from '../components/Credits'
 import Providers from '../providers/Providers.comp';
+import Header from '../components/Header';
 
 function App() {
     return (
         <Providers>
+            <Header/>
             <Accueil/>
             <Market />
             <Collection />
