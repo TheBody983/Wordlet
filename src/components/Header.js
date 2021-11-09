@@ -20,10 +20,11 @@ const Header = () => {
             <ul>
             {Object.entries(buttons).map(button => {
                 return (
-                    <li><Link to={"/"+button[0]} className={active==button[0]?"active":""} onClick={()=>setActive(button[0])}>{button[1]}</Link></li>
+                    <li><Link to={"/"+button[0]}>{button[1]}</Link></li>
                 )
             })}
             </ul>
+            <h1 id="wordlet-title">Wordlet</h1>
         </header>
     )
 }

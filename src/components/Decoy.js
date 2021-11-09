@@ -1,13 +1,10 @@
 import React from "react";
 
-import Header from './Header';
-
 const Decoy = () => {
     return(
-
         <section>
-                <Header />
-                <h1>Decoy en construction...</h1>
+            <h1>Decoy en construction...</h1>
+            <img src="marche.png" id="marche" alt=""/>
         </section>
     )
 }
