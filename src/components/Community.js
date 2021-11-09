@@ -12,7 +12,7 @@ const Community = () => {
                 <li className="card"><a href="https://www.linkedin.com/company/wordlet/">LinkedIn</a></li>
                 <li className="card"><a href="https://www.facebook.com/WordletTheWordWallet">Facebook</a></li>
             </ul>
-            <img src="lava1.jpg" id="mountains_front" alt=""/>
+            <img src="void.png" id="mountains_front" alt=""/>
         </section>
     )
 }
