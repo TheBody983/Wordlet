@@ -8,7 +8,7 @@ const Forge = () => {
             <Header/>
             <section>
                 <h1>Forge en construction...</h1>
-                <img src = "lava2.jpg" id = "mountains_front" alt = ""/>
+                <img src = "Forge_full.png" id = "Forge" alt = ""/>
             </section>
         </Providers>
     )
