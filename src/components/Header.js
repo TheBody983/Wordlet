@@ -10,9 +10,6 @@ const Header = () => {
         "forge": "Forge",
         "advanced": "Admin",
         "about": "A Propos",
-        "decoy": "Decoy 6",
-
-        
     }
 
     return (

@@ -6,7 +6,7 @@ const Advanced = () => {
     return(
         <Providers>
             <Header/>
-            <section>   
+            <section>
                 <h1>Espace en construction...</h1>
                 
                 <img src="marche.png" id="marche" alt=""/>
