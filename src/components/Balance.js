@@ -13,7 +13,7 @@ const MyBalance = () => {
             <button onClick={() => getWOTBalance()}>Actualiser</button>
         </>
         :
-            <button onClick={() => createWOTVault()}>Créer un WOT Vault</button>
+            <label>WOT Vault non initialisé</label>
         }   
     </div>
     )
