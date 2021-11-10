@@ -1,17 +1,30 @@
+import { useState } from "react"
 import React from "react"
 
+import {Link} from 'react-router-dom';
+
 const Header = () => {
+    const [active, setActive] = useState("accueil")
+    const buttons = {
+        "": "Accueil", 
+        "forge": "Forge",
+        "advanced": "Admin",
+        "about": "A Propos",
+    }
+
     return (
         <header>
             <ul>
-              	<li><a href="#accueil" id="btnaccueil" className="active">Accueil</a></li>
-                <li><a href="#marche" id="btnmarche">Marché</a></li>
-                <li><a href="#collection" id="btncollection">Collection</a></li>
-                <li><a href="#forge" id="btnforge">Forge</a></li>
-                <li><a href="#apropos" id="btnpropos">À propos</a></li>
+            {Object.entries(buttons).map(button => {
+                return (
+                    <li><Link to={"/"+button[0]}>{button[1]}</Link></li>
+                )
+            })}
             </ul>
+            <h1 id="wordlet-title">Wordlet</h1>
         </header>
     )
 }
+
 
 export default Header
