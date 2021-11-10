@@ -4,8 +4,6 @@ import Accueil from './components/Accueil';
 import Market from './components/Market';
 import Header from './components/Header';
 import APropos from './components/APropos';
-import Forge from './components/Forge';
-import ForgedTokenCollection from './components/ForgedTokenCollection';
 import Community from './components/Community';
 import Collection from './components/Collection';
 import Providers from './providers/Providers.comp';
@@ -17,8 +15,6 @@ function App() {
 			<Accueil/>
 			<Market />
 			<Collection />
-			<Forge />
-			<ForgedTokenCollection />
 			<Community />
 			<APropos/>
 		</Providers>
