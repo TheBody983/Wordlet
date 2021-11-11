@@ -1,15 +1,11 @@
 export const GET_USER_WORDTOKENS = `
-import WordletContract from 0xWordlet
+import WordTokenContract from 0x1f7da62a915f01c7
+import NonFungibleToken from 0x631e88ae7f1d7c20
 
 pub fun main(address: Address) : [UInt64]? {
+    let owner = getAccount(address)
+    let ref = owner.getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath).borrow()
 
-// Voir les NFT de address
-let nftOwner = getAccount(address)  
-let capability = nftOwner.getCapability<&{WordletContract.NFTReceiver}>(/public/NFTReceiver)
-
-let receiverRef = capability.borrow()
-    ?? panic("Impossible d'emprunter la Référence Reciever")
-
-return receiverRef.getIDs()
+    return ref?.getIDs()
 }
 `

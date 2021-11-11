@@ -1,25 +1,23 @@
 export const CREATE_WOT_VAULT = `
-import WOToken from 0xWordlet
+import WOTContract from 0x1f7da62a915f01c7
+import FungibleToken from 0x9a0766d93b6608b7;
 
-transaction{
-    let address: Address
+transaction {
+    let addr: Address
 
     prepare(acct: AuthAccount) {
-        self.address = acct.address
+        self.addr = acct.address
 
-        let vaultA <- WOToken.createEmptyVault()
-    
-        acct.save<@WOToken.Vault>(<-vaultA, to: /storage/MainVault)
+        let vaultA <- WOTContract.createEmptyVault()
+        
+        acct.save<@WOTContract.Vault>(<-vaultA, to: WOTContract.VaultStoragePath)
 
-        log("Vault vide Stocké")
-
-        let ReceiverRef = acct.link<&WOToken.Vault{WOToken.Receiver, WOToken.Balance}>(/public/MainReceiver, target: /storage/MainVault)
-
-        log("Références créées")
+        acct.link<&WOTContract.Vault{FungibleToken.Receiver, FungibleToken.Balance}>(WOTContract.ReceiverPublicPath, target: WOTContract.VaultStoragePath)
     }
 
     post {
-        getAccount(self.address).getCapability<&WOToken.Vault{WOToken.Receiver}>(/public/MainReceiver)
+        getAccount(self.addr)
+            .getCapability<&WOTContract.Vault{FungibleToken.Receiver}>(WOTContract.ReceiverPublicPath)
             .check():  
             "Référence Reciever du Vault créée incorrectement"
     }

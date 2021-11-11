@@ -6,6 +6,7 @@ import useWOT from "../hooks/use-wot.hook";
 import useWordTokens from "../hooks/use-wordtokens.hook";
 import useUserWordTokens from "../hooks/use-user-wordtokens.hook";
 import useMarket from "../hooks/use-market.hook";
+import useAccountState from "../hooks/use-account-state.hook";
 
 const UserContext = createContext()
 
@@ -15,6 +16,7 @@ export default function UserProvider({ children }) {
     const { getTokenData, transferWordToken } = useWordTokens( )
     const { userWordTokens, getUserWordTokens } = useUserWordTokens( user )
     const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user )
+    const { setupAccount } = useAccountState( )
 
 
     return (
@@ -22,6 +24,7 @@ export default function UserProvider({ children }) {
             WOTBalance,
             getWOTBalance,
             createWOTVault,
+            setupAccount,
             userWordTokens,
             getUserWordTokens,
             getTokenData,
@@ -36,7 +39,7 @@ export default function UserProvider({ children }) {
             getMarketListings,
             addToSellerCatalog,
             removeFromSellerCatalog,
-            userIsSeller
+            userIsSeller,
 
         }}>
             { children }

@@ -6,15 +6,15 @@ const MyBalance = () => {
     const { WOTBalance, getWOTBalance, createWOTVault } = useUser()
     return (
     <div className="balance">
-    {WOTBalance?
-    <>
-        <p>Mon Compte : </p>
-        <p>{WOTBalance} WOT</p>
-        <button onClick={() => getWOTBalance()}>Actualiser</button>
-    </>
-    :
-        <button onClick={() => createWOTVault()}>Créer un WOT Vault</button>
-    }
+        {WOTBalance!==null?
+        <>
+            <p>Mon Compte : </p>
+            <p>{WOTBalance} WOT</p>
+            <button onClick={() => getWOTBalance()}>Actualiser</button>
+        </>
+        :
+            <label>WOT Vault non initialisé</label>
+        }   
     </div>
     )
 }

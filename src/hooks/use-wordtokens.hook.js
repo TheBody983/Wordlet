@@ -5,12 +5,13 @@ import { TRANSFER_WORD_TOKEN } from '../cadence/transfer-word-token.tx';
 
 export default function useWordTokens( ) {
 
-    const getTokenData = async (setTokenData, tokenId) => {
+    const getTokenData = async (setTokenData, address, wordTokenID) => {
         try {
             await query({
                 cadence: GET_TOKEN_DATA,
                 args: (arg, t) => [
-                    arg(tokenId, t.UInt64)
+                    arg(address, t.Address),
+                    arg(wordTokenID, t.UInt64)
                 ]
             })
             .then(function(data) {

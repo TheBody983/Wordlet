@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 
 import { query } from '@onflow/fcl'
 import { GET_USER_WORDTOKENS } from "../cadence/get-user-wordtokens.script";
-import useMarketHook from "./use-market.hook";
 
 export default function useUserWordTokens( user ) {
     const [ userWordTokens, setUserWordTokens ] = useState(null)
-    const { getCurrentUserSalelist } = useMarketHook( )
 
     useEffect( () => getUserWordTokens(), [ user ] )
 
