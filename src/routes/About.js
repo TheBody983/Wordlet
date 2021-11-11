@@ -8,7 +8,7 @@ const About = () => {
         <Header/>
         <section id="community">
             <div className="row">
-            <p className="card" style={{width:"50%"}}>
+            <p className="card" style={{width:"50%", maxHeight:"75vh", overflowY:"scroll"}}>
 
             On a tous déjà collectionné des cartes, des figurines, des timbres, des fleurs séchées, 
             des papillons. Collectionner pour assembler, collectionner pour laisser une trace. 
