@@ -44,7 +44,9 @@ export default function UserProvider({ children }) {
             addToSellerCatalog,
             removeFromSellerCatalog,
             userIsSeller,
-            mintForgedToken
+            mintForgedToken,
+            userForgedTokens,
+            getUserForgedTokens
 
         }}>
             { children }

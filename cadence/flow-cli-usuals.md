@@ -3,7 +3,7 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/General/setup-account.tx.cdc`
 > Setup le compte signataire (WOT, WordToken, ForgedToken, Marketplace)
 
-`flow transactions send --network testnet --signer wordlet ./cadence/WOT/transactions/mint-wot.tx.cdc 1000.0`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/WOT/mint-wot.tx.cdc 1000.0`
 > Mine 1000 WOTs via la transaction MintWOT.tx.cdc dans le compte wordlet
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WOT/transfer-wot.tx.cdc 0x5be6fee0409b4842 1000.0`
