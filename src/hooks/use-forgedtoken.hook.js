@@ -62,6 +62,6 @@ export default function useForgedToken( ) {
             console.error(error)
         }
     }
-
+	
     return { mintForgedToken, getForgedTokenWords, transferForgedtoken }
 }

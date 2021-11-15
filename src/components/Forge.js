@@ -13,7 +13,7 @@ const Forge = () => {
                 <input type="text" id="WordTokenIds" placeholder="ex : 1,2,5"/>
                 <button onClick={() => mintForgedToken(document.getElementById("WordTokenIds").value.split(',').map(Number))}>Forger</button> 
             </div>
-            <img src="lava2.jpg" id="mountains_front" alt=""/>
+            <img src="forge_full.png" id="mountains_front" alt=""/>
         </section>
     )
 }

@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 import Providers from "../providers/Providers.comp";
 import Forge from '../components/Forge';
+import ForgeMarket from '../components/ForgeMarket';
 import ForgedTokenCollection from '../components/ForgedTokenCollection';
 
 const ForgeApp = () => {
@@ -9,6 +10,7 @@ const ForgeApp = () => {
         <Providers>
             <Header/>
             <Forge />
+			<ForgeMarket />
             <ForgedTokenCollection />
 
         </Providers>
