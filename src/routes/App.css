@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+:root{
+    --wordlet-purple: #2b1055;
+    --wordlet-purple-trans:  #2b1055F0;
+    --wordlet-yellow: #FDC867;
+    width: 100vw;
+    color: white;
+}
+
+body{
+    width: 100vw;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    background: linear-gradient(var(--wordlet-purple), #7597de);
+}
+
+header{
+    display: flex;
+    height: 0;
+    /* background-color: var(--wordlet-purple-trans); */
+    position: sticky;
+    position: -webkit-sticky;
+    top: 3rem;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 2rem;
+    z-index: 10000;
+}
+
+header ul{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    justify-content: space-around;
+}
+
+header ul li a{
+    color: white;
+    text-decoration: none;
+    padding: 6px 15px;
+    border-radius: 20px;
+}
+
+header ul li a:hover, .active{
+    background: white;
+    color: var(--wordlet-purple);
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+section img{
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+ul{
+    list-style: none;
+}
+
+button {
+    padding: 1em;
+    margin: 1em;
+    font-size: 1em;
+    min-width: 100px;
+    cursor: pointer;
+    border: white 20px;
+    border-radius: 20px;
+    color: var(--wordlet-purple);
+    background-color: white;
+}
+
+#wordlet-title{
+    color: #ffff;
+    font-size: 3rem;
+}
+
+#apropos{
+    background-color: black;
+}
+
+#auth-cluster{
+    margin: 1rem;
+    padding: 1rem;
+    color: black;
+    background-color: white;
+    border-radius: 30px;
+}
+
+#auth-cluster button{
+    margin: 0;
+}
+
+.btn-secondary {
+    color: white;
+    background-color: var(--wordlet-purple);
+}
+
+.market-listings{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    margin: 1em;
+    padding: 1em;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    background-color: var(--wordlet-purple-trans);
+    border-radius: 10px;
+    border: 5px ridge var(--wordlet-yellow);
+    flex-direction: column;
+}
+
+.card a{
+    text-decoration: none;
+    color: var(--wordlet-yellow);
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}

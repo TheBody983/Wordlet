@@ -5,7 +5,7 @@ import WordToken from "./WordToken";
 import { useUser } from "../providers/UserProvider";
 
 const UserTokens = () => {
-	const { getUserWordTokens, userWordTokens, userSalelist, addToSellerCatalog, removeFromSellerCatalog, userIsSeller } = useUser( )
+	const { getUserWordTokens, userWordTokens, userSalelist, addToSellerCatalog, removeFromSellerCatalog, userIsSeller, WOTBalance } = useUser( )
 	return (
 
         <section id="collection">
@@ -35,7 +35,7 @@ const UserTokens = () => {
 			}
 			</>
 		}
-		{
+		{WOTBalance?
 			<div className="horizontal-scroll-wrapper squares">
 				{!userIsSeller ?
 					<div>
@@ -47,6 +47,8 @@ const UserTokens = () => {
 					</div>
 				}
 			</div>
+			:
+			<></>
 		}
             <img src="cave.png" id="mountains_front" alt=""/>
         </section>
