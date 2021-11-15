@@ -6,7 +6,7 @@ import { useUser } from "../providers/UserProvider";
 
 const WordToken = (props) => {
 	const { user } = useAuth( )
-	const { getForgedTokenWords } = useUser( )
+	const { getForgedTokenWords, transferForgedtoken } = useUser( )
 	const [tokenData, setTokenData] = useState({})
 	const [display, setDisplay] = useState(false)
 
@@ -29,7 +29,15 @@ const WordToken = (props) => {
 			<div>
 				<p key="mots">Mots: {tokenData}</p>
 			</div>
-			}
+			}{props.collection &&
+				<>
+				<div>
+					<label>Receiver address : </label>
+					<input type="text" id="ReceiverAddr" placeholder="Entrez un destinataire"/>
+					<button onClick={() => transferForgedtoken(document.getElementById("ReceiverAddr").value, props.tokenId)}>Transfer Token</button> 
+				</div>
+				</>
+				}
 			<div>
 				<button onClick={() => setDisplay(false)}>Clear Token Info</button>
 			</div>

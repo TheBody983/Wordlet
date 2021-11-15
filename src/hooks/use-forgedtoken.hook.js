@@ -2,6 +2,7 @@ import { mutate, tx, query } from '@onflow/fcl'
 
 import { MINT_FORGEDTOKEN } from "../cadence/mint-forgedtoken.tx";
 import { GET_FORGEDTOKEN_WORDS } from "../cadence/get-forgedtoken-words.script";
+import { TRANSFER_FORGEDTOKEN } from "../cadence/transfer-forgedtoken.tx";
 
 export default function useForgedToken( ) {
 
@@ -43,5 +44,24 @@ export default function useForgedToken( ) {
         }
     }
 
-    return { mintForgedToken, getForgedTokenWords }
+    const transferForgedtoken = async ( address, tokenId) => {
+        try {
+            let transaction = await mutate({
+                cadence: TRANSFER_FORGEDTOKEN,
+                limit: 100,
+                args: (arg, t) => [
+                    arg(address, t.Address),
+                    arg(tokenId, t.UInt64)
+                ]
+            })
+            console.log("TxID : " + transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction Effectuée")
+        } catch (error) {
+            console.log("Transaction Echouée")
+            console.error(error)
+        }
+    }
+
+    return { mintForgedToken, getForgedTokenWords, transferForgedtoken }
 }
