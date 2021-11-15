@@ -33,7 +33,7 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/mint-forgedtoken.tx.cdc [5,4]`
 > Créer un ForgedToken a partir des WordTokens 20 et 21
 
-`flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/transfer-forgedtoken.tx.cdc 1`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/transfer-forgedtoken.tx.cdc 0x5be6fee0409b4842 1`
 > Transfert le ForgedToken numero 1 vers le compte Lucas
 
 -----------------------------------------------SCRIPTS-------------------------------------------------
