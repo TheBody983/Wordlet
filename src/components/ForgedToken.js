@@ -6,19 +6,19 @@ import { useUser } from "../providers/UserProvider";
 
 const WordToken = (props) => {
 	const { user } = useAuth( )
-	const { getTokenData, transferWordToken, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice } = useUser( )
+	const { getForgedTokenWords } = useUser( )
 	const [tokenData, setTokenData] = useState({})
 	const [display, setDisplay] = useState(false)
 
 	
 	useEffect(() => {
-		getTokenData(setTokenData, props.seller?props.seller:user?.addr, props.tokenId)
+		getForgedTokenWords(setTokenData, props.seller?props.seller:user?.addr, props.tokenId)
 	}, [ display ])
 
 	if(!display){
 		return (
 			<div >
-				<button  onClick={() =>setDisplay(true)}>WordToken #{props.tokenId}</button>
+				<button  onClick={() =>setDisplay(true)}>ForgedToken #{props.tokenId}</button>
 			</div>
 		)
 	}
@@ -27,9 +27,7 @@ const WordToken = (props) => {
 		<div className="card" key={props.tokenId}>
 			{tokenData &&
 			<div>
-				<p key="mot">Mot: {tokenData["word"]}</p>
-				<p key="tokenId">Token: #{props.tokenId}</p>
-				<p key="collection">Collection: {tokenData["collection"]}</p>
+				<p key="mots">Mots: {tokenData}</p>
 			</div>
 			}
 			<div>

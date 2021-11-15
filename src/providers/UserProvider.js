@@ -20,7 +20,7 @@ export default function UserProvider({ children }) {
     const { userForgedTokens, getUserForgedTokens } = useUserForgedTokens( user )
     const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user )
     const { setupAccount } = useAccountState( )
-    const { mintForgedToken } = useForgedToken( )
+    const { mintForgedToken, getForgedTokenWords } = useForgedToken( )
 
 
     return (
@@ -46,7 +46,8 @@ export default function UserProvider({ children }) {
             userIsSeller,
             mintForgedToken,
             userForgedTokens,
-            getUserForgedTokens
+            getUserForgedTokens,
+            getForgedTokenWords
 
         }}>
             { children }

@@ -1,6 +1,7 @@
-import { mutate, tx } from '@onflow/fcl'
+import { mutate, tx, query } from '@onflow/fcl'
 
 import { MINT_FORGEDTOKEN } from "../cadence/mint-forgedtoken.tx";
+import { GET_FORGEDTOKEN_WORDS } from "../cadence/get-forgedtoken-words.script";
 
 export default function useForgedToken( ) {
 
@@ -23,5 +24,24 @@ export default function useForgedToken( ) {
         }
     }
 
-    return { mintForgedToken }
+    const getForgedTokenWords = async (setForgedTokenWords, address, forgedTokenID) => {
+        try {
+            await query({
+                cadence: GET_FORGEDTOKEN_WORDS,
+                args: (arg, t) => [
+                    arg(address, t.Address),
+                    arg(forgedTokenID, t.UInt64)
+                ]
+            })
+            .then(function(data) {
+                setForgedTokenWords(data)
+            })
+            
+        } catch (error) {
+            console.debug("use-forgedtokens: getForgedtokenData Failed")
+            console.error(error)
+        }
+    }
+
+    return { mintForgedToken, getForgedTokenWords }
 }
