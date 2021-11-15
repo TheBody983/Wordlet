@@ -7,7 +7,7 @@
 > Mine 1000 WOTs via la transaction MintWOT.tx.cdc dans le compte wordlet
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WOT/transfer-wot.tx.cdc 0x5be6fee0409b4842 1000.0`
-> Transfert 1000 WOT du compte wordlet vers le compte de Lucas
+> Transfert 1000 WOT du compte wordlet vers le compte Lucas
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-wordtoken.tx.cdc "vente" "original"`
 > Mine un WordToken via la transaction MintWOT.cdc dans le compte signataire (wordlet)
@@ -32,6 +32,9 @@
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/mint-forgedtoken.tx.cdc [5,4]`
 > Créer un ForgedToken a partir des WordTokens 20 et 21
+
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/transfer-forgedtoken.tx.cdc 1`
+> Transfert le ForgedToken numero 1 vers le compte Lucas
 
 -----------------------------------------------SCRIPTS-------------------------------------------------
 
