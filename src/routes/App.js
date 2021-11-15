@@ -7,7 +7,6 @@ import Games from '../components/Games';
 import Credits from '../components/Credits'
 import Providers from '../providers/Providers.comp';
 import Header from '../components/Header';
-import ForgedTokenCollection from '../components/ForgedTokenCollection';
 
 function App() {
     return (

@@ -8,10 +8,9 @@ const ForgeApp = () => {
     return(
         <Providers>
             <Header/>
-            <section>
-                <Forge />
-                <ForgedTokenCollection />
-            </section>
+            <Forge />
+            <ForgedTokenCollection />
+
         </Providers>
     )
 }

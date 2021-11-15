@@ -22,7 +22,7 @@ const UserTokens = () => {
 				}
 				</> 
 			}
-			<img src="lava2.jpg" id="mountains_front" alt=""/>
+			<img src="void.png" id="mountains_front" alt=""/>
 		</section>
 	);
 };
