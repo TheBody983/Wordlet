@@ -6,13 +6,13 @@ import { useUser } from "../providers/UserProvider";
 
 const WordToken = (props) => {
 	const { user } = useAuth( )
-	const { getForgedTokenWords, transferForgedtoken } = useUser( )
+	const { getForgedTokenData, transferForgedtoken } = useUser( )
 	const [tokenData, setTokenData] = useState({})
 	const [display, setDisplay] = useState(false)
 
 	
 	useEffect(() => {
-		getForgedTokenWords(setTokenData, props.seller?props.seller:user?.addr, props.tokenId)
+		getForgedTokenData(setTokenData, props.seller?props.seller:user?.addr, props.tokenId)
 	}, [ display ])
 
 	if(!display){
@@ -27,7 +27,9 @@ const WordToken = (props) => {
 		<div className="card" key={props.tokenId}>
 			{tokenData &&
 			<div>
-				<p key="mots">Mots: {tokenData}</p>
+				<p key="mots">Mots : {tokenData["words"]}</p>
+				<p key="tokenId">Token: #{props.tokenId}</p>
+				<p key="forgeron">Forgeron : {tokenData["smith"]}</p>
 			</div>
 			}{props.collection &&
 				<>

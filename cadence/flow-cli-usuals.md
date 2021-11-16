@@ -71,6 +71,9 @@
 `flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-smith.script.cdc 0x1f7da62a915f01c7 1`
 > Affiche le smith du ForgedToken 1 sur le compte Wordlet
 
+`flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-data.script.cdc --arg Address:0x5be6fee0409b4842 --arg UInt64:5`
+> Affiche les données du ForgedToken 5 sur le compte Wordlet (collection ou espace de vente)
+
 `flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-wt.script.cdc --arg Address:0x1f7da62a915f01c7 --arg UInt64:1`
 > Affiche les données des tokens compris dans le ForgedToken ciblé
 ------------------⚠️ DEPRECATION WARNING---------------------

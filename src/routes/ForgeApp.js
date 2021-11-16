@@ -10,7 +10,6 @@ const ForgeApp = () => {
         <Providers>
             <Header/>
             <Forge />
-			<ForgeMarket />
             <ForgedTokenCollection />
 
         </Providers>

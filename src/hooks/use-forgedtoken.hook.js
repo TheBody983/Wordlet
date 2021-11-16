@@ -1,7 +1,7 @@
 import { mutate, tx, query } from '@onflow/fcl'
 
 import { MINT_FORGEDTOKEN } from "../cadence/mint-forgedtoken.tx";
-import { GET_FORGEDTOKEN_WORDS } from "../cadence/get-forgedtoken-words.script";
+import { GET_FORGEDTOKEN_DATA } from "../cadence/get-forgedtoken-data.script";
 import { TRANSFER_FORGEDTOKEN } from "../cadence/transfer-forgedtoken.tx";
 
 export default function useForgedToken( ) {
@@ -25,10 +25,10 @@ export default function useForgedToken( ) {
         }
     }
 
-    const getForgedTokenWords = async (setForgedTokenWords, address, forgedTokenID) => {
+    const getForgedTokenData = async (setForgedTokenWords, address, forgedTokenID) => {
         try {
             await query({
-                cadence: GET_FORGEDTOKEN_WORDS,
+                cadence: GET_FORGEDTOKEN_DATA,
                 args: (arg, t) => [
                     arg(address, t.Address),
                     arg(forgedTokenID, t.UInt64)
@@ -63,5 +63,5 @@ export default function useForgedToken( ) {
         }
     }
 	
-    return { mintForgedToken, getForgedTokenWords, transferForgedtoken }
+    return { mintForgedToken, getForgedTokenData, transferForgedtoken }
 }
