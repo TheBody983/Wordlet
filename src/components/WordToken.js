@@ -34,7 +34,7 @@ const WordToken = (props) => {
 			} {props.collection &&
 			<>
 			<div>
-				<label>Receiver address : </label>
+				<label>Adresse du receveur : </label>
 				<input type="text" id="ReceiverAddr" placeholder="Entrez un destinataire"/>
 				<button onClick={() => transferWordToken(document.getElementById("ReceiverAddr").value, props.tokenId)}>Transfer Token</button> 
 			</div>
@@ -47,11 +47,11 @@ const WordToken = (props) => {
 			} {props.market &&
 			<>
 			<div>
-				<h4>Price</h4>
+				<h4>Prix</h4>
 				<p>{tokenPrice} WOT</p>
 			</div>
 			<div>
-				<p>Seller: {props.seller}</p>
+				<p>Vendeur: {props.seller}</p>
 				<button onClick={() => buyWordtoken(props.seller, props.tokenId)}>Acheter</button>
 			</div>
 			</>
@@ -63,8 +63,7 @@ const WordToken = (props) => {
 				<button className="btn-primary" onClick={() => removeTokenFromSale(props.tokenId)}>Retirer de la vente</button> 
 			</div>
 			</>
-
-		}
+			}
 			<div>
 				<button onClick={() => setDisplay(false)}>Clear Token Info</button>
 			</div>

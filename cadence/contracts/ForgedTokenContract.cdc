@@ -46,25 +46,8 @@ pub contract ForgedTokenContract: NonFungibleToken {
             self.metadata = {}
         }   
 
-        pub fun getID(): UInt64 {
-            return self.id
-        }
-
-        /* 
-        pub fun getDatas(): [AnyStruct] {
-            return [
-                {"forged": self.forged},
-                {"smith": self.smith}
-            ]
-        }
-        */
-
-        pub fun getMetadata(): {String: String} {
-            return self.metadata
-        }
-
         destroy(){
-            destroy self.forged
+			destroy self.forged
         }
     }
 
@@ -143,6 +126,7 @@ pub contract ForgedTokenContract: NonFungibleToken {
     
     pub resource interface NFTMinterPublic {
         pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordTokenContract.NFT}): @NFT
+		pub fun dismantle(forgedToken: @NFT): @{UInt64: WordTokenContract.NFT}
     }
 
     pub resource NFTMinter : NFTMinterPublic {
