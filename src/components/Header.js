@@ -8,7 +8,7 @@ const Header = () => {
     const buttons = {
         "": "Accueil", 
         "forge": "Forge",
-        "advanced": "Admin",
+        "advanced": "Avancé",
         "about": "A Propos",
     }
 
@@ -17,7 +17,7 @@ const Header = () => {
             <ul>
             {Object.entries(buttons).map(button => {
                 return (
-                    <li><Link to={"/"+button[0]}>{button[1]}</Link></li>
+                    <li key={button[0]}><Link to={"/"+button[0]}>{button[1]}</Link></li>
                 )
             })}
             </ul>

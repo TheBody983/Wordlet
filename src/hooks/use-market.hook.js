@@ -25,7 +25,7 @@ export default function useMarketHook( user ) {
     }, [ user ] )
     
     const getCurrentUserSalelist = async () => {
-        try {
+        if(user){try {
             await query({
                 cadence: GET_USER_SALELIST,
                 args: (arg, t) => [
@@ -38,7 +38,7 @@ export default function useMarketHook( user ) {
             
         } catch (error) {
             console.error(error)
-        }
+        }}
     }
 
     const getSellerCatalog = async () => {
@@ -144,6 +144,7 @@ export default function useMarketHook( user ) {
             console.log("TxID : " + transaction)
             await tx(transaction).onceSealed()
             console.log("Transaction Effectuée")
+            getMarketListings()
         } catch (error) {
             console.log("Transaction Echouée")
             console.error(error)
