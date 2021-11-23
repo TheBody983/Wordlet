@@ -61,7 +61,7 @@ const Forge = () => {
 						{
 							Object.keys(forgeWordTokens).map((token, index) => {
 							return (
-								<Draggable key={token} draggableId={token} index={index}>
+								<Draggable key={token} draggableId={"df"+token} index={index}>
 									{(provided) => (
 										<div ref = {provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
 											<WordTokenSoft key={forgeWordTokens[token]} tokenId={forgeWordTokens[token]}/>
@@ -88,7 +88,7 @@ const Forge = () => {
 					{
 						Object.keys(collectionWordTokens).map((token, index) => {
 						return (
-							<Draggable key={token} draggableId={token} index={index}>
+							<Draggable key={token} draggableId={"dc"+token} index={index}>
 								{(provided) => (
 									<div ref = {provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
 										<WordTokenSoft key={collectionWordTokens[token]} tokenId={collectionWordTokens[token]}/>
