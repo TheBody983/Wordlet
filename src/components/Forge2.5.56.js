@@ -1,67 +1,112 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useUser } from "../providers/UserProvider";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 import WordTokenSoft from "./WordTokenSoft";
 
-
 const Forge = () => {
 	
-	const { getUserWordTokens, userWordTokens, setUserWordTokens } = useUser( )
+	const { userWordTokens } = useUser( )
     const { mintForgedToken } = useUser( )
+
+	const [forgeWordTokens, setForgeWordTokens] = useState([]);
+	const [collectionWordTokens, setCollectionWordTokens] = useState(userWordTokens);
+
+	function reset(){
+		setCollectionWordTokens(userWordTokens);
+		setForgeWordTokens([]);
+	}
 
 	const onDragEnd = (result) => {
 		if (!result.destination) {
-			return;
+		  return;
 		}
-		const newItems = Array.from(userWordTokens);
-		const [removed] = newItems.splice(result.source.index, 1);
-		newItems.splice(result.destination.index, 0, removed);
-		setUserWordTokens(newItems);
-	};
+
+		if (result.source.droppableId === "droppableForge"){
+			const forgeListCopy = Array.from(forgeWordTokens);
+			const [removed] = forgeListCopy.splice(result.source.index, 1);
+			if(result.destination.droppableId === "droppableForge"){
+				forgeListCopy.splice(result.destination.index, 0, removed);
+			} else if (result.destination.droppableId === "droppableCollection") {
+				const collectionListCopy = Array.from(collectionWordTokens);
+				collectionListCopy.splice(result.destination.index, 0, removed);
+				setCollectionWordTokens(collectionListCopy);
+			}
+			setForgeWordTokens(forgeListCopy);
+
+		} else if(result.source.droppableId === "droppableCollection"){
+			const collectionListCopy = Array.from(collectionWordTokens);
+			const [removed] = collectionListCopy.splice(result.source.index, 1);
+			if(result.destination.droppableId === "droppableCollection"){
+				collectionListCopy.splice(result.destination.index, 0, removed);
+			} else if (result.destination.droppableId === "droppableForge") {
+				const forgeListCopy = Array.from(forgeWordTokens);
+				forgeListCopy.splice(result.destination.index, 0, removed);
+				setForgeWordTokens(forgeListCopy);
+			}
+			setCollectionWordTokens(collectionListCopy);
+		}
+	  };
+
 
     return(
 		<DragDropContext onDragEnd={onDragEnd}>
         <section id="forge">
             <div className="card">
                 <label>Mots à forger : </label>
-				<Droppable droppableId="droppableForge" direction="horizontal">
-				{(provided, snapshot) => (
+				<Droppable key="df" droppableId="droppableForge" direction="horizontal">
+				{(provided) => (
 					<div className="market-listings" style={{height: 100}} ref={provided.innerRef} {...provided.droppableProps}>
+						{
+							Object.keys(forgeWordTokens).map((token, index) => {
+							return (
+								<Draggable key={token} draggableId={token} index={index}>
+									{(provided) => (
+										<div ref = {provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
+											<WordTokenSoft key={forgeWordTokens[token]} tokenId={forgeWordTokens[token]}/>
+										</div>
+									)}
+								</Draggable>
+							)
+							})
+						}
+					{provided.placeholder}
 					</div>
 				)}
 				</Droppable>
                 <button onClick={() => mintForgedToken()}>Forger</button> 
             </div>
-			<img src="forge_full.png" id="mountains_front" alt=""/>
+			
 			
 			{
-				userWordTokens &&
+				collectionWordTokens &&
 				
-				<Droppable droppableId="droppableCollection" direction="horizontal">
-				{(provided, snapshot) => (
-				<div className="market-listings" ref={provided.innerRef} {...provided.droppableProps}>
-				{
-					Object.keys(userWordTokens).map((token, index) => {
-					return (
-						<Draggable key={token} draggableId={token} index={index}>
-							{(provided, snapshot) => (
-								<div ref = {provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
-									<WordTokenSoft key={userWordTokens[token]} tokenId={userWordTokens[token]}/>
-								</div>
-							)}
-						</Draggable>
-					)
-					})
-				}
-				</div> 
+				<Droppable key="dc" droppableId="droppableCollection" direction="horizontal">
+				{(provided) => (
+					<div className="market-listings" ref={provided.innerRef} {...provided.droppableProps}>
+					{
+						Object.keys(collectionWordTokens).map((token, index) => {
+						return (
+							<Draggable key={token} draggableId={token} index={index}>
+								{(provided) => (
+									<div ref = {provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
+										<WordTokenSoft key={collectionWordTokens[token]} tokenId={collectionWordTokens[token]}/>
+									</div>
+								)}
+							</Draggable>
+						)
+						})
+					}
+					{provided.placeholder}
+					</div> 
 				)}
 				</Droppable>
 			}
 			
 
-			<button onClick={() => getUserWordTokens()}> Actualiser </button>
+			<button onClick={() =>  reset()}> Reinitialiser </button>
+			<img src="forge_full.png" id="mountains_front" alt=""/>
         </section>
 		</DragDropContext>
     )

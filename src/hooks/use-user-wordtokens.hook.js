@@ -28,5 +28,5 @@ export default function useUserWordTokens( user ) {
         }
     }
 
-    return { userWordTokens, getUserWordTokens ,setUserWordTokens }
+    return { userWordTokens, getUserWordTokens }
 }
