@@ -78,7 +78,7 @@ pub contract ForgedTokenContract: NonFungibleToken {
 
         pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
             let token <- self.ownedNFTs.remove(key: withdrawID)
-                ?? panic("Inpossible de retirer le WordToken : Il n'est pas dans la Collection")
+                ?? panic("Impossible de retirer le WordToken : Il n'est pas dans la Collection")
 
             emit Withdraw(id: token.id, from:self.owner?.address)
 
