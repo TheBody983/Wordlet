@@ -96,22 +96,20 @@ const Forge = () => {
 					</div>
 				)}
 				</Droppable>
-
 				<Popup trigger={<button>Forger</button>} modal>
-
-					{forgeWordTokens.length < 2 ?
-						<div className="card">
-							<label>Veuillez selectionner plus de 2 mots à forger</label>
-						</div>	
-					:
-						<div className="card">
-							<label>Êtes vous sûr de forger ces mots ? (ils ne pourront pas être dissociés par la suite)</label>
-							<button onClick={() => forge(forgeWordTokens)}>Forger</button> 
-						</div>	
-						
-					}
-					
-
+				{close => (
+						forgeWordTokens.length < 2 ?
+							<div className="card">
+								<label>Veuillez selectionner plus de 2 mots à forger</label>
+								<button className="button" onClick={() => { close(); }}> Ok </button>
+							</div>	
+						:
+							<div className="card">
+								<label>Êtes vous sûr de forger ces mots ? (ils ne pourront pas être dissociés par la suite)</label>
+								<button onClick={() => forge(forgeWordTokens)}>Forger</button> 
+								<button className="button" onClick={() => { close(); }}> Annuler </button>
+							</div>							
+				)}
 				</Popup>
             </div>
 			
