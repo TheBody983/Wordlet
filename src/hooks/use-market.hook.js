@@ -204,6 +204,23 @@ export default function useMarketHook( user ) {
         }
     }
 
+    const getUserSalelist = async(address, setUserSalelist)=>{
+        try {
+            await query({
+                cadence: GET_USER_SALELIST,
+                args: (arg, t) => [
+                    arg(address, t.Address),
+                ]
+            })
+            .then(function(data) {
+                setUserSalelist(Object.entries(data).map((e) => ( { "id": parseInt(e[1]), "seller": address} )) );
+            })
+        } catch (error) {
+            console.debug("getUserSalelist Failed")
+            console.error(error)
+        }
+    }
+
     return { 
         userSalelist, 
         sellerCatalog, 
@@ -219,5 +236,6 @@ export default function useMarketHook( user ) {
         addToSellerCatalog, 
         removeFromSellerCatalog, 
         updateTokenPrice,
+        getUserSalelist,
     }
 }
