@@ -84,7 +84,7 @@ const Forge = () => {
 				<label>Mots à forger : </label>
 				<Droppable key="df" droppableId="droppableForge" direction="horizontal">
 				{(provided) => (
-					<div className="market-listings" style={{height: 130}} ref={provided.innerRef} {...provided.droppableProps}>
+					<div className="market-listings" style={{minHeight: 150, minWidth: 150}} ref={provided.innerRef} {...provided.droppableProps}>
 						{
 							Object.keys(forgeWordTokens).map((token, index) => {
 							return (
@@ -125,7 +125,7 @@ const Forge = () => {
 					<label>Vos mots : </label>
 					<Droppable key="dc" droppableId="droppableCollection" direction="horizontal">
 					{(provided) => (
-						<div className="market-listings" ref={provided.innerRef} {...provided.droppableProps}>
+						<div className="market-listings" style={{minHeight: 150, minWidth: 150}} ref={provided.innerRef} {...provided.droppableProps}>
 						{
 							Object.keys(collectionWordTokens).map((token, index) => {
 							return (
