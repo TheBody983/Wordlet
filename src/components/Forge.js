@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useUser } from "../providers/UserProvider";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
@@ -9,10 +9,20 @@ import WordTokenSoft from "./WordTokenSoft";
 const Forge = () => {
 	
 	const { userWordTokens, getUserWordTokens } = useUser( )
-    const { mintForgedToken } = useUser( )
+	const { mintForgedToken } = useUser( )
 
 	const [forgeWordTokens, setForgeWordTokens] = useState([]);
 	const [collectionWordTokens, setCollectionWordTokens] = useState(userWordTokens);
+
+	const [initialized, setInitialized] = useState(false);
+
+	useEffect(() => {
+		if(userWordTokens && !initialized){
+			reset();
+			setInitialized(true);
+		}
+	});
+
 
 	function reset(){
 		getUserWordTokens();
@@ -23,18 +33,14 @@ const Forge = () => {
 	function forge(wordTokens){
 		if(wordTokens.length >= 2){
 			mintForgedToken(wordTokens);
-		} else{
-			console.log("- de deux mots");
-			
+		} else{			
 			return(
 				<div>
 					<Popup className="errorPopup" modal open={true}>
 						<div className="card">Popup content here !!</div>
 					</Popup>
 				</div>
-			)
-			
-			
+			)			
 		}
 	}
 
@@ -70,19 +76,19 @@ const Forge = () => {
 	  };
 
 
-    return (
+	return (
 		
 		<DragDropContext onDragEnd={onDragEnd}>
-        <section id="forge">
-            <div className="card">
-                <label>Mots à forger : </label>
+		<section id="forge">
+			<div className="card">
+				<label>Mots à forger : </label>
 				<Droppable key="df" droppableId="droppableForge" direction="horizontal">
 				{(provided) => (
 					<div className="market-listings" style={{height: 130}} ref={provided.innerRef} {...provided.droppableProps}>
 						{
 							Object.keys(forgeWordTokens).map((token, index) => {
 							return (
-								<Draggable key={token} draggableId={"df"+token} index={index}>
+								<Draggable key={token} draggableId={"df#"+token} index={index}>
 									{(provided) => (
 										<div ref = {provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
 											<WordTokenSoft key={forgeWordTokens[token]} tokenId={forgeWordTokens[token]}/>
@@ -111,7 +117,7 @@ const Forge = () => {
 							</div>							
 				)}
 				</Popup>
-            </div>
+			</div>
 			
 			{
 				collectionWordTokens &&
@@ -123,7 +129,7 @@ const Forge = () => {
 						{
 							Object.keys(collectionWordTokens).map((token, index) => {
 							return (
-								<Draggable key={token} draggableId={"dc"+token} index={index}>
+								<Draggable key={token} draggableId={"dc#"+token} index={index}>
 									{(provided) => (
 										<div ref = {provided.innerRef}{...provided.draggableProps}{...provided.dragHandleProps}>
 											<WordTokenSoft key={collectionWordTokens[token]} tokenId={collectionWordTokens[token]}/>
@@ -143,9 +149,9 @@ const Forge = () => {
 
 			<button onClick={() =>  reset()}> Reinitialiser </button>
 			<img src="forge_full.png" id="mountains_front" alt=""/>
-        </section>
+		</section>
 		</DragDropContext>
-    )
+	)
 }
 
 export default Forge
