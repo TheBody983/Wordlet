@@ -47,6 +47,9 @@
 `flow scripts execute --network testnet ./cadence/scripts/WordToken/get-wordtoken-data.script.cdc --arg Address:0x1f7da62a915f01c7 --arg UInt64:20`
 > Affiche les metadonnées du WordToken 20 sur le compte Wordlet (collection ou espace de vente)
 
+`flow scripts execute --network testnet ./cadence/scripts/WordToken/get-all-wordtoken-datas.script.cdc 0x1f7da62a915f01c7`
+> Affiche les metadonnées de tous les WordToken sur le compte Wordlet (collection)
+
 `flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-marketplace.script.cdc 0x1f7da62a915f01c7`
 > Affiche le marketplace du compte wordlet
 

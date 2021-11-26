@@ -4,6 +4,6 @@ pub fun main(address: Address) : [UInt64]? {
     let owner = getAccount(address)
     let ref = owner.getCapability<&{WordTokenContract.WordTokenCollectionPublic}>(WordTokenContract.CollectionPublicPath).borrow()
         ?? panic("Could not borrow account nft collection reference")
-
+		
     return ref.getIDs()
 }

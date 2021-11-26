@@ -16,7 +16,7 @@ export default function UserProvider({ children }) {
     const { user } = useAuth()
     const { WOTBalance, getWOTBalance, createWOTVault } = useWOT( user )
     const { getTokenData, transferWordToken } = useWordTokens( )
-    const { userWordTokens, getUserWordTokens } = useUserWordTokens( user )
+    const { userWordTokens, getUserWordTokens, allWordTokenDatas, getAllWordTokenDatas} = useUserWordTokens( user )
     const { userForgedTokens, getUserForgedTokens } = useUserForgedTokens( user )
     const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user )
     const { setupAccount } = useAccountState( )
@@ -31,6 +31,8 @@ export default function UserProvider({ children }) {
             setupAccount,
             userWordTokens,
             getUserWordTokens,
+			allWordTokenDatas,
+			getAllWordTokenDatas,
             getTokenData,
             userSalelist,
             getCurrentUserSalelist,
