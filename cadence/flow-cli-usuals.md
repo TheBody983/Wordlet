@@ -3,11 +3,11 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/General/setup-account.tx.cdc`
 > Setup le compte signataire (WOT, WordToken, ForgedToken, Marketplace)
 
-`flow transactions send --network testnet --signer wordlet ./cadence/WOT/transactions/mint-wot.tx.cdc 1000.0`
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/WOT/mint-wot.tx.cdc 1000.0`
 > Mine 1000 WOTs via la transaction MintWOT.tx.cdc dans le compte wordlet
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WOT/transfer-wot.tx.cdc 0x5be6fee0409b4842 1000.0`
-> Transfert 1000 WOT du compte wordlet vers le compte de Lucas
+> Transfert 1000 WOT du compte wordlet vers le compte Lucas
 
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-wordtoken.tx.cdc "vente" "original"`
 > Mine un WordToken via la transaction MintWOT.cdc dans le compte signataire (wordlet)
@@ -33,6 +33,9 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/mint-forgedtoken.tx.cdc [5,4]`
 > Créer un ForgedToken a partir des WordTokens 20 et 21
 
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/ForgedToken/transfer-forgedtoken.tx.cdc 0x5be6fee0409b4842 1`
+> Transfert le ForgedToken numero 1 vers le compte Lucas
+
 -----------------------------------------------SCRIPTS-------------------------------------------------
 
 `flow scripts execute --network testnet ./cadence/scripts/WOT/get-wot-balance.script.cdc 0x1f7da62a915f01c7`
@@ -43,6 +46,9 @@
 
 `flow scripts execute --network testnet ./cadence/scripts/WordToken/get-wordtoken-data.script.cdc --arg Address:0x1f7da62a915f01c7 --arg UInt64:20`
 > Affiche les metadonnées du WordToken 20 sur le compte Wordlet (collection ou espace de vente)
+
+`flow scripts execute --network testnet ./cadence/scripts/WordToken/get-all-wordtoken-datas.script.cdc 0x1f7da62a915f01c7`
+> Affiche les metadonnées de tous les WordToken sur le compte Wordlet (collection)
 
 `flow scripts execute --network testnet ./cadence/scripts/Marketplace/get-marketplace.script.cdc 0x1f7da62a915f01c7`
 > Affiche le marketplace du compte wordlet
@@ -67,6 +73,9 @@
 
 `flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-smith.script.cdc 0x1f7da62a915f01c7 1`
 > Affiche le smith du ForgedToken 1 sur le compte Wordlet
+
+`flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-data.script.cdc --arg Address:0x5be6fee0409b4842 --arg UInt64:5`
+> Affiche les données du ForgedToken 5 sur le compte Wordlet (collection ou espace de vente)
 
 `flow scripts execute --network testnet ./cadence/scripts/ForgedToken/get-forgedtoken-wt.script.cdc --arg Address:0x1f7da62a915f01c7 --arg UInt64:1`
 > Affiche les données des tokens compris dans le ForgedToken ciblé

@@ -41,6 +41,8 @@ pub contract MarketplaceContract002 {
 		}
 
 		pub fun listForSale(token: @NonFungibleToken.NFT, price: UFix64) {
+			let token <- token as! @WordTokenContract.NFT
+
 			let id = token.id
 
 			self.prices[id] = price
