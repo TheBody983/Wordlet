@@ -145,7 +145,7 @@ const Forge = () => {
 			}
 			
 
-			<button onClick={() =>  reset()}> Reinitialiser </button>
+			<button onClick={() =>  reset()}> Actualiser </button>
 
 			<img src="forge_full.png" id="mountains_front" alt=""/>
 		</section>
