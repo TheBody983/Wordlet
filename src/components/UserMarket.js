@@ -15,8 +15,6 @@ const UserMarket = () => {
         getUserSalelist (address, setUserSalelist)
     }, [])
 
-    console.log(userSalelist)
-
     return (
         
         <section id="marche">
