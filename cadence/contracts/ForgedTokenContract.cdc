@@ -125,18 +125,22 @@ pub contract ForgedTokenContract: NonFungibleToken {
 
     
     pub resource interface NFTMinterPublic {
-        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordTokenContract.NFT}): @NFT
-		pub fun dismantle(forgedToken: @NFT): @{UInt64: WordTokenContract.NFT}
+        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordTokenContract.NFT}): @NFT?
     }
 
     pub resource NFTMinter : NFTMinterPublic {
 
         // Créé un nouveau Token et le retourne
-        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordTokenContract.NFT}): @NFT {
+        pub fun mintNFT(smithAcct: AuthAccount, toForge: @{UInt64: WordTokenContract.NFT}): @NFT? {
             //emit Minted(id: ForgedTokenContract.totalSupply, smithAcct: smithAcct, forged: toForge)
-            ForgedTokenContract.totalSupply = ForgedTokenContract.totalSupply + 1 as UInt64
-            var newNFT <- create NFT(initID: ForgedTokenContract.totalSupply, forged: <- toForge, smith: smithAcct.address)
-            return <- newNFT
+			if toForge.length >= 2 {
+				ForgedTokenContract.totalSupply = ForgedTokenContract.totalSupply + 1 as UInt64
+				var newNFT <- create NFT(initID: ForgedTokenContract.totalSupply, forged: <- toForge, smith: smithAcct.address)
+				return <- newNFT
+			} else {
+				destroy toForge
+				return nil
+			}
         }
     }
 

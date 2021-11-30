@@ -1,6 +1,6 @@
 import WordTokenContract, ForgedTokenContract from 0x1f7da62a915f01c7
 
-pub fun main(address: Address, id: UInt64) : ForgedTokenData? {
+pub fun main(address: Address, id: UInt64) : {String : String}? {
 
 	let nftOwner = getAccount(address)
 
@@ -13,19 +13,9 @@ pub fun main(address: Address, id: UInt64) : ForgedTokenData? {
 				forgedTokenWords = forgedTokenWords.concat(wordToken.word).concat(" ")
 				i = i + 1
 			}
-			return ForgedTokenData(words: forgedTokenWords.slice(from: 0, upTo: forgedTokenWords.length-1), smith: forgedToken.smith) 
+			return {"words": forgedTokenWords.slice(from: 0, upTo: forgedTokenWords.length-1), "smith": forgedToken.smith.toString()} 
 		}
 	}
 
 	return nil
-}
-
-pub struct ForgedTokenData {
-    pub let words: String
-    pub let smith: Address
-
-    init(words: String, smith: Address) {
-        self.words = words
-        self.smith = smith
-    }
 }
