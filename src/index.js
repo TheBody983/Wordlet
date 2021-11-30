@@ -6,7 +6,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import App from './routes/App';
 import About from './routes/About';
-import Forge from './routes/Forge';
+import Forge from './routes/ForgeApp';
 import Advanced from './routes/Advanced';
 import Decoy from './routes/Decoy';
 import Header from "./components/Header";
