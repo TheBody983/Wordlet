@@ -5,10 +5,12 @@ import { query, mutate, tx } from '@onflow/fcl'
 import { GET_WOT_BALANCE } from '../cadence/get-wot-balance.script';
 import { CREATE_WOT_VAULT } from '../cadence/create-wot-vault.tx';
 
-export default function useWOT( user ) {
+export default function useWOT( user, loggedIn ) {
     const [WOTBalance, setWOTBalance] = useState(null)
 
-    useEffect( () => getWOTBalance(), [ user ])
+    useEffect( () => {
+		getWOTBalance()
+	}, [ loggedIn ])
 
     const getWOTBalance = async () => {
         if(user){

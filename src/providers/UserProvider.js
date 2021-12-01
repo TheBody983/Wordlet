@@ -13,12 +13,12 @@ import useUserForgedTokens from "../hooks/use-user-forgedtokens.hook";
 const UserContext = createContext()
 
 export default function UserProvider({ children }) {
-    const { user } = useAuth()
-    const { WOTBalance, getWOTBalance, createWOTVault } = useWOT( user )
+    const { user, loggedIn } = useAuth()
+    const { WOTBalance, getWOTBalance, createWOTVault } = useWOT( user, loggedIn )
     const { getTokenData, transferWordToken } = useWordTokens( )
-    const { userWordTokens, getUserWordTokens, allWordTokenDatas, getAllWordTokenDatas} = useUserWordTokens( user )
-    const { userForgedTokens, getUserForgedTokens } = useUserForgedTokens( user )
-    const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user )
+    const { userWordTokens, getUserWordTokens, allWordTokenDatas, getAllWordTokenDatas} = useUserWordTokens( user, loggedIn )
+    const { userForgedTokens, getUserForgedTokens } = useUserForgedTokens( user, loggedIn )
+    const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user, loggedIn )
     const { setupAccount } = useAccountState( )
     const { mintForgedToken, getForgedTokenData, transferForgedtoken } = useForgedToken( )
 

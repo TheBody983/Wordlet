@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { query } from '@onflow/fcl'
 import { GET_USER_FORGEDTOKENS } from "../cadence/get-user-forgedtokens.script";
 
-export default function useUserForgedTokens( user ) { 
+export default function useUserForgedTokens(  user, loggedIn ) { 
 	const [ userForgedTokens, setUserForgedTokens ] = useState(null)
 
-	useEffect( () => getUserForgedTokens(), [ user ] )
+	useEffect( () => {
+		getUserForgedTokens()
+	}, [ loggedIn ] )
 
 	const getUserForgedTokens = async () => {
 		if( user ){

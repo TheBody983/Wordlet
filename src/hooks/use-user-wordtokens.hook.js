@@ -4,14 +4,14 @@ import { query } from '@onflow/fcl'
 import { GET_USER_WORDTOKENS } from "../cadence/get-user-wordtokens.script";
 import { GET_ALL_WORDTOKEN_DATAS } from "../cadence/get-all-wordtoken-datas.script";
 
-export default function useUserWordTokens( user ) {
+export default function useUserWordTokens( user, loggedIn ) {
     const [ userWordTokens, setUserWordTokens ] = useState(null)
 	const [ allWordTokenDatas, setAllWordTokenDatas ] = useState(null)
 
     useEffect( () => {
 		getUserWordTokens()
 		getAllWordTokenDatas()
-	}, [ user ] )
+	}, [ loggedIn ])
 
     const getUserWordTokens = async () => {
         if( user ){

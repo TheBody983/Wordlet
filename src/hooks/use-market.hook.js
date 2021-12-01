@@ -11,18 +11,19 @@ import { GET_MARKET_LISTINGS } from "../cadence/get-market-listings.script";
 import { REMOVE_FROM_SELLER_CATALOG } from "../cadence/remove-from-seller-catalog.tx";
 import { ADD_TO_SELLER_CATALOG } from "../cadence/add-to-seller-catalog.tx";
 
-export default function useMarketHook( user ) {
+export default function useMarketHook( user, loggedIn ) {
     const [ userSalelist, setUserSalelist ] = useState(null)
     const [ sellerCatalog, setSellerCatalog ] = useState([])
     const [ marketListings, setMarketListings] = useState([])
     const [ userIsSeller, setUserIsSeller ] = useState(null)
 
+	useEffect( () => {
+		getSellerCatalog()
+    }, [])
+
     useEffect( () => {
-        getCurrentUserSalelist()
-        getSellerCatalog()
-        getMarketListings()
-        setUserIsSeller(sellerCatalog.includes(user?.addr))
-    }, [ user ] )
+		getCurrentUserSalelist()
+    }, [ loggedIn ])
     
     const getCurrentUserSalelist = async () => {
         try {
@@ -130,7 +131,7 @@ export default function useMarketHook( user ) {
 
     const listTokenForSale = async(tokenId, price)=>{
         // pasage d'argument entiers pose problème ajoute une décimale null si c'est le cas
-        if(price%1==0) price+= ".0"
+        if(price%1===0) price+= ".0"
 
         try {
             let transaction = await mutate({
