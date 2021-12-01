@@ -17,7 +17,7 @@ const Header = () => {
             <ul>
             {Object.entries(buttons).map(button => {
                 return (
-                    <li><Link to={"/"+button[0]}>{button[1]}</Link></li>
+                    <li key={button[1]}><Link to={"/"+button[0]}>{button[1]}</Link></li>
                 )
             })}
             </ul>
