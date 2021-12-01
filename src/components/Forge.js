@@ -30,6 +30,7 @@ const Forge = () => {
 			var idList = []
 			forgeWordTokens.map(tokenIndex => {
 				idList.push(parseInt(tokenIndex["id"]))
+				return(null)
 			});
 			mintForgedToken(idList)
 		}

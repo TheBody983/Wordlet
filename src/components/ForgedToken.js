@@ -13,7 +13,7 @@ const WordToken = (props) => {
 	
 	useEffect(() => {
 		getForgedTokenData(setTokenData, user?.addr, props.tokenId)
-	}, [ display ])
+	}, [ display, user, getForgedTokenData, setTokenData, props ])
 
 	if(!display){
 		return (

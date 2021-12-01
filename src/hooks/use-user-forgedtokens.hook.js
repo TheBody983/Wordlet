@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 import { query } from '@onflow/fcl'
 import { GET_USER_FORGEDTOKENS } from "../cadence/get-user-forgedtokens.script";
@@ -6,13 +6,7 @@ import { GET_USER_FORGEDTOKENS } from "../cadence/get-user-forgedtokens.script";
 export default function useUserForgedTokens(  user, loggedIn ) { 
 	const [ userForgedTokens, setUserForgedTokens ] = useState(null)
 
-	useEffect( () => {
-		if(loggedIn){
-			getUserForgedTokens()
-		}
-	}, [ loggedIn ] )
-
-	const getUserForgedTokens = async () => {
+	const getUserForgedTokens = useCallback(async () => {
 		if( user ){
 			try {
 				await query({
@@ -30,7 +24,13 @@ export default function useUserForgedTokens(  user, loggedIn ) {
 				console.error(error)
 			}
 		}
-	}
+	}, [user])
+
+	useEffect( () => {
+		if(loggedIn){
+			getUserForgedTokens()
+		}
+	}, [ loggedIn, getUserForgedTokens ] )
 
 	return { userForgedTokens, getUserForgedTokens }
 }

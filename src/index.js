@@ -9,7 +9,6 @@ import About from './routes/About';
 import Forge from './routes/ForgeApp';
 import Advanced from './routes/Advanced';
 import Decoy from './routes/Decoy';
-import Header from "./components/Header";
 
 ReactDOM.render(
     <BrowserRouter>

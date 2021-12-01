@@ -1,10 +1,10 @@
-import { useState } from "react"
+//import { useState } from "react"
 import React from "react"
 
 import {Link} from 'react-router-dom';
 
 const Header = () => {
-    const [active, setActive] = useState("accueil")
+    //const [active, setActive] = useState("accueil")
     const buttons = {
         "": "Accueil", 
         "forge": "Forge",

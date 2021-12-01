@@ -13,7 +13,7 @@ const WordToken = (props) => {
 	useEffect(() => {
 		getTokenData(setTokenData, props.seller?props.seller:user?.addr, props.tokenId)
 		getTokenPrice(props.seller?props.seller:user?.addr, props.tokenId, setTokenPrice)
-	}, [ display ])
+	}, [ display, getTokenData, getTokenPrice, props, user])
 
 	if(!display){
 		return (

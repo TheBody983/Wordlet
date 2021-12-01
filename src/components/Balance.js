@@ -3,7 +3,7 @@ import React from "react";
 import { useUser } from "../providers/UserProvider";
 
 const MyBalance = () => {
-    const { WOTBalance, getWOTBalance, createWOTVault } = useUser()
+    const { WOTBalance, getWOTBalance } = useUser()
     return (
     <div className="balance">
         {WOTBalance!==null?
