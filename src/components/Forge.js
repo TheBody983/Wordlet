@@ -15,9 +15,7 @@ const Forge = () => {
 	const [collectionWordTokens, setCollectionWordTokens] = useState([])
 
 	useEffect(() => {
-		if(allWordTokenDatas){
-			reset()
-		} 
+		setCollectionWordTokens(allWordTokenDatas)
 	}, [ allWordTokenDatas ])
 
 
