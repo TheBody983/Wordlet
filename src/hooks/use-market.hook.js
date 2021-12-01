@@ -22,7 +22,9 @@ export default function useMarketHook( user, loggedIn ) {
     }, [])
 
     useEffect( () => {
-		getCurrentUserSalelist()
+		if(loggedIn){
+			getCurrentUserSalelist()
+		}
     }, [ loggedIn ])
     
     const getCurrentUserSalelist = async () => {
@@ -49,7 +51,7 @@ export default function useMarketHook( user, loggedIn ) {
             })
             .then(function(data) {
                 setSellerCatalog(data)
-                setUserIsSeller(sellerCatalog.includes(user?.addr))
+                setUserIsSeller(data.includes(user?.addr))
                 getMarketListings()
             })
             
@@ -122,6 +124,7 @@ export default function useMarketHook( user, loggedIn ) {
             })
             console.log("TxID : " + transaction)
             await tx(transaction).onceSealed()
+
             console.log("Transaction Effectuée")
         } catch (error) {
             console.log("Transaction Echouée")
@@ -161,6 +164,7 @@ export default function useMarketHook( user, loggedIn ) {
             console.log("TxID : " + transaction)
             await tx(transaction).onceSealed()
             console.log("Transaction Effectuée")
+			getSellerCatalog()
         } catch (error) {
             console.log("Transaction Echouée")
             console.error(error)
@@ -177,6 +181,7 @@ export default function useMarketHook( user, loggedIn ) {
             console.log("TxID : " + transaction)
             await tx(transaction).onceSealed()
             console.log("Transaction Effectuée")
+			getSellerCatalog()
         } catch (error) {
             console.log("Transaction Echouée")
             console.error(error)
