@@ -22,7 +22,6 @@ export default function UserProvider({ children }) {
     const { setupAccount } = useAccountState( )
     const { mintForgedToken, getForgedTokenData, transferForgedtoken } = useForgedToken( )
 
-
     return (
         <UserContext.Provider value={{
             WOTBalance,

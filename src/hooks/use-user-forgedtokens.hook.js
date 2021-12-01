@@ -7,7 +7,9 @@ export default function useUserForgedTokens(  user, loggedIn ) {
 	const [ userForgedTokens, setUserForgedTokens ] = useState(null)
 
 	useEffect( () => {
-		getUserForgedTokens()
+		if(loggedIn){
+			getUserForgedTokens()
+		}
 	}, [ loggedIn ] )
 
 	const getUserForgedTokens = async () => {

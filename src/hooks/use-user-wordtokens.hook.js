@@ -9,8 +9,10 @@ export default function useUserWordTokens( user, loggedIn ) {
 	const [ allWordTokenDatas, setAllWordTokenDatas ] = useState(null)
 
     useEffect( () => {
-		getUserWordTokens()
-		getAllWordTokenDatas()
+		if(loggedIn){
+			getUserWordTokens()
+			getAllWordTokenDatas()
+		}
 	}, [ loggedIn ])
 
     const getUserWordTokens = async () => {

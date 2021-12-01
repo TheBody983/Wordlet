@@ -9,7 +9,9 @@ export default function useWOT( user, loggedIn ) {
     const [WOTBalance, setWOTBalance] = useState(null)
 
     useEffect( () => {
-		getWOTBalance()
+		if(loggedIn){
+			getWOTBalance()
+		}
 	}, [ loggedIn ])
 
     const getWOTBalance = async () => {
