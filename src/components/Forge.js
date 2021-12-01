@@ -14,14 +14,11 @@ const Forge = () => {
 	const [forgeWordTokens, setForgeWordTokens] = useState([])
 	const [collectionWordTokens, setCollectionWordTokens] = useState([])
 
-	const [initialized, setInitialized] = useState(false)
-
 	useEffect(() => {
-		if(!initialized && allWordTokenDatas){
+		if(allWordTokenDatas){
 			reset()
-			setInitialized(true)
 		} 
-	})
+	}, [ allWordTokenDatas ])
 
 
 	function reset(){
@@ -45,31 +42,24 @@ const Forge = () => {
 		  return
 		}
 
-		if(result.source.droppableId === "droppableForge"){
-			const forgeListCopy = Array.from(forgeWordTokens)
-			const [removed] = forgeListCopy.splice(result.source.index, 1)
-			if(result.destination.droppableId === "droppableForge"){
-				forgeListCopy.splice(result.destination.index, 0, removed)
-			} else if(result.destination.droppableId === "droppableCollection") {
-				const collectionListCopy = Array.from(collectionWordTokens)
-				collectionListCopy.splice(result.destination.index, 0, removed)
-				setCollectionWordTokens(collectionListCopy)
-			}
-			setForgeWordTokens(forgeListCopy)
+		const forgeListCopy = Array.from(forgeWordTokens)
+		const collectionListCopy = Array.from(collectionWordTokens)
+		var [removed] = [null]
 
-		} else if(result.source.droppableId === "droppableCollection"){
-			const collectionListCopy = Array.from(collectionWordTokens)
-			const [removed] = collectionListCopy.splice(result.source.index, 1)
-			if(result.destination.droppableId === "droppableCollection"){
-				collectionListCopy.splice(result.destination.index, 0, removed)
-			} else if(result.destination.droppableId === "droppableForge") {
-				const forgeListCopy = Array.from(forgeWordTokens)
-				forgeListCopy.splice(result.destination.index, 0, removed)
-				setForgeWordTokens(forgeListCopy)
-			}
-			setCollectionWordTokens(collectionListCopy)
+		if(result.source.droppableId === "droppableForge"){
+			[removed] = forgeListCopy.splice(result.source.index, 1)
+		} else {
+			[removed] = collectionListCopy.splice(result.source.index, 1)
 		}
-	  }
+
+		if(result.destination.droppableId === "droppableCollection"){
+			collectionListCopy.splice(result.destination.index, 0, removed)
+		} else {
+			forgeListCopy.splice(result.destination.index, 0, removed)
+		}
+		setCollectionWordTokens(collectionListCopy)
+		setForgeWordTokens(forgeListCopy)
+	}
 
 
 	return (
