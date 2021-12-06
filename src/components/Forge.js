@@ -93,7 +93,7 @@ const Forge = () => {
 				{close => (
 						forgeWordTokens.length < 2 ?
 							<div className="card">
-								<label>Veuillez selectionner plus de 2 mots à forger</label>
+								<label>Veuillez selectionner au moins 2 mots à forger</label>
 								<button className="button" onClick={() => { close() }}> Ok </button>
 							</div>	
 						:
