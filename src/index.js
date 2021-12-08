@@ -9,7 +9,6 @@ import About from './routes/About';
 import Forge from './routes/ForgeApp';
 import Advanced from './routes/Advanced';
 import Decoy from './routes/Decoy';
-
 ReactDOM.render(
     <BrowserRouter>
         <Routes>
@@ -25,6 +24,7 @@ ReactDOM.render(
                 <Route path = "about" element = {<About />} />
                 <Route path = "forge" element = {<Forge />} />
                 <Route path = "advanced" element = {<Advanced />} />
+                <Route path = "userMarket" element = {<UserMarket />} />
             <Route path = "decoy" element = {<Decoy />} />
         </Routes>
     </BrowserRouter>,
