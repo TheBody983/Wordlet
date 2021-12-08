@@ -9,6 +9,7 @@ import About from './routes/About';
 import Forge from './routes/ForgeApp';
 import Advanced from './routes/Advanced';
 import Decoy from './routes/Decoy';
+import UserMarket from './routes/UserMarket';
 ReactDOM.render(
     <BrowserRouter>
         <Routes>

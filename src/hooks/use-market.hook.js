@@ -163,7 +163,7 @@ export default function useMarketHook( user, loggedIn ) {
 	}
   
   const updateTokenPrice = async(tokenId, price)=>{
-        if(price%1==0) price+= ".0"
+        if(price%1===0) price+= ".0"
 
         try {
             let transaction = await mutate({

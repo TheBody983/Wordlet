@@ -9,11 +9,11 @@ const UserMarket = () => {
     const { getUserSalelist} = useUser( "0x1f7da62a915f01c7" )
 
     const [userSalelist, setUserSalelist] = useState([])
-    const [address, setAddress] = useState("0x1f7da62a915f01c7")
+    const [address] = useState("0x1f7da62a915f01c7")
 
     useEffect(() => {
         getUserSalelist (address, setUserSalelist)
-    }, [])
+    }, [address, getUserSalelist])
 
     return (
         

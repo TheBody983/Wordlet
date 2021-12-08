@@ -18,7 +18,7 @@ export default function UserProvider({ children }) {
     const { getTokenData, transferWordToken } = useWordTokens( )
     const { userWordTokens, getUserWordTokens, allWordTokenDatas, getAllWordTokenDatas} = useUserWordTokens( user, loggedIn )
     const { userForgedTokens, getUserForgedTokens } = useUserForgedTokens( user, loggedIn )
-    const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller} = useMarket( user, loggedIn )
+    const { userSalelist, getCurrentUserSalelist, buyWordtoken, listTokenForSale, removeTokenFromSale, getTokenPrice, marketListings, getMarketListings, addToSellerCatalog, removeFromSellerCatalog, userIsSeller, updateTokenPrice, getUserSalelist} = useMarket( user, loggedIn )
     const { setupAccount } = useAccountState( )
     const { mintForgedToken, getForgedTokenData, transferForgedtoken } = useForgedToken( )
 
