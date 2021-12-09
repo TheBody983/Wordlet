@@ -7,7 +7,7 @@ const Decoy = () => {
         <Providers>
             <Header/>
             <section>
-                <h1>Decoy en construction...</h1>
+                <h1>Le Decoy arrive bientôt</h1>
                 <img src="marche.png" id="marche" alt=""/>
             </section>
         </Providers>
