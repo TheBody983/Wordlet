@@ -8,7 +8,7 @@ const Community = () => {
             </div>
             <ul id="contacts">
                 <li className="card"><a href="mailto:wordletthewordwallet@gmail.com" >mail</a></li>
-                <li className="card"><a href="https://discord.gg/zmRRJcVJzM">Discord</a></li>
+                <li className="card"><a href="https://discord.gg/Cr5t7UVhdG">Discord</a></li>
                 <li className="card"><a href="https://www.linkedin.com/company/wordlet/">LinkedIn</a></li>
                 <li className="card"><a href="https://www.facebook.com/WordletTheWordWallet">Facebook</a></li>
             </ul>
