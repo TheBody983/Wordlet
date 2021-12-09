@@ -8,7 +8,7 @@ const Header = () => {
     const buttons = {
         "": "Accueil", 
         "forge": "Forge",
-        "advanced": "Avancé",
+        // "advanced": "Avancé",
         "about": "A Propos",
     }
 
