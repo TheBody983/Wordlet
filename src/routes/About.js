@@ -29,7 +29,7 @@ const About = () => {
             Vos mots, ceux qui vous sont chers. Wordlet met à votre disposition un environnement de liberté d'expression 
             grâce à un support contemporain et ludique.
             <br/><br/>
-            Un panel d'action vous est offert, comprenant :
+            Un panel d'action vous est offert, comprenant :<br/>
             • Acheter des mots sur le marché<br/>
             • Collectionner tous les mots d'une collection<br/>
             • Les utiliser dans des jeux exclusifs comme le Decoy 6<br/>
