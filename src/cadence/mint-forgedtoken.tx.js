@@ -30,7 +30,7 @@ transaction (wordTokenIds: [UInt64]){
 
         let newNFT <- self.minterRef.mintNFT(smithAcct: authAcct, toForge: <- wordTokenCollection)
 
-        self.receiverRef.deposit(token: <-newNFT)
+        self.receiverRef.deposit(token: <-newNFT!)
 
         log("NFT Mintée et déposée dans le stockage du compte")
             
