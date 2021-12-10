@@ -12,6 +12,12 @@
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-wordtoken.tx.cdc "vente" "original"`
 > Mine un WordToken via la transaction MintWOT.cdc dans le compte signataire (wordlet)
 
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-and-sell-wordtoken.tx.cdc "vente" "original" 950.0`
+> Mine un WordToken via la transaction et le met en vente 
+
+`flow transactions send --network testnet --signer wordlet ./cadence/transactions/Marketplace/empty-marketplace.tx.cdc`
+> Vide le marketplace et detruit les tokens en vente
+
 `flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/transfer-wordtoken.tx.cdc 0x5be6fee0409b4842 6`
 > transfert le WordToken 6 du compte wordlet au compte de Lucas
 

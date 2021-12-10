@@ -1,5 +1,6 @@
 export const MINT_FORGEDTOKEN = `
 import WordTokenContract, ForgedTokenContract from 0x1f7da62a915f01c7
+import NonFungibleToken from 0x631e88ae7f1d7c20
 
 /*
 v1
@@ -30,7 +31,7 @@ transaction (wordTokenIds: [UInt64]){
 
         let newNFT <- self.minterRef.mintNFT(smithAcct: authAcct, toForge: <- wordTokenCollection)
 
-        self.receiverRef.deposit(token: <-newNFT)
+        self.receiverRef.deposit(token: <- newNFT!)
 
         log("NFT Mintée et déposée dans le stockage du compte")
             
