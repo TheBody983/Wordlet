@@ -136,7 +136,7 @@ const Forge = () => {
 
 			<button onClick={() =>  reset()}> Actualiser </button>
 
-			<img src="Forge_full.png" id="mountains_front" alt=""/>
+			<img src="Forge.png" id="mountains_front" alt=""/>
 		</section>
 		</DragDropContext>
 	)
