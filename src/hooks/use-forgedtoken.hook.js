@@ -10,7 +10,7 @@ export default function useForgedToken( ) {
         try {
             let transaction = await mutate({
                 cadence: MINT_FORGEDTOKEN,
-                limit: 10000,
+                limit: 9999,
                 args: (arg, t) => [
                     arg(wordTokenIds, t.Array(t.UInt64))
                 ]
