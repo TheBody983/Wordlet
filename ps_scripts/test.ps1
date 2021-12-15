@@ -33,9 +33,16 @@ $MysqlCmd = New-Object MySql.Data.MySqlClient.MySqlCommand($query, $conn)
 $DataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter($MysqlCmd) 
 $DataSet = New-Object System.Data.DataSet  
 $DataAdapter.Fill($DataSet, "data")
+$words = $DataSet.Tables.Rows.mot
+$words
 
-Foreach($word in $DataSet.Tables[0].Rows.mot) 
-{ 
-	$word
-   	flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-and-sell-wordtoken.tx.cdc $word "original" 500.0
+$confirmation = Read-Host "minter ces mots ? (y/n)"
+if ($confirmation -eq 'y') {
+
+    $words = '[\"' + ($words -join '\",\"') + '\"]' 
+
+	flow transactions send --network testnet --signer wordlet ./cadence/transactions/WordToken/mint-and-sell.tx.cdc ('"' + $words + '"') "original"
+
 }
+
+
