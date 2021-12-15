@@ -2,7 +2,12 @@ import { mutate, tx } from '@onflow/fcl'
 
 import { SETUP_ACCOUNT } from "../cadence/setup-account.tx";
 
+import { useTxs }  from "../providers/TxProvider";
+
+
 export default function useAccountState( ) {
+
+    const { addTx } = useTxs() || {}
 
     const setupAccount = async () => {
         try {
@@ -10,11 +15,12 @@ export default function useAccountState( ) {
                 cadence: SETUP_ACCOUNT,
                 limit: 100
             })
-            console.log("TxID : " + transaction)
+            console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
             await tx(transaction).onceSealed()
-            console.log("Transaction Effectuée")
+            console.log("Transaction " + transaction + " effectuée")
         } catch (error) {
-            console.log("Transaction Echouée")
+            console.log("Transaction échouée")
             console.error(error)
         }
     }

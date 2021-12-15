@@ -12,12 +12,16 @@ import { REMOVE_FROM_SELLER_CATALOG } from "../cadence/remove-from-seller-catalo
 import { ADD_TO_SELLER_CATALOG } from "../cadence/add-to-seller-catalog.tx";
 import { UPDATE_TOKEN_PRICE } from "../cadence/update-token-price";
 
+import { useTxs }  from "../providers/TxProvider";
+
 export default function useMarketHook( user, loggedIn ) {
 	const [ userSalelist, setUserSalelist ] = useState(null)
 	const [ sellerCatalog, setSellerCatalog ] = useState([])
 	const [ marketListings, setMarketListings] = useState([])
 	const [ userIsSeller, setUserIsSeller ] = useState(null)
-	
+
+	const { addTx } = useTxs() 
+
 	const getCurrentUserSalelist = useCallback(async () => {
 		try {
 			await query({
@@ -95,11 +99,12 @@ export default function useMarketHook( user, loggedIn ) {
 					arg(tokenId, t.UInt64)
 				]
 			})
-			console.log("TxID : " + transaction)
-			await tx(transaction).onceSealed()
-			console.log("Transaction Effectuée")
+			console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction " + transaction + " effectuée")
 		} catch (error) {
-			console.log("Transaction Echouée")
+			console.log("Transaction échouée")
 			console.error(error)
 		}
 	}
@@ -113,12 +118,12 @@ export default function useMarketHook( user, loggedIn ) {
 					arg(tokenId, t.UInt64)
 				]
 			})
-			console.log("TxID : " + transaction)
-			await tx(transaction).onceSealed()
-
-			console.log("Transaction Effectuée")
+			console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction " + transaction + " effectuée")
 		} catch (error) {
-			console.log("Transaction Echouée")
+			console.log("Transaction échouée")
 			console.error(error)
 		}
 	}
@@ -136,11 +141,12 @@ export default function useMarketHook( user, loggedIn ) {
 					arg(price, t.UFix64)
 				]
 			})
-			console.log("TxID : " + transaction)
-			await tx(transaction).onceSealed()
-			console.log("Transaction Effectuée")
+			console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction " + transaction + " effectuée")
 		} catch (error) {
-			console.log("Transaction Echouée")
+			console.log("Transaction échouée")
 			console.error(error)
 		}
 	}
@@ -152,12 +158,13 @@ export default function useMarketHook( user, loggedIn ) {
 				limit: 100,
 				args: (arg, t) => []
 			})
-			console.log("TxID : " + transaction)
-			await tx(transaction).onceSealed()
-			console.log("Transaction Effectuée")
+			console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction " + transaction + " effectuée")
 			getSellerCatalog()
 		} catch (error) {
-			console.log("Transaction Echouée")
+			console.log("Transaction échouée")
 			console.error(error)
 		}
 	}
@@ -174,11 +181,12 @@ export default function useMarketHook( user, loggedIn ) {
                     arg(price, t.UFix64),
                 ]
             })
-            console.log("TxID : " + transaction)
+            console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
             await tx(transaction).onceSealed()
-            console.log("Transaction Effectuée")
+            console.log("Transaction " + transaction + " éffectuée")
         } catch (error) {
-            console.log("Transaction Echouée")
+            console.log("Transaction échouée")
             console.error(error)
         }
     }
@@ -190,12 +198,13 @@ export default function useMarketHook( user, loggedIn ) {
 				limit: 100,
 				args: (arg, t) => []
 			})
-			console.log("TxID : " + transaction)
-			await tx(transaction).onceSealed()
-			console.log("Transaction Effectuée")
+			console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction " + transaction + " effectuée")
 			getSellerCatalog()
 		} catch (error) {
-			console.log("Transaction Echouée")
+			console.log("Transaction échouée")
 			console.error(error)
 		}
 	}

@@ -4,23 +4,28 @@ import { MINT_FORGEDTOKEN } from "../cadence/mint-forgedtoken.tx";
 import { GET_FORGEDTOKEN_DATA } from "../cadence/get-forgedtoken-data.script";
 import { TRANSFER_FORGEDTOKEN } from "../cadence/transfer-forgedtoken.tx";
 
+import { useTxs }  from "../providers/TxProvider";
+
 export default function useForgedToken( ) {
+
+    const { addTx } = useTxs() 
 
     const mintForgedToken = async (wordTokenIds) => {
         try {
             let transaction = await mutate({
                 cadence: MINT_FORGEDTOKEN,
-                limit: 9999,
+                limit: 100,
                 args: (arg, t) => [
                     arg(wordTokenIds, t.Array(t.UInt64))
                 ]
             })
             
-            console.log("TxID : " + transaction)
+            console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
             await tx(transaction).onceSealed()
-            console.log("Transaction Effectuée")
+            console.log("Transaction " + transaction + " effectuée")
         } catch (error) {
-            console.log("Transaction Echouée")
+            console.log("Transaction échouée")
             console.error(error)
         }
     }
@@ -54,11 +59,12 @@ export default function useForgedToken( ) {
                     arg(tokenId, t.UInt64)
                 ]
             })
-            console.log("TxID : " + transaction)
+            console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
             await tx(transaction).onceSealed()
-            console.log("Transaction Effectuée")
+            console.log("Transaction " + transaction + " effectuée")
         } catch (error) {
-            console.log("Transaction Echouée")
+            console.log("Transaction échouée")
             console.error(error)
         }
     }

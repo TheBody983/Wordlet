@@ -5,8 +5,12 @@ import { query, mutate, tx } from '@onflow/fcl'
 import { GET_WOT_BALANCE } from '../cadence/get-wot-balance.script';
 import { CREATE_WOT_VAULT } from '../cadence/create-wot-vault.tx';
 
+import { useTxs }  from "../providers/TxProvider";
+
 export default function useWOT( user, loggedIn ) {
 	const [WOTBalance, setWOTBalance] = useState(null)
+
+	const { addTx } = useTxs() 
 
 	const getWOTBalance = useCallback(async () => {
 		if(user){
@@ -34,11 +38,12 @@ export default function useWOT( user, loggedIn ) {
 				cadence: CREATE_WOT_VAULT,
 				limit: 100
 			})
-			console.log("TxID : " + transaction)
-			await tx(transaction).onceSealed()
-			console.log("Transaction Effectuée")
+			console.log("Transaction " + transaction + " en cours...")
+            addTx(transaction)
+            await tx(transaction).onceSealed()
+            console.log("Transaction " + transaction + " effectuée")
 		} catch (error) {
-			console.log("Transaction Echouée")
+			console.log("Transaction échouée")
 			console.error(error)
 		}
 	}
